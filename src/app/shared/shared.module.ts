@@ -7,17 +7,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedWrapperComponent } from './components/shared-wrapper/shared-wrapper.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { CartComponent } from './components/cart/cart.component';
 import { ShopDetailComponent } from './components/shop-detail/shop-detail.component';
 import { SingleHeaderComponent } from './components/single-header/single-header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { PartnerComponent } from './components/home/components/partner/partner.component';
-import { NewsletterComponent } from './components/home/components/newsletter/newsletter.component';
-import { TestimonyComponent } from './components/home/components/testimony/testimony.component';
-import { ProductsComponent } from './components/home/components/products/products.component';
-import { SliderComponent } from './components/home/components/slider/slider.component';
-import { ServicesComponent } from './components/home/components/services/services.component';
-import { CategoryComponent } from './components/home/components/category/category.component';
-import { HeaderComponent } from './components/header/header.component';
 
 const sharedRoutes: Routes = [
   {
@@ -42,6 +35,10 @@ const sharedRoutes: Routes = [
         component: ContactComponent,
       },
       {
+        path: 'cart',
+        component: CartComponent,
+      },
+      {
         path: 'shop-detail',
         component: ShopDetailComponent,
       },
@@ -57,17 +54,10 @@ const sharedRoutes: Routes = [
     SharedWrapperComponent,
     FooterComponent,
     NavbarComponent,
+    CartComponent,
     ShopDetailComponent,
     SingleHeaderComponent,
     NotFoundComponent,
-    PartnerComponent,
-    NewsletterComponent,
-    TestimonyComponent,
-    ProductsComponent,
-    SliderComponent,
-    ServicesComponent,
-    CategoryComponent,
-    HeaderComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(sharedRoutes)],
 })

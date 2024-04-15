@@ -8,7 +8,7 @@ const routes: Routes = [
 },
 {
   path: 'portail',
-  loadChildren:  () => import('./portail/portail.module').then(m => m.PortailModule) 
+  loadChildren:  () => import('./portail/client.module').then(m => m.ClientModule) 
 },
 {
   path: 'admin',

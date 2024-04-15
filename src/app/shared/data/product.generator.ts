@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Product } from "./../interfaces/product";
+import { Product } from "../interfaces/product";
 
 
 export function createProduct(): Product {

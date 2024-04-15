@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
-import { PortailModule } from './portail/portail.module';
+import { ClientModule } from './portail/client.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { PortailModule } from './portail/portail.module';
     AppRoutingModule,
     SharedModule,
     AdminModule,
-    PortailModule,
+    ClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
