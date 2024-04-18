@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mbeyTech": {
+    "mbeytech": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,19 +23,28 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mbey-tech",
+            "outputPath": "dist/mbeytech",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css",
+              
+              "https://use.fontawesome.com/releases/v5.15.4/css/all.css",
+              "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css",
+              "src/assets/client/client/lib/lightbox/css/lightbox.min.css",
+              "src/assets/client/client/lib/owlcarousel/assets/owl.carousel.min.css",
+              "src/assets/client/client/css/bootstrap.min.css",
+              "src/assets/client/client/css/style.css"
+
+              
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -65,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mbeyTech:build:production"
+              "buildTarget": "mbeytech:build:production"
             },
             "development": {
-              "buildTarget": "mbeyTech:build:development"
+              "buildTarget": "mbeytech:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "mbeyTech:build"
+            "buildTarget": "mbeytech:build"
           }
         },
         "test": {

@@ -14,7 +14,6 @@ import { PortailModule } from './portail/portail.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     AdminModule,
     PortailModule,
   ],

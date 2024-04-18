@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Category } from "./../interfaces/category";
+import { Category } from "../interfaces/category";
 
 
 export function createCategory(): Category {
