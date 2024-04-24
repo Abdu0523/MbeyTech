@@ -5,6 +5,7 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { CartComponent } from './components/cart/cart.component';
 import { SharedModule } from '../shared/shared.module';
 import { SharedWrapperComponent } from '../shared/components/shared-wrapper/shared-wrapper.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const portailRoutes: Routes = [
   {
@@ -26,7 +27,8 @@ const portailRoutes: Routes = [
 @NgModule({
   declarations: [
     ProfilComponent,
-    CartComponent
+    CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,

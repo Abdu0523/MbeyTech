@@ -1,0 +1,108 @@
+.Checkout {
+    width: 1920px;
+    height: 1304px;
+    padding: 50px 140px 88px;
+    background-color: #fff;
+  }
+  .Groupe-2573 {
+    width: 1640px;
+    height: 1035px;
+    margin: 30px 0 0;
+    padding: 30px 85px 38px;
+  }
+  .Liste-des-produits-payer {
+    width: 356px;
+    height: 41px;
+    margin: 0 171px 30px 8px;
+    font-family: Nunito;
+    font-size: 30px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+  }
+  .-produits-dans-le-panier {
+    width: 227px;
+    height: 27px;
+    margin: 14px 40px 30px 171px;
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+  }
+
+  .-produits-dans-le-panier .text-style-1 {
+    font-weight: 600;
+  }
+  .Groupe-3091 {
+    width: 762px;
+    height: 710px;
+    margin: 30px 40px 15px 0;
+  }
+  .Groupe-3079 {
+    width: 762px;
+    height: 130px;
+    margin: 0 0 15px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+
+  }
+  .Groupe-3070 {
+    width: 762px;
+    height: 130px;
+    margin: 0 0 15px;
+    padding: 30px;
+  }
+  .Rectangle-667 {
+    width: 762px;
+    height: 130px;
+    margin: 0 0 15px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+  }
+  .Groupe-de-masques-15 {
+    width: 70px;
+    height: 70px;
+    margin: 0 30px 0 0;
+  }
+  .Rectangle-671 {
+    width: 70px;
+    height: 70px;
+    margin: 0 30px 0 0;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  .Image-23 {
+    width: 70px;
+    height: 70px;
+    margin: 0 30px 0 0;
+  }
+  .Groupe-1941 {
+    width: 90px;
+    height: 22px;
+    margin: 7.3px 331px 10.2px 30px;
+  }
+  .Macbook-Air {
+    width: 90px;
+    height: 22px;
+    margin: 7.3px 331px 10.2px 30px;
+    font-family: Nunito;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+  }
