@@ -11,3 +11,5 @@ const personController = new PersonController(personUseCase);
 
 personRoutes.post('/create', async (req, res) => personController.createPerson(req, res));
 personRoutes.get('/getAll', async (req, res) => personController.getAllPersons(req, res));
+personRoutes.post('/login', async (req, res) => personController.login(req, res));
+

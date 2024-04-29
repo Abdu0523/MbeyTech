@@ -3,19 +3,20 @@ import mongoose from'mongoose';
 import cors from 'cors';
 import { personRoutes } from './routes/PersonRoute';
 import { ApiKeyMiddleware } from './middleware/ApiKeyMiddleware'
+import  connectDatabase  from "../../config/database";
+import dotenv from 'dotenv';
 
 const app = express();
 const port = 3000;
-
+dotenv.config();
 // Express init
 app.use(cors());
 app.use(express.json());
-app.use(ApiKeyMiddleware);
+// app.use(ApiKeyMiddleware);
 
 // Connect to MongoDB using Mongoose
-let con_string_dev = 'mongodb://localhost:27018/nodejstsdb'
-let con_string_pro = 'mongodb://mongo_db_service:27017/nodejstsdb'
-mongoose.connect(process.env.NODE_ENV === 'production' ? con_string_pro : con_string_dev);
+connectDatabase();
+
 
 // Routes
 app.use('/api/persons', personRoutes);
