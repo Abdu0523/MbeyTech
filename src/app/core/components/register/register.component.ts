@@ -21,11 +21,11 @@ export class RegisterComponent {
       .subscribe(
         response => {
           console.log(response);
-          // Rediriger l'utilisateur vers une autre page après l'inscription réussie
+         
         },
         error => {
           console.error(error);
-          // Afficher un message d'erreur à l'utilisateur
+
         }
       );
   }

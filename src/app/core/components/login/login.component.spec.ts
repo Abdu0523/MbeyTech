@@ -9,7 +9,7 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [ReactiveFormsModule], // Importer ReactiveFormsModule pour les tests de formulaire
+      imports: [ReactiveFormsModule], 
     }).compileComponents();
   });
 
@@ -43,5 +43,5 @@ describe('LoginComponent', () => {
     expect(form.valid).toBeTruthy();
   });
 
-  // Vous pouvez ajouter d'autres tests selon vos besoins
+  
 });
