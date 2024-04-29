@@ -41,7 +41,6 @@ Method: POST
 
 Header: 
 Content-Type: application/json
-api-key: abd23AghQYJK8cP2aXKY4zR/YWGGZq8HsErTbfW1E7k=
 
 URL
 http://localhost:3000/api/persons/create
@@ -51,7 +50,6 @@ http://localhost:3000/api/persons/create
 Method: GET
 
 Header: 
-api-key: abd23AghQYJK8cP2aXKY4zR/YWGGZq8HsErTbfW1E7k=
 
 URL
 localhost:3000/api/persons/getAll
@@ -70,5 +68,5 @@ npm install
 ### Run
 
 ```
-npm run serve
+npm run dev
 ```
