@@ -16,18 +16,12 @@ const coreRoutes: Routes = [
         path: 'register',
         component: RegisterComponent,
       },
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(coreRoutes)
-  ]
+  declarations: [LoginComponent, RegisterComponent],
+  imports: [CommonModule, RouterModule.forChild(coreRoutes)],
 })
-export class CoreModule { }
+export class CoreModule {}
