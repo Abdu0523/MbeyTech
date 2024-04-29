@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { FormsModule } from '@angular/forms';
+
 
 const coreRoutes: Routes = [
   {
@@ -21,7 +23,14 @@ const coreRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
-  imports: [CommonModule, RouterModule.forChild(coreRoutes)],
+  declarations: [LoginComponent ],
+  imports: [CommonModule, RouterModule.forChild(coreRoutes), FormsModule, ],
+  exports: [
+   
+    CommonModule,
+    RouterModule, 
+    FormsModule
+  ]
 })
 export class CoreModule {}
+
