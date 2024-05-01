@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { PersonUseCase } from '../../../infrastructure/use-cases/PersonUseCase';
 import { SavePersonDTO } from '../../../data/dtos/SavePersonDTO';
 import sendToken from '../../../utils/jwtToken';
-import { LoginDTO } from '../../../data/dtos/loginDTO';
-import PersonModel from '../../../data/models/Personne.entity';
-import comparePassword from '../../../utils/comparePassword';
+import { LoginDTO } from '../../../data/dtos/LoginDTO';
+// import PersonModel from '../../../data/models/Personne.entity';
+// import comparePassword from '../../../utils/comparePassword';
 
 export class PersonController {
   private personUseCase: PersonUseCase;

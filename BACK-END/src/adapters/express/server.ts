@@ -5,6 +5,7 @@ import { personRoutes } from './routes/PersonRoute';
 import { ApiKeyMiddleware } from './middleware/ApiKeyMiddleware'
 import  connectDatabase  from "../../config/database";
 import dotenv from 'dotenv';
+import categorieRouter from './routes/CategorieRoute';
 
 const app = express();
 const port = 3000;
@@ -20,6 +21,7 @@ connectDatabase();
 
 // Routes
 app.use('/api/persons', personRoutes);
+app.use('/api/categories', categorieRouter);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
