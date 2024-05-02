@@ -1,0 +1,25 @@
+<h2>Register</h2>
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" [(ngModel)]="formData.username" required>
+  </div>
+  <div>
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone" [(ngModel)]="formData.phone" required>
+  </div>
+  <div>
+    <label for="userType">User Type:</label>
+    <select id="userType" name="userType" [(ngModel)]="formData.userType" required>
+      <option value="bailleur">Bailleur</option>
+      <option value="producteur">Producteur</option>
+      <option value="main d'oeuvre">Main d'oeuvre</option>
+      <option value="acheteur">Acheteur</option>
+    </select>
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="formData.password" required>
+  </div>
+  <button type="submit">Register</button>
+</form>

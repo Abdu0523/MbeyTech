@@ -1,0 +1,22 @@
+.nav-item.active-parent .nav-link {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: #81c408;
+    color: #fff;
+  }
+
+  
+  .logout-button {
+    position: absolute;
+    bottom: 10px; /* ou la valeur de votre choix */
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .sidebar-dark-primary{
+    background-color: #45595b;
+  }
