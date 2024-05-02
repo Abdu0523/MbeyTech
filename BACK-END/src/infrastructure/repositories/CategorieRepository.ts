@@ -1,9 +1,10 @@
 import IRepository from "./IRepository";
-import { SavePersonDTO } from '../../data/dtos/SavePersonDTO';
+import { SavePersonDTO } from "../../data/dtos/SavePersonDTO";
 import { ICategorie } from "../../data/interfaces/ICategorie";
 import CategorieModel from "../../data/models/Categories.entity";
 
 export class CategorieRepository implements IRepository<any> {
+
   async add(entity: ICategorie): Promise<ICategorie> {
     try {
       const newCategorie = await CategorieModel.create(entity);
@@ -31,9 +32,20 @@ export class CategorieRepository implements IRepository<any> {
     }
   }
 
-  async update(id: string, entity: Partial<ICategorie>): Promise<ICategorie | null> {
+  async getByNom(nom: string): Promise<ICategorie | null> {
+    return await CategorieModel.findOne({ nom });
+  }
+
+  async update(
+    id: string,
+    entity: Partial<ICategorie>
+  ): Promise<ICategorie | null> {
     try {
-      const updatedCategorie = await CategorieModel.findByIdAndUpdate(id, entity, { new: true });
+      const updatedCategorie = await CategorieModel.findByIdAndUpdate(
+        id,
+        entity,
+        { new: true }
+      );
       return updatedCategorie;
     } catch (error: any) {
       throw new Error("Error updating category: " + error.message);

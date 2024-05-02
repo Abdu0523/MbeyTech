@@ -1,16 +1,7 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FileService } from '../../../../../../shared/services/file/file.service';
-import { FormMaker } from '../../../../../shared/interfaces/form-maker';
-import { Category } from '../../../../../../shared/interfaces/category';
+import { FormMaker } from '../../../../shared/interfaces/form-maker';
+import { FileService } from '../../../../../shared/services/file/file.service';
 
 @Component({
   selector: 'app-update-category',
@@ -18,13 +9,8 @@ import { Category } from '../../../../../../shared/interfaces/category';
   styleUrl: './update-category.component.css',
 })
 export class UpdateCategoryComponent {
-  @Output() categoryUpdated: EventEmitter<{
-    _id: string;
-    nom: string;
-    image: File;
-  }> = new EventEmitter<{ _id: string; nom: string; image: File }>();
-
-  @Input() category!: Category;
+  @Output() categoryUpdated: EventEmitter<{ nom: string; image: File }> =
+    new EventEmitter<{ nom: string; image: File }>();
 
   categoryForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -48,27 +34,18 @@ export class UpdateCategoryComponent {
 
   @ViewChild('updateCategoryModal') updateCategoryModal!: ElementRef;
 
-  constructor(private fileService: FileService) {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['category'] && changes['category'].currentValue) {
-      this.categoryForm.patchValue({
-        name: this.category.nom,
-        image: this.category.image,
-      });
-    }
-  }
+  constructor(
+    private fileService: FileService,
+  ) {}
 
   onSubmit() {
     if (this.categoryForm.valid) {
+      console.log('info: ', this.categoryForm.value);
       const nom = this.categoryForm.get('name')?.value;
       const image = this.fileService.getFile();
-      console.log(nom, image);
       if (image && nom) {
-        const _id = this.category._id;
-        this.categoryUpdated.emit({ _id, nom, image });
-        $('#update-category-modal').hide();
-        // this.resetForm()
+        this.categoryUpdated.emit({ nom, image });
+        // this.closeModal();
       }
     } else {
       this.categoryForm.markAllAsTouched();
@@ -80,7 +57,7 @@ export class UpdateCategoryComponent {
     this.fileService.setFile(file);
   }
 
-  resetForm() {
+  private initForm() {
     this.categoryForm.get('name')?.setValue('');
     this.categoryForm.get('image')?.setValue('');
   }

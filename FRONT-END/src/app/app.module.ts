@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { PortailModule } from './portail/portail.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { PortailModule } from './portail/portail.module';
     AppRoutingModule,
     AdminModule,
     PortailModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

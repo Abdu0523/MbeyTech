@@ -48,4 +48,14 @@ export class CategorieUseCase {
       throw new Error("Error deleting category: " + error.message);
     }
   }
+
+  async categoryExists(id: string): Promise<boolean> {
+    const categorie = await this.categorieRepository.getById(id);
+    return !!categorie;
+  }
+
+  async categoryNameExists(nom: string): Promise<boolean> {
+    const categorie = await this.categorieRepository.getByNom(nom);
+    return !!categorie;
+  }
 }

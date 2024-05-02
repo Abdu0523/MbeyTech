@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShopDetailComponent } from './components/shop-detail/shop-detail.component';
 import { SingleHeaderComponent } from './components/single-header/single-header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { HeroComponent } from './components/home/hero/hero.component';
 
 const sharedRoutes: Routes = [
   {
@@ -47,6 +48,7 @@ const sharedRoutes: Routes = [
     ShopDetailComponent,
     SingleHeaderComponent,
     NotFoundComponent,
+    HeroComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(sharedRoutes)],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]

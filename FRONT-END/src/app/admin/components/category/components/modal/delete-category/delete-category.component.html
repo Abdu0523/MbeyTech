@@ -1,28 +1,30 @@
-<div class="modal fade" id="delete-category">
+<div class="modal fade" id="delete-category-modal">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Supprimer une catégorie</h4>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <form (ngSubmit)="onSubmit()" #deleteCategoryModal="ngForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Supprimer une catégorie</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Êtes-vous sûr de vouloir vraiment supprimer cette catégorie ?</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-dark" data-dismiss="modal">
+            Fermer
+          </button>
+          <button type="submit" class="btn btn-primary">Supprimer</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>Êtes-vous sûr de vouloir vraiment supprimer cette catégorie ?</p>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-          Fermer
-        </button>
-        <button type="button" class="btn btn-info">Supprimer</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
+      <!-- /.modal-content -->
+    </form>
   </div>
   <!-- /.modal-dialog -->
 </div>

@@ -1,6 +1,8 @@
-<app-add-category></app-add-category>
-<app-update-category></app-update-category>
-<app-delete-category></app-delete-category>
+<app-add-category (categoryAdded)="onCategoryAdded($event)"></app-add-category>
+<app-update-category [category]="category" (categoryUpdated)="onCategoryUdated($event)"></app-update-category>
+<app-delete-category
+  (categoryDeleted)="onCategoryDeleted()"
+></app-delete-category>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -13,7 +15,11 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right align-items-center">
             <li class="breadcrumb-item active">
-              <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#add-category">
+              <button
+                class="btn btn-lg btn-primary mt-1"
+                data-bs-toggle="modal"
+                data-bs-target="#add-category"
+              >
                 <i class="fas fa-plus"> </i> Ajouter une catégorie
               </button>
             </li>
@@ -27,16 +33,25 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
+      <div class="row" *ngIf="categories.length === 0">
+        <h4 class="mt-5">
+          Vous n'avez pas encore de catégorie disponible. Si vous souhaitez
+          ajouter une nouvelle catégorie veillez ciquer sur le boutton
+          <b>Ajouter une catégorie</b>
+        </h4>
+      </div>
       <div class="row">
-        <div class="col-md-4" *ngFor="let item of categories;">
+        <div class="col-md-4" *ngFor="let item of categories">
           <div class="card card-widget widget-user">
             <div class="widget-user-header bg-dark">
-              <h3 class="widget-user-username font-weight-bold text-primary">{{item.name}}</h3>
+              <h3 class="widget-user-username font-weight-bold text-primary">
+                {{ item.nom }}
+              </h3>
             </div>
             <div class="widget-user-image">
               <img
                 class="img-circle elevation-2"
-                src="assets/logo.jpeg"
+                [src]="'http://localhost:3000/api/uploads/' + item.image"
                 alt="Categorie Avatar"
               />
             </div>
@@ -45,7 +60,9 @@
                 <div class="justify-content-center col-sm-4 border-right">
                   <button
                     class="btn btn-sm btn-outline-primary"
-                    data-toggle="modal" data-target="#update-category"
+                    (click)="getCategoryById(item._id)"
+                    data-toggle="modal"
+                    data-target="#update-category-modal"
                   >
                     Modifier
                   </button>
@@ -57,7 +74,12 @@
                   </div>
                 </div>
                 <div class="col-sm-4">
-                  <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#delete-category">
+                  <button
+                    class="btn btn-sm btn-outline-danger"
+                    (click)="getId(item._id)"
+                    data-toggle="modal"
+                    data-target="#delete-category-modal"
+                  >
                     supprimer
                   </button>
                 </div>

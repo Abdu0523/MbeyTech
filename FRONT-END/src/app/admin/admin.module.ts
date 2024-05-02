@@ -15,6 +15,7 @@ import { AddCategoryComponent } from './components/category/components/modal/add
 import { UpdateCategoryComponent } from './components/category/components/modal/update-category/update-category.component';
 import { DeleteCategoryComponent } from './components/category/components/modal/delete-category/delete-category.component';
 import { RolesComponent } from './components/roles/roles.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const adminRoutes: Routes = [
   {
@@ -63,6 +64,11 @@ const adminRoutes: Routes = [
     DeleteCategoryComponent,
     RolesComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(adminRoutes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(adminRoutes),
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class AdminModule {}
