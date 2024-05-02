@@ -11,7 +11,7 @@ declare var $ : any;
 export class ListProductComponent {
 
   @Input() products: Products[] = [];
-  //products: Products[] = [];
+  confirmProductId!: string ;
 
   constructor(private productService: ServiceProductService) { }
 
@@ -30,5 +30,20 @@ export class ListProductComponent {
       this.loadProducts();
     });
   }
+
+
+  confirmDelete(productId: string): void {
+    if (confirm("Voulez-vous vraiment supprimer ce produit ?")) {
+      this.deleteProduct(productId);
+    }
+  }
+  
+/*
+  openDeleteConfirmationModal(product: Products): void {
+    this.confirmProductId = product._id;
+    $('#deleteConfirmationModal').modal('show');
+  }
+*/
+ 
 
 }
