@@ -7,6 +7,7 @@ import  connectDatabase  from "../../config/database";
 import dotenv from 'dotenv';
 import categorieRouter from './routes/CategorieRoute';
 import path from 'path';
+import productRoutes from './routes/ProductRoute';
 
 const app = express();
 const port = 3000;
@@ -23,6 +24,7 @@ connectDatabase();
 // Routes
 app.use('/api/persons', personRoutes);
 app.use('/api/categories', categorieRouter);
+app.use('/api/products', productRoutes);
 app.get('/api/uploads/:imageName', (req, res) => {
   const imageName = req.params.imageName;
   res.sendFile(path.join(__dirname, './../../../src/uploads', imageName));

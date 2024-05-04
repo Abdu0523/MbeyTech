@@ -1,12 +1,11 @@
 <ng-template #updateCategoryModal let-modal>
-  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+  <form  (ngSubmit)="onSubmit()">
     <div class="modal-header">
       <h4 class="modal-title">Ajouter une nouvelle catégorie</h4>
       <button
         type="button"
         class="close"
         aria-label="Close"
-        (click)="closeModal()"
       >
       </button>
     </div>
@@ -19,7 +18,6 @@
             [type]="_ctrl.type"
             [name]="_ctrl.key"
             class="form-control"
-            [formControlName]="_ctrl.key"
             [placeholder]="_ctrl.name"
           />
           <input
@@ -27,7 +25,6 @@
             [type]="_ctrl.type"
             [name]="_ctrl.key"
             class="form-control"
-            [formControlName]="_ctrl.key"
             [placeholder]="_ctrl.name"
             (change)="onFileSelected($event)"
           />
@@ -48,7 +45,7 @@
       </div>
     </div>
     <div class="modal-footer justify-content-between">
-      <button type="button" class="btn btn-dark" (click)="closeModal()">
+      <button type="button" class="btn btn-dark">
         Fermer
       </button>
       <button type="submit" class="btn btn-primary">Ajouter</button>
