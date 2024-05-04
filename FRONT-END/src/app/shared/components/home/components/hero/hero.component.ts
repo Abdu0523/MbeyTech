@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Category } from '../../../interfaces/category';
-import { CategoryService } from '../../../services/category/category.service';
+import { Category } from '../../../../interfaces/category';
+import { CategoryService } from '../../../../services/category/category.service';
 
 @Component({
   selector: 'app-hero',

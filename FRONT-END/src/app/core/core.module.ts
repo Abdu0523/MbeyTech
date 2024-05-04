@@ -27,7 +27,7 @@ const coreRoutes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forRoot(coreRoutes)
+    RouterModule.forChild(coreRoutes)
   ]
 })
 export class CoreModule { }
