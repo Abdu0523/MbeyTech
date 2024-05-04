@@ -1,8 +1,9 @@
-import { Document } from 'mongoose';
-import { SavePersonDTO } from '../../data/dtos/SavePersonDTO';
+import mongoose, { Schema, Document } from 'mongoose';
 import { IPersonne } from "../../data/interfaces/IPersonne";
-import PersonModel from '../../data/models/Personne.entity';
 import IRepository from './IRepository';
+import PersonModel from '../../data/models/Personne.entity';
+import { SavePersonDTO } from '../../data/dtos/SavePersonDTO';
+import { ListPersonneDTO } from '../../data/dtos/ListPersonDTO';
 
 interface IPersonDocument extends Document, IPersonne {}
 
@@ -14,6 +15,9 @@ interface IPersonDocument extends Document, IPersonne {}
 //const PersonModel = mongoose.model<IPersonDocument>('Person', PersonSchema);
 
 export class PersonRepository implements IRepository<any> {
+  getByNom(nom: string): Promise<any> {
+    throw new Error('Method not implemented.');
+  }
   getById(id: string): Promise<any> {
     throw new Error('Method not implemented.');
   }
