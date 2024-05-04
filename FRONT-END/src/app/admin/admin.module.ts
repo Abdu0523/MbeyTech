@@ -11,9 +11,7 @@ import { UsersComponent } from './components/users/users.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminWrapperComponent } from './components/admin-wrapper/admin-wrapper.component';
-import { AddCategoryComponent } from './components/category/components/modal/add-category/add-category.component';
-import { UpdateCategoryComponent } from './components/category/components/modal/update-category/update-category.component';
-import { DeleteCategoryComponent } from './components/category/components/modal/delete-category/delete-category.component';
+
 import { RolesComponent } from './components/roles/roles.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -50,19 +48,18 @@ const adminRoutes: Routes = [
 @NgModule({
   declarations: [
     NavbarComponent,
-    CategoryComponent,
+   
     SidebarComponent,
     PreloaderComponent,
     FooterComponent,
-    ProductComponent,
     UsersComponent,
-    OrdersComponent,
+   
     DashboardComponent,
     AdminWrapperComponent,
-    AddCategoryComponent,
-    UpdateCategoryComponent,
-    DeleteCategoryComponent,
+   
+    
     RolesComponent,
+    
   ],
   imports: [
     CommonModule,
