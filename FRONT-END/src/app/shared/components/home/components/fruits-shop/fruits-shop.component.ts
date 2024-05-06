@@ -1,10 +1,84 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Category } from '../../../../interfaces/category';
+import { CategoryService } from '../../../../services/category/category.service';
+import { ServiceProductService } from '../../../../../admin/components/product/shared/services/service-product.service';
+import { Product } from '../../../../../admin/components/product/shared/models/products';
 
 @Component({
   selector: 'app-fruits-shop',
   templateUrl: './fruits-shop.component.html',
-  styleUrl: './fruits-shop.component.css'
+  styleUrl: './fruits-shop.component.css',
 })
-export class FruitsShopComponent {
+export class FruitsShopComponent implements OnInit {
+  public categories!: Category[];
+  public productsByCategory!: Product[];
+  public products!: Product[];
+  public category!: Category;
+  public product!: Product;
 
+  constructor(
+    private categoryService: CategoryService,
+    private productService: ServiceProductService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadCategories();
+    this.loadProducts();
+  }
+
+  loadCategories() {
+    this.categoryService.getAllCategories().subscribe(
+      (categories: Category[]) => {
+        this.categories = categories;
+      },
+      (error) => {
+        console.error(
+          'Une erreur est survenue lors du chargement des catégories :',
+          error
+        );
+      }
+    );
+  }
+
+  loadProducts() {
+    this.productService.getAllProducts().subscribe(
+      (products: Product[]) => {
+        this.products = products;
+      },
+      (error) => {
+        console.error(
+          'Une erreur est survenue lors du chargement des produits :',
+          error
+        );
+      }
+    );
+  }
+
+  getProductsByCategory(id: any) {
+    this.productService.getProductsByCategory(id).subscribe(
+      (productsByCategory: Product[]) => {
+        this.productsByCategory = productsByCategory;
+      },
+      (error) => {
+        console.error(
+          'Une erreur est survenue lors du chargement des produits par categorie :',
+          error
+        );
+      }
+    );
+  }
+
+  getCategoryById(id: string) {
+    this.categoryService.getCategoryById(id).subscribe(
+      (category: Category) => {
+        this.category = category;
+      },
+      (error) => {
+        console.error(
+          'Une erreur est survenue lors de la récupération de la categorie :',
+          error
+        );
+      }
+    );
+  }
 }
