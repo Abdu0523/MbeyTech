@@ -1,7 +1,7 @@
 import express from 'express';
-import { PersonRepository } from '../../../infrastructure/repositories/PersonRepository';
-import { PersonUseCase } from '../../../infrastructure/use-cases/PersonUseCase';
 import { PersonController } from '../controllers/PersonController';
+import { PersonUseCase } from '../../../infrastructure/use-cases/PersonUseCase';
+import { PersonRepository } from '../../../infrastructure/repositories/PersonRepository';
 
 export const personRoutes = express.Router();
 

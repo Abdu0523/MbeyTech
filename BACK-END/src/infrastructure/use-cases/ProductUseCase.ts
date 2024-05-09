@@ -51,4 +51,8 @@ export  class ProductUseCase {
             throw new Error(`Error while deleting product: ${error}`);
         }
     }
+
+    async getProductsByCategory(categoryId: string): Promise<IProduct[]> {
+        return this.productRepository.getProductsByCategory(categoryId);
+      }
 }

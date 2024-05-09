@@ -1,59 +1,56 @@
-<div class="modal fade" id="update-category">
-    <div class="modal-dialog">
+<div class="modal fade" id="update-category-modal">
+  <div class="modal-dialog">
+    <form id="categoryForm" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Modifier une nouvelle catégorie</h4>
+          <h4 class="modal-title">Modifier une catégorie</h4>
           <button
             type="button"
             class="close"
             data-dismiss="modal"
             aria-label="Close"
+            (click)="resetForm()"
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Nom de la catégorie</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  placeholder="Nom de la catégorie"
-                />
+          <div class="card-body">
+            <div class="form-group" *ngFor="let _ctrl of formMaker">
+              <label [for]="_ctrl.key">{{ _ctrl.name }}</label>
+              <input
+              *ngIf="_ctrl.type !== 'file'"
+                [type]="_ctrl.type"
+                [name]="_ctrl.key"
+                class="form-control"
+                [formControlName]="_ctrl.key"
+                [placeholder]="_ctrl.name"
+              />
+              <input
+                *ngIf="_ctrl.type === 'file'"
+                [type]="_ctrl.type"
+                [name]="_ctrl.key"
+                class="form-control"
+                [formControlName]="_ctrl.key"
+                [placeholder]="_ctrl.name"
+                (change)="onFileSelected($event)"
+              />
+              <div class="text-danger" *ngIf="_ctrl?.control?.invalid && _ctrl?.control?.touched">
+                <span *ngIf="_ctrl?.control?.errors?.['required']">{{_ctrl.name}} est requis</span>
               </div>
-              <div class="form-group">
-                <label for="exampleInputFile">Image de la catégorie</label>
-                <div class="input-group">
-                  <div class="custom-file">
-                    <input
-                      type="file"
-                      class="custom-file-input"
-                      id="exampleInputFile"
-                    />
-                    <label class="custom-file-label" for="exampleInputFile"
-                      >Choisir une image</label
-                    >
-                  </div>
-                  <div class="input-group-append">
-                    <span class="input-group-text">Charger</span>
-                  </div>
-                </div>
-              </div>
+              <img *ngIf="_ctrl.type === 'file' && categoryForm.get(_ctrl.key)?.value" [src]="categoryForm.get(_ctrl.key)?.value" alt="Category Image">
             </div>
-          </form>
+          </div>
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">
+          <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="resetForm()">
             Fermer
           </button>
-          <button type="button" class="btn btn-info">Modifier</button>
+          <button type="submit" class="btn btn-primary" id="update-category-button">Modifier</button>
         </div>
       </div>
       <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+    </form>
   </div>
-  
+  <!-- /.modal-dialog -->
+</div>
