@@ -36,6 +36,16 @@ export class CategoryService {
     );
   }
 
+  getCategoryByName(nom: string): Observable<Category> {
+    return this.httpClient.get<Category>(`${this.url}/categoryByName/${nom}`).pipe(
+      tap((category) => console.log('category : ', category)),
+      catchError((error) => {
+        console.error('Error from get category by name : ', error);
+        return of();
+      })
+    );
+  }
+
   addCategory(nom: string, image: File): Observable<Category> {
     const formData = new FormData();
     formData.append('nom', nom);
@@ -75,4 +85,6 @@ export class CategoryService {
       })
     );
   }
+
+  
 }

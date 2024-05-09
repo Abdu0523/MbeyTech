@@ -14,5 +14,6 @@ productRoutes.get('/getAll', async (req, res) => productController.getAllProduct
 productRoutes.get('/:id', async (req, res) => productController.getProductById(req, res));
 productRoutes.put('/:id', async (req, res) => productController.updateProduct(req, res));
 productRoutes.delete('/:id', async (req, res) => productController.deleteProduct(req, res));
+productRoutes.get('/category/:categoryId', async (req, res) => productController.getProductsByCategory(req, res));
 
 export default productRoutes;

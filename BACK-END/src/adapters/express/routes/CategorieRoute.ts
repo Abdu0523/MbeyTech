@@ -43,6 +43,11 @@ categorieRouter.get("/:id", async (req: Request, res: Response) => {
   await categorieController.getCategorieById(req, res);
 });
 
+// Route pour récupérer une catégorie par NOM
+categorieRouter.get("categoryByNom/:nom", async (req: Request, res: Response) => {
+  await categorieController.getCategorieByNom(req, res);
+});
+
 // Route pour mettre à jour une catégorie
 categorieRouter.put("/:id", upload.single("image"), async (req: Request, res: Response) => {
   await categorieController.updateCategorie(req, res);
