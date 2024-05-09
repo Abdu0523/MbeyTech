@@ -16,6 +16,7 @@ export class PersonController {
   async createPerson(req: Request, res: Response): Promise<void> {
     try {
       const person: SavePersonDTO = req.body;
+      console.log('person', person)
 
       const newData = await this.personUseCase.createPerson(person);
       sendToken(newData,200,res)

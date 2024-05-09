@@ -1,6 +1,6 @@
 export interface IPersonne {
-    prenom: string;
-    nom: string;
+    nomComplet: string;
+    // nom: string;
     email: string;
     countryCode: string;
     phone: string;
