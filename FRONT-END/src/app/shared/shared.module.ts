@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShopDetailComponent } from './components/shop-detail/shop-detail.component';
 import { SingleHeaderComponent } from './components/single-header/single-header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const sharedRoutes: Routes = [
   {
@@ -32,6 +33,10 @@ const sharedRoutes: Routes = [
         path: 'shop-detail',
         component: ShopDetailComponent,
       },
+      {
+        path: 'checkout',
+        component: CheckoutComponent,
+      },
     ],
   },
 ];
@@ -47,6 +52,7 @@ const sharedRoutes: Routes = [
     ShopDetailComponent,
     SingleHeaderComponent,
     NotFoundComponent,
+    CheckoutComponent
   ],
   imports: [CommonModule, RouterModule.forChild(sharedRoutes)],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]

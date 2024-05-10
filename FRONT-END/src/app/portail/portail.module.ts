@@ -26,7 +26,7 @@ const portailRoutes: Routes = [
 @NgModule({
   declarations: [
     ProfilComponent,
-    CartComponent
+    CartComponent,
   ],
   imports: [
     CommonModule,

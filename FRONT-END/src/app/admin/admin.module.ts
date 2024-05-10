@@ -15,7 +15,7 @@ import { AddCategoryComponent } from './components/category/components/modal/add
 import { UpdateCategoryComponent } from './components/category/components/modal/update-category/update-category.component';
 import { DeleteCategoryComponent } from './components/category/components/modal/delete-category/delete-category.component';
 import { RolesComponent } from './components/roles/roles.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
+import { SharedModule } from "../shared/shared.module";
 
 const adminRoutes: Routes = [
   {
@@ -48,23 +48,22 @@ const adminRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    CategoryComponent,
-    SidebarComponent,
-    PreloaderComponent,
-    FooterComponent,
-    ProductComponent,
-    UsersComponent,
-    OrdersComponent,
-    DashboardComponent,
-    AdminWrapperComponent,
-    AddCategoryComponent,
-    UpdateCategoryComponent,
-    DeleteCategoryComponent,
-    RolesComponent,
-    CheckoutComponent,
-  ],
-  imports: [CommonModule, RouterModule.forChild(adminRoutes)],
+    declarations: [
+        NavbarComponent,
+        CategoryComponent,
+        SidebarComponent,
+        PreloaderComponent,
+        FooterComponent,
+        ProductComponent,
+        UsersComponent,
+        OrdersComponent,
+        DashboardComponent,
+        AdminWrapperComponent,
+        AddCategoryComponent,
+        UpdateCategoryComponent,
+        DeleteCategoryComponent,
+        RolesComponent
+    ],
+    imports: [CommonModule, RouterModule.forChild(adminRoutes), SharedModule]
 })
 export class AdminModule {}
