@@ -3,6 +3,7 @@ import { PersonRepository } from "../repositories/PersonRepository";
 import { ListPersonneDTO } from "../../data/dtos/ListPersonDTO";
 import { SavePersonDTO } from "../../data/dtos/SavePersonDTO";
 import { LoginDTO } from "../../data/dtos/LoginDTO";
+import ErrorHandler from "../../utils/errorHandler";
 import PersonModel from "../../data/models/Personne.entity";
 import sendToken from "../../utils/jwtToken";
 

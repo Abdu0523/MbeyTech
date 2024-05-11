@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 export interface IProduct {
-    id: mongoose.Schema.Types.ObjectId;
+    //id: mongoose.Schema.Types.ObjectId;
     name: string;
     description: string;
-    status: String;
+    status: string;
     image: string;
     price: number;
     quantity: number;

@@ -11,6 +11,7 @@ const categorieUseCase = new CategorieUseCase(categorieRepository);
 const categorieController = new CategorieController(categorieUseCase);
 // const upload: multer.Multer;
 // const storage: multer.StorageEngine;
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "src/uploads");
