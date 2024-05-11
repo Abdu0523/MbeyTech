@@ -58,4 +58,14 @@ export class CategorieUseCase {
     const categorie = await this.categorieRepository.getByNom(nom);
     return !!categorie;
   }
+
+  async getCategorieByNom(nom: string): Promise<ICategorie | null> {
+    try {
+      const categorie = await this.categorieRepository.getByNom(nom);
+      return categorie;
+    } catch (error: any) {
+      throw new Error("Error getting category by NOM: " + error.message);
+    }
+  }
+  
 }

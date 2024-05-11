@@ -90,4 +90,18 @@ export class CategorieController {
       res.status(500).json({ error: error.message });
     }
   }
+
+  async getCategorieByNom(req: Request, res: Response): Promise<void> {
+    try {
+      const { nom } = req.params;
+      const categorie = await this.categorieUseCase.getCategorieByNom(nom);
+      if (categorie) {
+        res.json(categorie);
+      } else {
+        res.status(404).json({ error: "Category not found" });
+      }
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }

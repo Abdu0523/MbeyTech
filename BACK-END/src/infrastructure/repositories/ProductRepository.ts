@@ -48,4 +48,14 @@ export  class ProductRepository {
             throw new Error(`Error while deleting product: ${error}`);
         }
     }
+
+    async getProductsByCategory(categoryId: string): Promise<IProduct[]> {
+        try {
+            const products = await ProductModel.find({ category: categoryId })
+                .populate('category');
+            return products.map(product => product.toJSON());
+        } catch (error) {
+            throw new Error(`Error while finding products by category: ${error}`);
+        }
+    }
 }
