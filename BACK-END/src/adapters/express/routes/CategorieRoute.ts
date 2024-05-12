@@ -5,13 +5,13 @@ import { CategorieUseCase } from "../../../infrastructure/use-cases/CategorieUse
 import multer from "multer";
 import path from "path";
 
- const categorieRouter: Router = express.Router();
- const categorieRepository = new CategorieRepository();
- const categorieUseCase = new CategorieUseCase(categorieRepository);
- const categorieController = new CategorieController(categorieUseCase);
-// // const upload: multer.Multer;
-// // const storage: multer.StorageEngine;
- const storage = multer.diskStorage({
+const categorieRouter: Router = express.Router();
+const categorieRepository = new CategorieRepository();
+const categorieUseCase = new CategorieUseCase(categorieRepository);
+const categorieController = new CategorieController(categorieUseCase);
+// const upload: multer.Multer;
+// const storage: multer.StorageEngine;
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "src/uploads");
   },
@@ -21,10 +21,10 @@ import path from "path";
       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
     );
   },
- });
+});
 const upload = multer({ storage: storage });
 
-// // Route pour ajouter une catégorie
+// Route pour ajouter une catégorie
 categorieRouter.post(
   "/",
   upload.single("image"),
@@ -33,7 +33,7 @@ categorieRouter.post(
   }
 );
 
-// // Route pour récupérer toutes les catégories
+// Route pour récupérer toutes les catégories
 categorieRouter.get("/", async (req: Request, res: Response) => {
   await categorieController.getAllCategories(req, res);
 });
