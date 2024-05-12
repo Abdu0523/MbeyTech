@@ -7,11 +7,7 @@ import { IPersonne } from "../interfaces/IPersonne";
 
 
  const PersonSchema = new mongoose.Schema<IPersonne>({
-    prenom: {
-        type: String,
-        required: true,
-    },
-    nom: {
+    nomComplet: {
         type: String,
         required: true,
     },
