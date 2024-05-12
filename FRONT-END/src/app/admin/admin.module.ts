@@ -15,6 +15,7 @@ import { AddCategoryComponent } from './components/category/components/modal/add
 import { UpdateCategoryComponent } from './components/category/components/modal/update-category/update-category.component';
 import { DeleteCategoryComponent } from './components/category/components/modal/delete-category/delete-category.component';
 import { RolesComponent } from './components/roles/roles.component';
+import { SharedModule } from "../shared/shared.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './components/product/components/add-product/add-product.component';
 import { ListProductComponent } from './components/product/components/list-product/list-product.component';
