@@ -3,8 +3,8 @@ import { IPersonne } from "../interfaces/IPersonne";
 
 export class ListPersonneDTO implements IPersonne {
   constructor(
-    public prenom: string,
-    public nom: string,
+    public nomComplet: string,
+    // public nom: string,
     public email: string,
     public countryCode: string,
     public phone: string,
@@ -16,21 +16,21 @@ export class ListPersonneDTO implements IPersonne {
   ) {}
 
   // Getters et setters pour toutes les propriétés
-  getPrenom(): string {
-    return this.prenom;
+  getNomComplet(): string {
+    return this.nomComplet;
   }
 
-  setPrenom(prenom: string): void {
-    this.prenom = prenom;
+  setNomComplet(nomComplet: string): void {
+    this.nomComplet = nomComplet;
   }
 
-  getNom(): string {
-    return this.nom;
-  }
+  // getNom(): string {
+  //   return this.nom;
+  // }
 
-  setNom(nom: string): void {
-    this.nom = nom;
-  }
+  // setNom(nom: string): void {
+  //   this.nom = nom;
+  // }
 
   getEmail(): string {
     return this.email;
@@ -98,7 +98,7 @@ export class ListPersonneDTO implements IPersonne {
 
   // Méthodes supplémentaires (facultatives)
   toString(): string {
-    return `Personne: ${this.prenom} ${this.nom}, Email: ${this.email}`;
+    return `Personne: ${this.nomComplet} , Email: ${this.email}`;
   }
 
   estActif(): boolean {

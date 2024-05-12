@@ -16,6 +16,10 @@ import { UpdateCategoryComponent } from './components/category/components/modal/
 import { DeleteCategoryComponent } from './components/category/components/modal/delete-category/delete-category.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { SharedModule } from "../shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddProductComponent } from './components/product/components/add-product/add-product.component';
+import { ListProductComponent } from './components/product/components/list-product/list-product.component';
+import { UpdateProductComponent } from './components/product/components/update-product/update-product.component';
 
 const adminRoutes: Routes = [
   {
@@ -48,22 +52,30 @@ const adminRoutes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
-        NavbarComponent,
-        CategoryComponent,
-        SidebarComponent,
-        PreloaderComponent,
-        FooterComponent,
-        ProductComponent,
-        UsersComponent,
-        OrdersComponent,
-        DashboardComponent,
-        AdminWrapperComponent,
-        AddCategoryComponent,
-        UpdateCategoryComponent,
-        DeleteCategoryComponent,
-        RolesComponent
-    ],
-    imports: [CommonModule, RouterModule.forChild(adminRoutes), SharedModule]
+  declarations: [
+    NavbarComponent,
+    CategoryComponent,
+    SidebarComponent,
+    PreloaderComponent,
+    FooterComponent,
+    ProductComponent,
+    UsersComponent,
+    OrdersComponent,
+    DashboardComponent,
+    AdminWrapperComponent,
+    AddCategoryComponent,
+    UpdateCategoryComponent,
+    DeleteCategoryComponent,
+    RolesComponent,
+    AddProductComponent,
+    ListProductComponent,
+    UpdateProductComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(adminRoutes),
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class AdminModule {}

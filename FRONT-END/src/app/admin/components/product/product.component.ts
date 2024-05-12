@@ -1,21 +1,27 @@
-import { Component } from '@angular/core';
-import { Product } from '../../../shared/interfaces/product';
-import { createProduct, createProducts } from '../../../shared/data/product.generator';
+import { Component, OnInit } from '@angular/core';
+import { ServiceProductService } from './shared/services/service-product.service';
+import { Products } from './shared/models/products';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  styleUrls: ['./product.component.css']
 })
-export class ProductComponent {
-  public productCache!: Product[];
-  public products!: Product[];
-  public product: Product = createProduct();
+export class ProductComponent implements OnInit {
+  
+  public products: Products[] = []; 
+
+  constructor(private productService: ServiceProductService) {}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.products = createProducts(100);
-    this.productCache = this.products;
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    this.productService.getAllProducts().subscribe(products => this.products = products);
+  }
+
+  onProductAdded(): void {
+    this.loadProducts(); // Mettre à jour la liste des produits après l'ajout
   }
 }

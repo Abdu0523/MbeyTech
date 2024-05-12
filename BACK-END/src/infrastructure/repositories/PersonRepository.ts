@@ -15,6 +15,18 @@ interface IPersonDocument extends Document, IPersonne {}
 //const PersonModel = mongoose.model<IPersonDocument>('Person', PersonSchema);
 
 export class PersonRepository implements IRepository<any> {
+  getByNom(nom: string): Promise<any> {
+    throw new Error('Method not implemented.');
+  }
+  getById(id: string): Promise<any> {
+    throw new Error('Method not implemented.');
+  }
+  update(id: string, entity: Partial<any>): Promise<any> {
+    throw new Error('Method not implemented.');
+  }
+  delete(id: string): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
 
   async add(person: SavePersonDTO): Promise<any> {
     const newPerson = new PersonModel(person);

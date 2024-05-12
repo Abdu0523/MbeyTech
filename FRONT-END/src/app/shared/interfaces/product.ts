@@ -6,6 +6,6 @@ export interface Product {
     image: string;
     price?: string;
     category?: string;
-    promo: boolean;
-    promoVal?: number; // Optionel
+    date: Date;    // date
+    promoVal?: number; // statut
 }

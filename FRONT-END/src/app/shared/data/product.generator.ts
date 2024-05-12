@@ -11,7 +11,7 @@ export function createProduct(): Product {
       image: faker.image.urlLoremFlickr({category: 'shoes'}),
       price: faker.commerce.price(),
       category: faker.commerce.department(),
-      promo: hasPromo,
+      date: faker.date.anytime(),
       promoVal: hasPromo ? faker.number.int({ min: 10, max: 60 }) : undefined,
     };
 }

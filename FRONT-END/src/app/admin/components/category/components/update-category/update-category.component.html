@@ -1,0 +1,54 @@
+<ng-template #updateCategoryModal let-modal>
+  <form  (ngSubmit)="onSubmit()">
+    <div class="modal-header">
+      <h4 class="modal-title">Ajouter une nouvelle catégorie</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+      >
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card-body">
+        <div class="form-group" *ngFor="let _ctrl of formMaker">
+          <label [for]="_ctrl.key">{{ _ctrl.name }}</label>
+          <input
+            *ngIf="_ctrl.type !== 'file'"
+            [type]="_ctrl.type"
+            [name]="_ctrl.key"
+            class="form-control"
+            [placeholder]="_ctrl.name"
+          />
+          <input
+            *ngIf="_ctrl.type === 'file'"
+            [type]="_ctrl.type"
+            [name]="_ctrl.key"
+            class="form-control"
+            [placeholder]="_ctrl.name"
+            (change)="onFileSelected($event)"
+          />
+          <div
+            class="text-danger"
+            *ngIf="_ctrl?.control?.invalid && _ctrl?.control?.touched"
+          >
+            <span *ngIf="_ctrl?.control?.errors?.['required']"
+              >{{ _ctrl.name }} est requis</span
+            >
+          </div>
+          <img
+            *ngIf="_ctrl.type === 'file' && categoryForm.get(_ctrl.key)?.value"
+            [src]="categoryForm.get(_ctrl.key)?.value"
+            alt="Category Image"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+      <button type="button" class="btn btn-dark">
+        Fermer
+      </button>
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </div>
+  </form>
+</ng-template>

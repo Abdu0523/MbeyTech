@@ -11,6 +11,15 @@ import { ShopDetailComponent } from './components/shop-detail/shop-detail.compon
 import { SingleHeaderComponent } from './components/single-header/single-header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { HeroComponent } from './components/home/components/hero/hero.component';
+import { FeatursSectionComponent } from './components/home/components/featurs-section/featurs-section.component';
+import { FruitsShopComponent } from './components/home/components/fruits-shop/fruits-shop.component';
+import { FeatursComponent } from './components/home/components/featurs/featurs.component';
+import { VesitableShopComponent } from './components/home/components/vesitable-shop/vesitable-shop.component';
+import { BannerSectionComponent } from './components/home/components/banner-section/banner-section.component';
+import { BestsalerProductComponent } from './components/home/components/bestsaler-product/bestsaler-product.component';
+import { FactComponent } from './components/home/components/fact/fact.component';
+import { TastimonialComponent } from './components/home/components/tastimonial/tastimonial.component';
 
 const sharedRoutes: Routes = [
   {
@@ -52,7 +61,16 @@ const sharedRoutes: Routes = [
     ShopDetailComponent,
     SingleHeaderComponent,
     NotFoundComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    HeroComponent,
+    FeatursSectionComponent,
+    FruitsShopComponent,
+    FeatursComponent,
+    VesitableShopComponent,
+    BannerSectionComponent,
+    BestsalerProductComponent,
+    FactComponent,
+    TastimonialComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(sharedRoutes)],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
