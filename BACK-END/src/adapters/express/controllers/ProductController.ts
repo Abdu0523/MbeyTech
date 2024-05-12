@@ -9,6 +9,7 @@ export class ProductController {
     this.productUseCase = productUseCase;
   }
 
+  /*
   async createProduct(req: Request, res: Response): Promise<void> {
     try {
       const newProduct: IProduct = req.body;
@@ -21,6 +22,22 @@ export class ProductController {
       res.status(500).json({ status: "Error", message: error.message });
     }
   }
+  */
+  async createProduct(req: Request, res: Response): Promise<void> {
+    try {
+      const newProduct: IProduct = req.body;
+      // Ajoutez une vérification pour vérifier si une image a été téléchargée
+      if (req.file) {
+        newProduct.image = req.file.path; // Chemin d'accès à l'image
+      }
+      const createdProduct = await this.productUseCase.createProduct(newProduct);
+      res.status(201).json(createdProduct);
+    } catch (error: any) {
+      console.log("Error creating product", error.stack);
+      res.status(500).json({ status: "Error", message: error.message });
+    }
+  }
+  
 
   async getAllProducts(req: Request, res: Response): Promise<void> {
     try {

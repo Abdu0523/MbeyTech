@@ -7,7 +7,7 @@ export interface Products{
   image: string;
   price: number;
   quantity: number;
- // categoryId: number;
+  category: string;
 }
 
 export class Product implements Products{
@@ -19,5 +19,6 @@ export class Product implements Products{
        public image: string,
        public price: number,
        public quantity: number,
+       public category: string
     ){}
 }

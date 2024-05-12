@@ -55,4 +55,9 @@ export  class ProductUseCase {
     async getProductsByCategory(categoryId: string): Promise<IProduct[]> {
         return this.productRepository.getProductsByCategory(categoryId);
       }
+
+      async productNameExists(name : string) : Promise<boolean> {
+            const product = await this.productRepository.getByName(name)
+            return !!product
+      }
 }

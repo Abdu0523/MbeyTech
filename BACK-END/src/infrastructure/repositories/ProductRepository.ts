@@ -58,4 +58,12 @@ export  class ProductRepository {
             throw new Error(`Error while finding products by category: ${error}`);
         }
     }
-}
+
+    async getByName(name : string): Promise<IProduct | null> {
+        return await ProductModel.findOne({name})
+    }
+   
+    }
+
+
+
