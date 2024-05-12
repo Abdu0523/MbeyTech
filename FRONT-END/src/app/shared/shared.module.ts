@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShopDetailComponent } from './components/shop-detail/shop-detail.component';
 import { SingleHeaderComponent } from './components/single-header/single-header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HeroComponent } from './components/home/components/hero/hero.component';
 import { FeatursSectionComponent } from './components/home/components/featurs-section/featurs-section.component';
 import { FruitsShopComponent } from './components/home/components/fruits-shop/fruits-shop.component';
@@ -41,6 +42,10 @@ const sharedRoutes: Routes = [
         path: 'shop-detail',
         component: ShopDetailComponent,
       },
+      {
+        path: 'checkout',
+        component: CheckoutComponent,
+      },
     ],
   },
 ];
@@ -56,6 +61,7 @@ const sharedRoutes: Routes = [
     ShopDetailComponent,
     SingleHeaderComponent,
     NotFoundComponent,
+    CheckoutComponent,
     HeroComponent,
     FeatursSectionComponent,
     FruitsShopComponent,
