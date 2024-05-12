@@ -55,13 +55,13 @@ export class CategorieUseCase {
   }
 
   async categoryNameExists(nom: string): Promise<boolean> {
-    const categorie = await this.categorieRepository.getByNom(nom);
+    const categorie = await this.categorieRepository.getByName(nom);
     return !!categorie;
   }
 
   async getCategorieByNom(nom: string): Promise<ICategorie | null> {
     try {
-      const categorie = await this.categorieRepository.getByNom(nom);
+      const categorie = await this.categorieRepository.getByName(nom);
       return categorie;
     } catch (error: any) {
       throw new Error("Error getting category by NOM: " + error.message);
