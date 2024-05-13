@@ -4,12 +4,12 @@ import { catchError, Observable, of } from 'rxjs';
 import { OrderDetail } from '../../interfaces/order-detail';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderDetailService {
   private apiUrl = 'http://localhost:3000/api/order-details';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   addOrderDetail(orderDetail: OrderDetail): Observable<OrderDetail> {
     return this.http.post<OrderDetail>(`${this.apiUrl}`, orderDetail).pipe(
@@ -17,6 +17,28 @@ export class OrderDetailService {
         console.error('Error from addOrderDetail : ', error);
         return of();
       })
-    );;
+    );
+  }
+
+  getOrderDetailsForOrder(orderId: string): Observable<OrderDetail[]> {
+    return this.http.get<OrderDetail[]>(
+      `${this.apiUrl}/order/${orderId}`
+    );
+  }
+
+  updateOrderDetail(
+    orderDetailId: string,
+    orderDetailData: Partial<OrderDetail>
+  ): Observable<OrderDetail> {
+    return this.http.put<OrderDetail>(
+      `${this.apiUrl}/order-details/${orderDetailId}`,
+      orderDetailData
+    );
+  }
+
+  deleteOrderDetail(orderDetailId: string): Observable<any> {
+    return this.http.delete<any>(
+      `${this.apiUrl}/order-details/${orderDetailId}`
+    );
   }
 }

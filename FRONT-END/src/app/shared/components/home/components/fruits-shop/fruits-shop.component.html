@@ -45,7 +45,7 @@
                   <div class="rounded position-relative fruite-item">
                     <div class="fruite-img">
                       <img
-                        [src]="'http://localhost:3000/api/uploads/' + product.image.split('\\')[2]"
+                        [src]="'http://localhost:3000/api/uploads/' + item.image.split('\\')[2]"
                         class="img-fluid w-100 rounded-top"
                         alt=""
                       />
@@ -68,7 +68,7 @@
                           FCFA {{ item.price }} / kg
                         </p>
                         <a
-                          (click)="addToCart(item._id,'663d3eca576baba30d52d489')"
+                          (click)="addToCart(item._id,customerId)"
                           class="btn border border-secondary rounded-pill px-3 text-primary"
                           ><i class="fa fa-shopping-bag me-2 text-primary"></i>
                           Ajouter au panier</a

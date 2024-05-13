@@ -20,6 +20,10 @@ orderDetailRouter.get("/:id", async (req: Request, res: Response) => {
   await orderDetailController.getOrderDetailById(req, res);
 });
 
+orderDetailRouter.get("/order/:id", async (req: Request, res: Response) => {
+    await orderDetailController.getOrderDetailsForOrder(req, res);
+  });
+
 orderDetailRouter.put("/:id", async (req: Request, res: Response) => {
   await orderDetailController.updateOrderDetail(req, res);
 });

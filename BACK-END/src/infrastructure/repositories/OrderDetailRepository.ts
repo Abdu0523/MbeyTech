@@ -34,6 +34,15 @@ export class OrderDetailRepository implements IRepository<any> {
     }
   }
 
+  async getOrderDetailsForOrder(orderId: string): Promise<any[]> {
+    try {
+      const orderDetails = await OrderDetailModel.find({ orderId });
+      return orderDetails;
+    } catch (error: any) {
+      throw new Error("Error getting order details for order: " + error.message);
+    }
+  }
+
   async update(
     id: string,
     entity: Partial<IOrderDetail>

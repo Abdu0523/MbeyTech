@@ -31,6 +31,15 @@ export class OrderDetailUseCase {
     }
   }
 
+  async getOrderDetailsForOrder(orderId: string): Promise<any[]> {
+    try {
+        const orderDetails = await this.orderDetailRepository.getOrderDetailsForOrder(orderId);
+        return orderDetails;
+    } catch (error: any) {
+        throw new Error("Error getting order detail for order: " + error.message);
+    }
+  }
+
   async updateOrderDetail(orderDetailId: string, updatedOrderDetailData: Partial<IOrderDetail>): Promise<IOrderDetail | null> {
     try {
       const updatedOrderDetail = await this.orderDetailRepository.update(orderDetailId, updatedOrderDetailData);

@@ -22,6 +22,15 @@ export class OrderService {
     );
   }
 
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.apiUrl).pipe(
+      catchError((error) => {
+        console.error('Error from getOrderForCustomer : ', error);
+        return of([]);
+      })
+    );
+  }
+
   getOrderForCustomer(customerId: string): Observable<Order> {
     return this.http.get<Order>(`${this.apiUrl}/${customerId}`).pipe(
       catchError((error) => {
@@ -40,5 +49,13 @@ export class OrderService {
           return of();
         })
       );
+  }
+
+  updateOrder(orderId: string, orderData: Partial<Order>): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${orderId}`, orderData);
+  }
+
+  deleteOrder(orderId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${orderId}`);
   }
 }

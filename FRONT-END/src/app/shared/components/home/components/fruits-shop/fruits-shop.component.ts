@@ -19,6 +19,7 @@ export class FruitsShopComponent implements OnInit {
   public products: Product[] = [];
   public category!: Category;
   public product!: Product;
+  public customerId: string = "663d3eca576baba30d52d489"
 
   constructor(
     private categoryService: CategoryService,
