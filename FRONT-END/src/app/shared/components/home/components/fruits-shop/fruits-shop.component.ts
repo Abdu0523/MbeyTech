@@ -7,6 +7,7 @@ import { OrderDetail } from '../../../../interfaces/order-detail';
 import { Order } from '../../../../interfaces/order';
 import { OrderDetailService } from '../../../../services/order-detail/order-detail.service';
 import { OrderService } from '../../../../services/order/order.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-fruits-shop',

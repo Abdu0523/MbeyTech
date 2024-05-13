@@ -44,7 +44,7 @@ const sharedRoutes: Routes = [
         component: ContactComponent,
       },
       {
-        path: 'shop-detail',
+        path: 'shop-detail/:id',
         component: ShopDetailComponent,
       },
       {

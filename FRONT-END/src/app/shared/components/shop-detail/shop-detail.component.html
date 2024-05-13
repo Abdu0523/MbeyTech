@@ -8,18 +8,16 @@
           <div class="col-lg-6">
             <div class="border rounded">
               <a href="#">
-                <img
-                  src="assets/client/client/img/single-item.jpg"
-                  class="img-fluid rounded"
-                  alt="Image"
-                />
+                <img *ngIf="product" [src]="'http://localhost:3000/api/uploads/' + product.image.split('\\')[2]"
+                 class="img-fluid"
+                  alt={{product!.name}}>
               </a>
             </div>
           </div>
           <div class="col-lg-6">
-            <h4 class="fw-bold mb-3">Brocoli</h4>
-            <p class="mb-3">Category: Vegetables</p>
-            <h5 class="fw-bold mb-3">3,35 $</h5>
+            <h4 class="fw-bold mb-3">{{product!.name}}</h4>
+            <p class="mb-3">Category: {{product!.category}}</p>
+            <h5 class="fw-bold mb-3">{{product!.price}} FCFA</h5>
             <div class="d-flex mb-4">
               <i class="fa fa-star text-secondary"></i>
               <i class="fa fa-star text-secondary"></i>
@@ -28,12 +26,7 @@
               <i class="fa fa-star"></i>
             </div>
             <p class="mb-4">
-              The generated Lorem Ipsum is therefore always free from repetition
-              injected humour, or non-characteristic words etc.
-            </p>
-            <p class="mb-4">
-              Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock
-              flounder; chain pickerel hatchetfish, pencilfish snailfish
+              {{product!.description}}
             </p>
             <div class="input-group quantity mb-5" style="width: 100px">
               <div class="input-group-btn">
@@ -309,60 +302,35 @@
                 placeholder="keywords"
                 aria-describedby="search-icon-1"
               />
-              <span id="search-icon-1" class="input-group-text p-3"
-                ><i class="fa fa-search"></i
-              ></span>
+              <span id="search-icon-1" class="input-group-text p-3">
+                <i class="fa fa-search"></i>
+              </span>
             </div>
             <div class="mb-4">
               <h4>Categories</h4>
               <ul class="list-unstyled fruite-categorie">
-                <li>
+                <li *ngFor="let category of categories">
                   <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                    <span>(3)</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                    <span>(5)</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"
-                      ><i class="fas fa-apple-alt me-2"></i>Strawbery</a
-                    >
-                    <span>(2)</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                    <span>(8)</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                    <span>(5)</span>
+                    <a href="#"><i class="fas fa-apple-alt me-2"></i>{{ category.nom }}</a>
+                    
                   </div>
                 </li>
               </ul>
             </div>
           </div>
-          <div class="col-lg-12">
+          
+          <div class="col-lg-12"  *ngFor="let relatedProduct of relatedProducts">
             <h4 class="mb-4">Featured products</h4>
             <div class="d-flex align-items-center justify-content-start">
               <div class="rounded" style="width: 100px; height: 100px">
                 <img
-                  src="assets/client/client/img/featur-1.jpg"
+                  [src]="'http://localhost:3000/api/uploads/' + relatedProduct.image.split('\\')[2]"
                   class="img-fluid rounded"
                   alt="Image"
                 />
               </div>
               <div>
-                <h6 class="mb-2">Big Banana</h6>
+                <h6 class="mb-2">{{relatedProduct.name}}</h6>
                 <div class="d-flex mb-2">
                   <i class="fa fa-star text-secondary"></i>
                   <i class="fa fa-star text-secondary"></i>
@@ -371,7 +339,7 @@
                   <i class="fa fa-star"></i>
                 </div>
                 <div class="d-flex mb-2">
-                  <h5 class="fw-bold me-2">2.99 $</h5>
+                  <h5 class="fw-bold me-2">{{relatedProduct.price}} $</h5>
                   <h5 class="text-danger text-decoration-line-through">
                     4.11 $
                   </h5>
@@ -383,7 +351,7 @@
                 <img src="assets/client/client/img/featur-2.jpg" class="img-fluid rounded" alt="" />
               </div>
               <div>
-                <h6 class="mb-2">Big Banana</h6>
+                <h6 class="mb-2">{{relatedProduct.name}}</h6>
                 <div class="d-flex mb-2">
                   <i class="fa fa-star text-secondary"></i>
                   <i class="fa fa-star text-secondary"></i>
@@ -392,7 +360,7 @@
                   <i class="fa fa-star"></i>
                 </div>
                 <div class="d-flex mb-2">
-                  <h5 class="fw-bold me-2">2.99 $</h5>
+                  <h5 class="fw-bold me-2">{{relatedProduct.price}} $</h5>
                   <h5 class="text-danger text-decoration-line-through">
                     4.11 $
                   </h5>
