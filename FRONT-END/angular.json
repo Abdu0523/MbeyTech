@@ -28,24 +28,19 @@
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.css",
-              
               "https://use.fontawesome.com/releases/v5.15.4/css/all.css",
               "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css",
               "src/assets/client/client/lib/lightbox/css/lightbox.min.css",
               "src/assets/client/client/lib/owlcarousel/assets/owl.carousel.min.css",
               "src/assets/client/client/css/bootstrap.min.css",
               "src/assets/client/client/css/style.css"
-
-              
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
