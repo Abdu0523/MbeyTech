@@ -44,17 +44,20 @@
                 <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let item of products">
                   <div class="rounded position-relative fruite-item">
                     <div class="fruite-img">
+                      <a [routerLink]="['/shop-detail', item._id]"> 
                       <img
                         [src]="'http://localhost:3000/api/uploads/' + item.image.split('\\')[2]"
                         class="img-fluid w-100 rounded-top"
                         alt=""
                       />
+                    </a>
                     </div>
                     <div
                       class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                       style="top: 10px; left: 10px"
+                      
                     >
-                      {{ item.name }}
+                      {{ item.category }}
                     </div>
                     <div
                       class="p-4 border border-secondary border-top-0 rounded-bottom"

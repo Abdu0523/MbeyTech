@@ -7,6 +7,7 @@ import { OrderDetail } from '../../../../interfaces/order-detail';
 import { Order } from '../../../../interfaces/order';
 import { OrderDetailService } from '../../../../services/order-detail/order-detail.service';
 import { OrderService } from '../../../../services/order/order.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-fruits-shop',
@@ -19,7 +20,8 @@ export class FruitsShopComponent implements OnInit {
   public products: Product[] = [];
   public category!: Category;
   public product!: Product;
-  public customerId: string = "663d3eca576baba30d52d489"
+  public customerId: string = "663d3eca576baba30d52d489";
+ 
 
   constructor(
     private categoryService: CategoryService,
@@ -90,6 +92,7 @@ export class FruitsShopComponent implements OnInit {
       }
     );
   }
+
 
   addToCart(productId: string, customerId: string) {
     // Vérifier si une commande existe pour le client
