@@ -19,6 +19,6 @@ export class Product implements Products{
        public image: string,
        public price: number,
        public quantity: number,
-       public category: string
+       public category:  string
     ){}
 }
