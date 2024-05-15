@@ -12,7 +12,7 @@ import { Order } from '../../../shared/interfaces/order';
 })
 export class CartComponent {
   orderDetails: OrderDetail[] = [];
-  public customId: string = "663d3eca576baba30d52d489";
+  public customId: string = '663d3eca576baba30d52d489';
 
   constructor(
     private router: Router,
@@ -39,15 +39,26 @@ export class CartComponent {
   }
 
   getOrderDetailsForCart(orderId: string = '') {
-    // Vous devrez passer l'ID de la commande du panier du client à cette méthode
-    // const orderId = 'ID_de_la_commande_du_panier_du_client';
-
     this.orderDetailService.getOrderDetailsForOrder(orderId).subscribe({
       next: (orderDetails) => {
         this.orderDetails = orderDetails;
+        console.log(this.orderDetails);
       },
       error: () => {
         console.error('Error fetching order details for cart.');
+      },
+    });
+  }
+
+  deleteOrderDetail(orderId: string = '') {
+    this.orderDetailService.deleteOrderDetail(orderId).subscribe({
+      next: (orderDetails) => {
+        this.orderDetails = orderDetails;
+        console.log(this.orderDetails);
+        this.getUnvalidatedOrdersForCustomer();
+      },
+      error: () => {
+        console.error('Error deleting order details for cart.');
       },
     });
   }

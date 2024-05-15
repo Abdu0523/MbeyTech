@@ -20,7 +20,7 @@ export class OrderDetailService {
     );
   }
 
-  getOrderDetailsForOrder(orderId: string): Observable<OrderDetail[]> {
+  getOrderDetailsForOrder(orderId: string = ''): Observable<OrderDetail[]> {
     return this.http.get<OrderDetail[]>(
       `${this.apiUrl}/order/${orderId}`
     );
@@ -31,14 +31,14 @@ export class OrderDetailService {
     orderDetailData: Partial<OrderDetail>
   ): Observable<OrderDetail> {
     return this.http.put<OrderDetail>(
-      `${this.apiUrl}/order-details/${orderDetailId}`,
+      `${this.apiUrl}/${orderDetailId}`,
       orderDetailData
     );
   }
 
   deleteOrderDetail(orderDetailId: string): Observable<any> {
     return this.http.delete<any>(
-      `${this.apiUrl}/order-details/${orderDetailId}`
+      `${this.apiUrl}/${orderDetailId}`
     );
   }
 }

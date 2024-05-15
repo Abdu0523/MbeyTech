@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../../../../interfaces/category';
 import { CategoryService } from '../../../../services/category/category.service';
 import { ServiceProductService } from '../../../../../admin/components/product/shared/services/service-product.service';
-import { Product } from '../../../../../admin/components/product/shared/models/products';
+import { Product, Products } from '../../../../../admin/components/product/shared/models/products';
 import { OrderDetail } from '../../../../interfaces/order-detail';
 import { Order } from '../../../../interfaces/order';
 import { OrderDetailService } from '../../../../services/order-detail/order-detail.service';
@@ -21,7 +21,8 @@ export class FruitsShopComponent implements OnInit {
   public category!: Category;
   public product!: Product;
   public customerId: string = "663d3eca576baba30d52d489";
- 
+  public productIdToAdd!: string;
+  public orderDetails: OrderDetail[] = []
 
   constructor(
     private categoryService: CategoryService,
@@ -93,25 +94,24 @@ export class FruitsShopComponent implements OnInit {
     );
   }
 
-
-  addToCart(productId: string, customerId: string) {
-    // Vérifier si une commande existe pour le client
+  addToCart(product: Products, customerId: string) {
+    // const productAlreadyInCart = this.orderDetails.some(detail => detail.product.some(p => p._id === product._id));
+    // console.log('productAlreadyInCart',productAlreadyInCart)
+    // if (productAlreadyInCart) {
+    //   alert('Ce produit est déjà dans votre panier.');
+    //   return;
+    // }
     this.orderService.getUnvalidatedOrdersForCustomer(customerId).subscribe(
       (order: Order) => {
-        console.log('====================================');
-        console.log(order);
-        console.log('====================================');
         if (!order) {
-          // Si aucune commande n'existe, créer une nouvelle commande
           this.orderService
             .createOrder({ person: customerId })
             .subscribe(
               (newOrder: Order) => {
                 console.log('newOrder : ', newOrder);
-                // Ajouter le produit au panier avec l'ID de la nouvelle commande
                 const orderDetail: OrderDetail = {
-                  order: newOrder._id,
-                  product: productId,
+                  order: [newOrder],
+                  product: [product],
                   quantity: 1,
                   unitPrice: 1,
                 };
@@ -125,13 +125,12 @@ export class FruitsShopComponent implements OnInit {
               }
             );
         } else {
-          // Si une commande existe, ajouter simplement le produit au panier avec l'ID de la commande existante
-          
+          this.getOrderDetailsForCart(order._id)
           const orderDetail: OrderDetail = {
-            order: order._id,
-            product: productId,
-            quantity: 0,
-            unitPrice: 0,
+            order: [order],
+            product: [product],
+            quantity: 1,
+            unitPrice: 1,
             status: '',
           };
           this.addOrderDetail(orderDetail);
@@ -144,6 +143,16 @@ export class FruitsShopComponent implements OnInit {
   }
 
   addOrderDetail(orderDetail: OrderDetail) {
+    this.orderDetailService.getOrderDetailsForOrder(orderDetail.order[0]._id).subscribe({
+      next: (orderDetails) => {
+        this.orderDetails = orderDetails;
+        console.log('detai first',this.orderDetails);
+        const productAlreadyInCart = this.orderDetails.some(detail => detail.product.some(p => p._id === orderDetail.product[0]._id));;
+    console.log('productAlreadyInCart',productAlreadyInCart)
+    if (productAlreadyInCart) {
+      alert('Ce produit est déjà dans votre panier.');
+      return;
+    }
     this.orderDetailService.addOrderDetail(orderDetail).subscribe(
       () => {
         console.log('Produit ajouté au panier avec succès.');
@@ -152,5 +161,23 @@ export class FruitsShopComponent implements OnInit {
         console.error('Une erreur est survenue lors addOrderDetail :', error);
       }
     );
+      },
+      error: () => {
+        console.error('Error fetching order details for cart.');
+      },
+    });
+    
+  }
+
+  getOrderDetailsForCart(orderId: string = '') {
+    this.orderDetailService.getOrderDetailsForOrder(orderId).subscribe({
+      next: (orderDetails) => {
+        this.orderDetails = orderDetails;
+        console.log('detai first',this.orderDetails);
+      },
+      error: () => {
+        console.error('Error fetching order details for cart.');
+      },
+    });
   }
 }

@@ -6,14 +6,12 @@ const OrderDetailSchema = new mongoose.Schema<IOrderDetail>({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Order",
-      required: true,
     },
   ],
   product: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
-      required: true,
     },
   ],
   quantity: {
@@ -37,6 +35,20 @@ const OrderDetailSchema = new mongoose.Schema<IOrderDetail>({
     default: Date.now,
   },
 });
+
+OrderDetailSchema.virtual('productInfo', {
+    ref: 'Product',
+    localField: 'productId',
+    foreignField: '_id',
+    justOne: true
+  });
+  
+  OrderDetailSchema.virtual('orderInfo', {
+    ref: 'Order',
+    localField: 'orderId',
+    foreignField: '_id',
+    justOne: true
+  });
 
 const OrderDetailModel = mongoose.model<IOrderDetail>("OrderDetail", OrderDetailSchema);
 export default OrderDetailModel;
