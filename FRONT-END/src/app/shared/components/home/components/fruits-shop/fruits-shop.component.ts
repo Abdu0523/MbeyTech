@@ -3,6 +3,7 @@ import { Category } from '../../../../interfaces/category';
 import { CategoryService } from '../../../../services/category/category.service';
 import { ServiceProductService } from '../../../../../admin/components/product/shared/services/service-product.service';
 import { Product } from '../../../../../admin/components/product/shared/models/products';
+import { PanierService } from '../../../../services/panier/panier.service';
 
 @Component({
   selector: 'app-fruits-shop',
@@ -18,7 +19,8 @@ export class FruitsShopComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private productService: ServiceProductService
+    private productService: ServiceProductService,
+    private panierService:  PanierService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,10 @@ export class FruitsShopComponent implements OnInit {
         );
       }
     );
+  }
+  addToPanier(product:Product){
+this.panierService.addToCart(product)
+
   }
 
   loadProducts() {
@@ -66,6 +72,22 @@ export class FruitsShopComponent implements OnInit {
         );
       }
     );
+  }
+  getProducts() {
+    return this.productService.getAllProducts().subscribe({
+      next: (productsByCategory: Product[]) => {
+        this.productsByCategory = productsByCategory;
+      },
+      error: (error) => {
+        console.error(
+          'Une erreur est survenue lors du chargement des produits par categorie :',
+          error
+        );
+      },
+      complete: () => {
+        console.log('Chargement des produits par categorie terminé');
+      }
+    });
   }
 
   getCategoryById(id: string) {

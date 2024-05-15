@@ -11,8 +11,7 @@ export interface Products{
   quantity: number;
   category: Category[];
 }
-
-export class Product implements Products{
+export class Commande implements Products{
     constructor(
        public _id: string,
        public name: string,

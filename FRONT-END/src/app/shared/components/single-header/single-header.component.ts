@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SingleHeaderComponent {
   @Input() pageTitle: string = 'pageTitle';
+
 }
