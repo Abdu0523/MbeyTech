@@ -20,6 +20,7 @@ import { BannerSectionComponent } from './components/home/components/banner-sect
 import { BestsalerProductComponent } from './components/home/components/bestsaler-product/bestsaler-product.component';
 import { FactComponent } from './components/home/components/fact/fact.component';
 import { TastimonialComponent } from './components/home/components/tastimonial/tastimonial.component';
+import { FormsModule } from '@angular/forms';
 
 const sharedRoutes: Routes = [
   {
@@ -72,7 +73,7 @@ const sharedRoutes: Routes = [
     FactComponent,
     TastimonialComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(sharedRoutes)],
+  imports: [CommonModule, RouterModule.forChild(sharedRoutes),FormsModule],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
 })
 export class SharedModule {}

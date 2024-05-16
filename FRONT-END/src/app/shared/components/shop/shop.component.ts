@@ -106,8 +106,7 @@ export class ShopComponent {
     );
   }
   isProductInCart(productId: string): boolean {
-    console.log("test--",this.panierService.isProductInCart(productId) )
-    return this.panierService.isProductInCart(productId);
+     return this.panierService.isProductInCart(productId);
   }
   removeFromCart(productId:string){
     this.panierService.removeFromCart(productId)

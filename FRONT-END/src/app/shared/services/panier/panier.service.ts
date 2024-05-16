@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../../admin/components/product/shared/models/products';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +18,15 @@ export class PanierService {
     localStorage.setItem('cart', JSON.stringify(cartItems));
     this.RequiredRefresh.next()
   }
-
-  removeFromCart(productId: string): void {
-    let cartItems = JSON.parse(localStorage.getItem('cart') || '[]') as Product[];
-    let updatedCart = cartItems.filter(item => item._id !== productId);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    this.RequiredRefresh.next();
-
+  removeFromCart(productId: string): Observable<any> {
+    return new Observable(subscriber => {
+      let cartItems = JSON.parse(localStorage.getItem('cart') || '[]') as Product[];
+      let updatedCart = cartItems.filter(item => item._id !== productId);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      subscriber.next({ message: 'Product removed from cart successfully' });
+      subscriber.complete();
+      this.RequiredRefresh.next();
+    });
   }
   isProductInCart(productId: string): boolean {
     let cartItems = JSON.parse(localStorage.getItem('cart') || '[]') as Product[];

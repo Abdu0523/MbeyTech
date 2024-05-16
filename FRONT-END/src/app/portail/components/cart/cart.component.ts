@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PanierService } from '../../../shared/services/panier/panier.service';
 import { Product } from '../../../admin/components/product/shared/models/products';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -23,6 +24,10 @@ export class CartComponent {
   ngOnInit() {
    this.getAllPanier()
    this.calculateTotal()
+   this.panierService.RequiredRefresh.subscribe(()=>{
+    this.getAllPanier()
+    this.calculateTotal()
+   })
 
   }
   navigateToCheckout() {
@@ -47,5 +52,48 @@ getAllPanier(){
   this.quantity = 1
 }
 
+   removeFromCart(productId: string) {
+  Swal.fire({
+    title: 'Êtes-vous sûr ?',
+    text: 'Vous ne pourrez pas revenir en arrière !',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Oui, supprimez-la !'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.panierService.removeFromCart(productId).subscribe({
+        next: () => {
+          this.alertSuccess()
+        },
+        error: (error) => {
+         this.alertError()
+        }
+      });
+    }
+  });
+}
+alertError(){
+  Swal.fire({
+    title: 'Oops!',
+    text: 'Un problème s est produit lors de la suppression du produit.',
+    icon: 'error'
+  });
+}
+showAlert() {
+  Swal.fire({
+    title: "produits mise à jour avec succès !",
+    text: "Vous avez cliqué sur le bouton !",
+    icon: "success"
+  });
+}
+alertSuccess(){
+  Swal.fire({
+    title: 'Supprimé !',
+    text: 'Le produit a été retiré.',
+    icon: 'success'
+  });
+}
 
 }

@@ -27,7 +27,14 @@ export class FruitsShopComponent implements OnInit {
     this.loadCategories();
     this.loadProducts();
   }
+  
+  isProductInCart(productId: string): boolean {
+    return this.panierService.isProductInCart(productId);
+ }
+ removeFromCart(productId:string){
+  this.panierService.removeFromCart(productId)
 
+    }
   loadCategories() {
     this.categoryService.getAllCategories().subscribe(
       (categories: Category[]) => {

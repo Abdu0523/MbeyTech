@@ -62,11 +62,22 @@
                       <div class="d-flex justify-content-between flex-lg-wrap">
                         <p class="text-dark fs-5 fw-bold mb-0">{{product.price}} CFA / {{product.quantity}}kg</p>
                         <a
-                          class="btn border border-secondary rounded-pill px-3 text-primary"
-                          (click)="addToPanier(product)"
-                          ><i class="fa fa-shopping-bag me-2 text-primary"></i>
-                          Ajouter au panier</a
-                        >
+                        *ngIf="!isProductInCart(product._id)"
+                        class="btn border border-secondary rounded-pill px-3 text-primary"
+                        (click)="addToPanier(product)"
+                      >
+                        <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                        Ajouter au panier
+                      </a>
+
+                      <a
+                        *ngIf="isProductInCart(product._id)"
+                        class="btn border border-secondary rounded-pill px-3 text-danger"
+                        (click)="removeFromCart(product._id)"
+                      >
+                        <i class="fa fa-trash me-2 text-danger"></i>
+                        Supprimer du panier
+                      </a>
                       </div>
                     </div>
                   </div>
