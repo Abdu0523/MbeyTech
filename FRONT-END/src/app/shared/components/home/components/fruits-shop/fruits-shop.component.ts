@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../../../../interfaces/category';
 import { CategoryService } from '../../../../services/category/category.service';
 import { ServiceProductService } from '../../../../../admin/components/product/shared/services/service-product.service';
-import { Product, Products } from '../../../../../admin/components/product/shared/models/products';
+import { Product } from '../../../../../admin/components/product/shared/models/products';
+import { PanierService } from '../../../../services/panier/panier.service';
+import { Products } from '../../../../../admin/components/product/shared/models/products';
 import { OrderDetail } from '../../../../interfaces/order-detail';
 import { Order } from '../../../../interfaces/order';
 import { OrderDetailService } from '../../../../services/order-detail/order-detail.service';
@@ -14,7 +16,7 @@ import { Observable } from 'rxjs';
   templateUrl: './fruits-shop.component.html',
   styleUrl: './fruits-shop.component.css',
 })
-export class FruitsShopComponent implements OnInit {
+export class FruitsShopComponent  {
   public categories: Category[] = [];
   public productsByCategory: Product[] = [];
   public products: Product[] = [];
@@ -28,14 +30,32 @@ export class FruitsShopComponent implements OnInit {
     private categoryService: CategoryService,
     private productService: ServiceProductService,
     private orderService: OrderService,
-    private orderDetailService: OrderDetailService
+    private orderDetailService: OrderDetailService,
+    private panierService : PanierService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadCategories();
     this.loadProducts();
+    this.panierService.RequiredRefresh.subscribe(()=>{
+      this.loadCategories();
+      this.loadProducts();
+     })
+
   }
 
+  isProductInCart(productId: string): boolean {
+    return this.panierService.isProductInCart(productId);
+ }
+ removeFromCart(productId:string){
+  this.panierService.removeFromCart(productId).subscribe({
+    next: () => {
+    },
+    error: (error) => {
+    }
+  });
+
+    }
   loadCategories() {
     this.categoryService.getAllCategories().subscribe(
       (categories: Category[]) => {
@@ -49,12 +69,15 @@ export class FruitsShopComponent implements OnInit {
       }
     );
   }
+  addToPanier(product:Product){
+this.panierService.addToCart(product)
+
+  }
 
   loadProducts() {
     this.productService.getAllProducts().subscribe(
       (products: Product[]) => {
         this.products = products;
-        console.log('products : ', this.products);
       },
       (error) => {
         console.error(
@@ -78,12 +101,27 @@ export class FruitsShopComponent implements OnInit {
       }
     );
   }
+  getProducts() {
+    return this.productService.getAllProducts().subscribe({
+      next: (productsByCategory: Product[]) => {
+        this.productsByCategory = productsByCategory;
+      },
+      error: (error) => {
+        console.error(
+          'Une erreur est survenue lors du chargement des produits par categorie :',
+          error
+        );
+      },
+      complete: () => {
+        console.log('Chargement des produits par categorie terminé');
+      }
+    });
+  }
 
   getCategoryById(id: string) {
     this.categoryService.getCategoryById(id).subscribe(
       (category: Category) => {
         this.category = category;
-        return category;
       },
       (error) => {
         console.error(
@@ -166,9 +204,8 @@ export class FruitsShopComponent implements OnInit {
         console.error('Error fetching order details for cart.');
       },
     });
-    
-  }
 
+  }
   getOrderDetailsForCart(orderId: string = '') {
     this.orderDetailService.getOrderDetailsForOrder(orderId).subscribe({
       next: (orderDetails) => {
