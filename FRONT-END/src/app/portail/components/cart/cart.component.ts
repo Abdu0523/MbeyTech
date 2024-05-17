@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { PanierService } from '../../../shared/services/panier/panier.service';
 import { Product } from '../../../admin/components/product/shared/models/products';
 import Swal from 'sweetalert2';
+import { OrderDetailService } from '../../../shared/services/order-detail/order-detail.service';
+import { OrderService } from '../../../shared/services/order/order.service';
+import { OrderDetail } from '../../../shared/interfaces/order-detail';
+import { Order } from '../../../shared/interfaces/order';
 
 @Component({
   selector: 'app-cart',
@@ -19,17 +23,24 @@ export class CartComponent {
 
   constructor(
     private router: Router,
-    private panierService: PanierService
+    private panierService: PanierService,
+  
+    private orderService: OrderService,
+    private orderDetailService: OrderDetailService
   ) {}
   ngOnInit() {
    this.getAllPanier()
    this.calculateTotal()
+   this.getUnvalidatedOrdersForCustomer();
    this.panierService.RequiredRefresh.subscribe(()=>{
     this.getAllPanier()
     this.calculateTotal()
    })
 
   }
+  orderDetails: OrderDetail[] = [];
+  public customId: string = '663d3eca576baba30d52d489';
+
   navigateToCheckout() {
     this.router.navigate(['/checkout']);
     console.log("checkout tap")
@@ -96,4 +107,37 @@ alertSuccess(){
   });
 }
 
+
+  getUnvalidatedOrdersForCustomer() {
+    this.orderService
+      .getUnvalidatedOrdersForCustomer(this.customId)
+      .subscribe((order: Order) => {
+        this.getOrderDetailsForCart(order._id);
+      });
+  }
+
+  getOrderDetailsForCart(orderId: string = '') {
+    this.orderDetailService.getOrderDetailsForOrder(orderId).subscribe({
+      next: (orderDetails) => {
+        this.orderDetails = orderDetails;
+        console.log(this.orderDetails);
+      },
+      error: () => {
+        console.error('Error fetching order details for cart.');
+      },
+    });
+  }
+
+  deleteOrderDetail(orderId: string = '') {
+    this.orderDetailService.deleteOrderDetail(orderId).subscribe({
+      next: (orderDetails) => {
+        this.orderDetails = orderDetails;
+        console.log(this.orderDetails);
+        this.getUnvalidatedOrdersForCustomer();
+      },
+      error: () => {
+        console.error('Error deleting order details for cart.');
+      },
+    });
+  }
 }

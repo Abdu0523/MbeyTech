@@ -28,6 +28,11 @@ export class ShopComponent {
     this.loadCategories();
     this.loadProducts();
     this.getProducts()
+    this.panierService.RequiredRefresh.subscribe(()=>{
+      this.loadCategories();
+      this.loadProducts();
+      this.getProducts()
+     })
 
   }
   addToPanier(product:Product){
@@ -109,7 +114,12 @@ export class ShopComponent {
      return this.panierService.isProductInCart(productId);
   }
   removeFromCart(productId:string){
-    this.panierService.removeFromCart(productId)
+    this.panierService.removeFromCart(productId).subscribe({
+      next: () => {
+      },
+      error: (error) => {
+      }
+    });
 
       }
 }

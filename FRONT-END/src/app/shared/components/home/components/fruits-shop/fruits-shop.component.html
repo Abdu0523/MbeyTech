@@ -10,7 +10,7 @@
           <ul class="nav nav-pills d-inline-flex text-center mb-5">
             <li class="nav-item">
               <a
-                class="d-flex m-2 py-2 bg-light rounded-pill active"
+                class="d-flex m-2 py-2 bg-light rounded-pill"
                 data-bs-toggle="pill"
                 href="#tab-1"
               >
@@ -33,24 +33,27 @@
         </div>
       </div>
       <div class="tab-content">
-        <div id="tab-1" class="tab-pane fade show p-0">
+        <div id="tab-1" class="tab-pane fade show p-0 active">
           <div class="row g-4">
             <div class="col-lg-12">
               <div class="row g-4">
                 <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let product of products">
                   <div class="rounded position-relative fruite-item">
                     <div class="fruite-img">
+                      <a [routerLink]="['/shop-detail', product._id]">
                       <img
                         [src]="'http://localhost:3000/api/uploads/' + product.image.split('\\')[2]"
                         class="img-fluid w-100 rounded-top"
                         alt=""
                       />
+                    </a>
                     </div>
                     <div
                       class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                       style="top: 10px; left: 10px"
+
                     >
-                      {{category.nom}}
+                      {{product.category[0].nom}}
                     </div>
                     <div
                       class="p-4 border border-secondary border-top-0 rounded-bottom"
@@ -90,9 +93,16 @@
         <div id="tab-2" class="tab-pane fade show p-0">
           <div class="row g-4">
             <div class="col-lg-12">
-              <div class="row g-4">
-                <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let item of productsByCategory">
+              <div
+                class="row g-4"
+                *ngIf="productsByCategory.length > 0; else anonymouser"
+              >
+                <div
+                  class="col-md-6 col-lg-4 col-xl-3"
+                  *ngFor="let item of productsByCategory"
+                >
                   <div class="rounded position-relative fruite-item">
+                    <a [routerLink]="['/shop-detail', item._id]">
                     <div class="fruite-img">
                       <img
                       [src]="'http://localhost:3000/api/uploads/' + item.image.split('\\')[2]"
@@ -100,6 +110,7 @@
                         alt=""
                       />
                     </div>
+                  </a>
                     <div
                       class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                       style="top: 10px; left: 10px"
@@ -116,16 +127,33 @@
                       <div class="d-flex justify-content-between flex-lg-wrap">
                         <p class="text-dark fs-5 fw-bold mb-0">{{item.price}} CFA / {{item.quantity}}kg</p>
                         <a
-                          class="btn border border-secondary rounded-pill px-3 text-primary"
-                          (click)="addToPanier(item)"
-                          ><i class="fa fa-shopping-bag me-2 text-primary"></i>
-                          Ajouter au panier</a
-                        >
+                        *ngIf="!isProductInCart(item._id)"
+                        class="btn border border-secondary rounded-pill px-3 text-primary"
+                        (click)="addToPanier(item)"
+                      >
+                        <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                        Ajouter au panier
+                      </a>
+
+                      <a
+                        *ngIf="isProductInCart(item._id)"
+                        class="btn border border-secondary rounded-pill px-3 text-danger"
+                        (click)="removeFromCart(item._id)"
+                      >
+                        <i class="fa fa-trash me-2 text-danger"></i>
+                        Supprimer du panier
+                      </a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <ng-template #anonymouser>
+                <p>
+                  Aucun produit n'est disponible pour cette catégorie pour le
+                  moment.
+                </p>
+              </ng-template>
             </div>
           </div>
         </div>

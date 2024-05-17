@@ -15,7 +15,7 @@ interface IPersonDocument extends Document, IPersonne {}
 //const PersonModel = mongoose.model<IPersonDocument>('Person', PersonSchema);
 
 export class PersonRepository implements IRepository<any> {
-  getByNom(nom: string): Promise<any> {
+  getByName(name: string): Promise<any> {
     throw new Error('Method not implemented.');
   }
   getById(id: string): Promise<any> {

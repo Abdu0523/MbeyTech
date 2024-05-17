@@ -21,6 +21,11 @@ import { BestsalerProductComponent } from './components/home/components/bestsale
 import { FactComponent } from './components/home/components/fact/fact.component';
 import { TastimonialComponent } from './components/home/components/tastimonial/tastimonial.component';
 import { FormsModule } from '@angular/forms';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagModule } from 'primeng/tag';
 
 const sharedRoutes: Routes = [
   {
@@ -40,7 +45,7 @@ const sharedRoutes: Routes = [
         component: ContactComponent,
       },
       {
-        path: 'shop-detail',
+        path: 'shop-detail/:id',
         component: ShopDetailComponent,
       },
       {
@@ -73,7 +78,7 @@ const sharedRoutes: Routes = [
     FactComponent,
     TastimonialComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(sharedRoutes),FormsModule],
+  imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule,FormsModule],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
 })
 export class SharedModule {}
