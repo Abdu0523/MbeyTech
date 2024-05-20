@@ -1,13 +1,15 @@
-import express from 'express';
-import mongoose from'mongoose';
-import cors from 'cors';
-import { personRoutes } from './routes/PersonRoute';
-import { ApiKeyMiddleware } from './middleware/ApiKeyMiddleware'
-import  connectDatabase  from "../../config/database";
-import dotenv from 'dotenv';
-import categorieRouter from './routes/CategorieRoute';
-import path from 'path';
-import productRoutes from './routes/ProductRoute';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import { personRoutes } from "./routes/PersonRoute";
+import { ApiKeyMiddleware } from "./middleware/ApiKeyMiddleware";
+import connectDatabase from "../../config/database";
+import dotenv from "dotenv";
+import categorieRouter from "./routes/CategorieRoute";
+import path from "path";
+import productRoutes from "./routes/ProductRoute";
+import OrderRouter from "./routes/OderRoute";
+import orderDetailRouter from "./routes/OrderDetailRoute";
 
 const app = express();
 const port = 3000;
@@ -20,14 +22,15 @@ app.use(express.json());
 // Connect to MongoDB using Mongoose
 connectDatabase();
 
-
 // Routes
-app.use('/api/persons', personRoutes);
-app.use('/api/categories', categorieRouter);
-app.use('/api/products', productRoutes);
-app.get('/api/uploads/:imageName', (req, res) => {
+app.use("/api/persons", personRoutes);
+app.use("/api/categories", categorieRouter);
+app.use("/api/products", productRoutes);
+app.use("/api/orders", OrderRouter);
+app.use("/api/order-details", orderDetailRouter);
+app.get("/api/uploads/:imageName", (req, res) => {
   const imageName = req.params.imageName;
-  res.sendFile(path.join(__dirname, './../../../src/uploads', imageName));
+  res.sendFile(path.join(__dirname, "./../../../src/uploads", imageName));
 });
 
 app.listen(port, () => {

@@ -14,7 +14,9 @@
                 data-bs-toggle="pill"
                 href="#tab-1"
               >
-                <span class="text-dark" style="width: 130px">Tous nos produits</span>
+                <span class="text-dark" style="width: 130px"
+                  >Tous nos produits</span
+                >
               </a>
             </li>
             <li class="nav-item" *ngFor="let item of categories">
@@ -22,7 +24,9 @@
                 class="d-flex py-2 m-2 bg-light rounded-pill"
                 data-bs-toggle="pill"
                 href="#tab-2"
-                (click)="getProductsByCategory(item._id); getCategoryById(item._id)"
+                (click)="
+                  getProductsByCategory(item._id); getCategoryById(item._id)
+                "
               >
                 <span class="text-dark" style="width: 130px">{{
                   item.nom
@@ -33,24 +37,27 @@
         </div>
       </div>
       <div class="tab-content">
-        <div id="tab-1" class="tab-pane fade show p-0">
+        <div id="tab-1" class="tab-pane fade show p-0 active">
           <div class="row g-4">
             <div class="col-lg-12">
               <div class="row g-4">
                 <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let item of products">
                   <div class="rounded position-relative fruite-item">
                     <div class="fruite-img">
+                      <a [routerLink]="['/shop-detail', item._id]"> 
                       <img
-                        src="./../../assets/client/client/img/fruite-item-5.jpg"
+                        [src]="'http://localhost:3000/api/uploads/' + item.image.split('\\')[2]"
                         class="img-fluid w-100 rounded-top"
                         alt=""
                       />
+                    </a>
                     </div>
                     <div
                       class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                       style="top: 10px; left: 10px"
+                      
                     >
-                      {{category.nom}}
+                      {{ item.category }}
                     </div>
                     <div
                       class="p-4 border border-secondary border-top-0 rounded-bottom"
@@ -60,12 +67,14 @@
                         {{item.description}}
                       </p>
                       <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                        <p class="text-dark fs-5 fw-bold mb-0">
+                          FCFA {{ item.price }} / kg
+                        </p>
                         <a
-                          href="#"
+                          (click)="addToCart(item._id,customerId)"
                           class="btn border border-secondary rounded-pill px-3 text-primary"
                           ><i class="fa fa-shopping-bag me-2 text-primary"></i>
-                          Add to cart</a
+                          Ajouter au panier</a
                         >
                       </div>
                     </div>
@@ -75,15 +84,22 @@
             </div>
           </div>
         </div>
+        
         <div id="tab-2" class="tab-pane fade show p-0">
           <div class="row g-4">
             <div class="col-lg-12">
-              <div class="row g-4">
-                <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let item of productsByCategory">
+              <div
+                class="row g-4"
+                *ngIf="productsByCategory.length > 0; else anonymouser"
+              >
+                <div
+                  class="col-md-6 col-lg-4 col-xl-3"
+                  *ngFor="let item of productsByCategory"
+                >
                   <div class="rounded position-relative fruite-item">
                     <div class="fruite-img">
                       <img
-                        src="./../../assets/client/client/img/fruite-item-5.jpg"
+                      [src]="'http://localhost:3000/api/uploads/' + item.image.split('\\')[2]"
                         class="img-fluid w-100 rounded-top"
                         alt=""
                       />
@@ -92,29 +108,36 @@
                       class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                       style="top: 10px; left: 10px"
                     >
-                      {{category.nom}}
+                      {{ category.nom }}
                     </div>
                     <div
                       class="p-4 border border-secondary border-top-0 rounded-bottom"
                     >
-                      <h4>{{item.name}}</h4>
+                      <h4>{{ item.name }}</h4>
                       <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit
-                        sed do eiusmod te incididunt
+                        {{ item.description }}
                       </p>
                       <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                        <p class="text-dark fs-5 fw-bold mb-0">
+                          FCFA {{ item.price }} / kg
+                        </p>
                         <a
                           href="#"
                           class="btn border border-secondary rounded-pill px-3 text-primary"
                           ><i class="fa fa-shopping-bag me-2 text-primary"></i>
-                          Add to cart</a
-                        >
+                          Ajouter au panier
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <ng-template #anonymouser>
+                <p>
+                  Aucun produit n'est disponible pour cette catégorie pour le
+                  moment.
+                </p>
+              </ng-template>
             </div>
           </div>
         </div>

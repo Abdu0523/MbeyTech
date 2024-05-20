@@ -69,6 +69,7 @@
                 <td><small>  {{user.email}} </small></td>
                 <td class="project_progress"><small>{{user.phone}} </small></td>
                 <td class="project-state"><span class="badge badge-success"> {{user.statut}} </span></td>
+
                 <td class="project-actions d-flex text-right">
                   <a class="btn-sm d-flex align-items-center mx-1" href="#">
                     <i class="fas fa-eye text-primary"></i>
@@ -81,6 +82,7 @@
                   </a>
                   <a class="btn-sm d-flex align-items-center mx-1" (click)="deleteUser(user.id)">
                     <i class="fas fa-trash text-danger"></i>
+
                   </a>
                 </td>
               </tr>
