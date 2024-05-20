@@ -7,6 +7,7 @@ export interface IPersonne {
     adresse: string;
     statut: string;
     password: string;
+    userType: string;
     createdAt: Date;
     updatedAt: Date;
   }

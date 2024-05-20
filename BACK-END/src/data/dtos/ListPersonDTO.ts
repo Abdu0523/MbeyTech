@@ -11,6 +11,7 @@ export class ListPersonneDTO implements IPersonne {
     public adresse: string,
     public statut: string,
     public password: string,
+    public userType: string,
     public createdAt: Date,
     public updatedAt: Date
   ) {}
@@ -79,6 +80,14 @@ export class ListPersonneDTO implements IPersonne {
   setPassword(password: string): void {
     this.password = password;
   }
+
+  getUserType(): string {
+      return this.userType;
+    }
+
+    setUserType(userType: string): void {
+      this.userType = userType;
+    }
 
   getCreatedAt(): Date {
     return this.createdAt;

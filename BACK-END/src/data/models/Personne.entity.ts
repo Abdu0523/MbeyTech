@@ -42,6 +42,12 @@ import { IPersonne } from "../interfaces/IPersonne";
         max: 16,
         minlength: 6
     },
+    userType: {
+        type: String,
+        required: true,
+        // max: 16,
+        // minlength: 6
+    },
     createdAt: {
         type: Date,
         default: Date.now
