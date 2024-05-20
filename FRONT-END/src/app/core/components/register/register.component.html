@@ -3,10 +3,12 @@
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="row w-100 m-0">
           <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
-            <div class="card col-lg-4 mx-auto">
-              <div class="card-body px-5 py-5">
+            <div class="card col-lg-6 mx-auto">
+              <div class="card-body px-5 py-5 ">
+                <div class="d-flex justify-content-center align-items-center">
+                  <img src="../../../../assets/logo.jpeg" style="width: 10%">
+                </div>
                 <h3 class="card-title text-center mb-3">s'inscrire</h3>
-                <img src="" alt="" srcset="">
                 <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col-md-6 form-group">
@@ -19,8 +21,12 @@
                         </div>
                     </div>
                       <div class="form-group">
+                    <label>countryCode</label>
+                    <input type="text" formControlName="countryCode" class="form-control p_input">
+                  </div>
+                      <div class="form-group">
                     <label>telephone</label>
-                    <input type="text" formControlName="telephone" class="form-control p_input">
+                    <input type="text" formControlName="phone" class="form-control p_input">
                   </div>
                   <div class="form-group">
                     <label>Adresse</label>
@@ -38,7 +44,7 @@
                       <option value="acheteur">Acheteur</option>
                       <option value="bailleur">Bailleur</option>
                     </select>
-                  </div>
+                  </div> 
                   <div class="text-center">
                     <button type="submit" [disabled]="addUserForm.invalid" class="btn btn-block btn-primary enter-btn text-light mt-3">Login</button>
                   </div>
