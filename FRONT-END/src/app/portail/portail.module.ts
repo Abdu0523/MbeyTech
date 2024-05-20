@@ -5,6 +5,7 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { CartComponent } from './components/cart/cart.component';
 import { SharedModule } from '../shared/shared.module';
 import { SharedWrapperComponent } from '../shared/components/shared-wrapper/shared-wrapper.component';
+import { FormsModule } from '@angular/forms';
 
 const portailRoutes: Routes = [
   {
@@ -26,12 +27,13 @@ const portailRoutes: Routes = [
 @NgModule({
   declarations: [
     ProfilComponent,
-    CartComponent
+    CartComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(portailRoutes),
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class PortailModule { }

@@ -1,3 +1,5 @@
+import { Category } from "../../../../../shared/interfaces/category";
+
 export interface Products{
 
   _id: string;
@@ -7,7 +9,7 @@ export interface Products{
   image: string;
   price: number;
   quantity: number;
- // categoryId: number;
+  category: Category[];
 }
 
 export class Product implements Products{
@@ -19,5 +21,6 @@ export class Product implements Products{
        public image: string,
        public price: number,
        public quantity: number,
+       public category: Category[]
     ){}
 }

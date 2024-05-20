@@ -32,8 +32,8 @@ export class CategorieRepository implements IRepository<any> {
     }
   }
 
-  async getByNom(nom: string): Promise<ICategorie | null> {
-    return await CategorieModel.findOne({ nom });
+  async getByName(name: string): Promise<ICategorie | null> {
+    return await CategorieModel.findOne({ name });
   }
 
   async update(

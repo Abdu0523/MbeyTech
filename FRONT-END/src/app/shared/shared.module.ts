@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShopDetailComponent } from './components/shop-detail/shop-detail.component';
 import { SingleHeaderComponent } from './components/single-header/single-header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HeroComponent } from './components/home/components/hero/hero.component';
 import { FeatursSectionComponent } from './components/home/components/featurs-section/featurs-section.component';
 import { FruitsShopComponent } from './components/home/components/fruits-shop/fruits-shop.component';
@@ -19,6 +20,12 @@ import { BannerSectionComponent } from './components/home/components/banner-sect
 import { BestsalerProductComponent } from './components/home/components/bestsaler-product/bestsaler-product.component';
 import { FactComponent } from './components/home/components/fact/fact.component';
 import { TastimonialComponent } from './components/home/components/tastimonial/tastimonial.component';
+import { FormsModule } from '@angular/forms';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagModule } from 'primeng/tag';
 
 const sharedRoutes: Routes = [
   {
@@ -38,8 +45,12 @@ const sharedRoutes: Routes = [
         component: ContactComponent,
       },
       {
-        path: 'shop-detail',
+        path: 'shop-detail/:id',
         component: ShopDetailComponent,
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent,
       },
     ],
   },
@@ -56,6 +67,7 @@ const sharedRoutes: Routes = [
     ShopDetailComponent,
     SingleHeaderComponent,
     NotFoundComponent,
+    CheckoutComponent,
     HeroComponent,
     FeatursSectionComponent,
     FruitsShopComponent,
@@ -66,7 +78,7 @@ const sharedRoutes: Routes = [
     FactComponent,
     TastimonialComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(sharedRoutes)],
+  imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule,FormsModule],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
 })
 export class SharedModule {}
