@@ -20,6 +20,7 @@ import { BannerSectionComponent } from './components/home/components/banner-sect
 import { BestsalerProductComponent } from './components/home/components/bestsaler-product/bestsaler-product.component';
 import { FactComponent } from './components/home/components/fact/fact.component';
 import { TastimonialComponent } from './components/home/components/tastimonial/tastimonial.component';
+import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
@@ -77,7 +78,7 @@ const sharedRoutes: Routes = [
     FactComponent,
     TastimonialComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule],
+  imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule,FormsModule],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
 })
 export class SharedModule {}

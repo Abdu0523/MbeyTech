@@ -12,67 +12,57 @@ import { Observable } from 'rxjs';
   styleUrl: './shop-detail.component.css'
 })
 export class ShopDetailComponent implements OnInit {
-
-  product: Products | undefined;
-  categories: Category[] = [];
-  products: Products[]= []; 
-  selectedCategoryId: string = ""; // Stocker l'ID de la catégorie sélectionnée
+  public product!: Products;
+  public categories: Category[] = [];
   public relatedProducts: Products[] = [];
-  
- 
-  constructor (private productService : ServiceProductService,
-     private route : ActivatedRoute,
-     private categoryService: CategoryService,
-      ){
-    
-  }
+  public productsByCategory: Products[] = [];
 
-
+  constructor(
+    private productService: ServiceProductService,
+    private categoryService: CategoryService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const productId = params.get('id');
-      console.log("l''id du produit :", productId);
+      const productId: any = params.get('id');
       if (productId) {
-        this.productService.getProductById(productId).subscribe(
-          (product: Products) => {
-            this.product = product;
-          },
-          (error) => {
-            console.error('Une erreur est survenue lors du chargement du produit :', error);
-          }
-        );
+        this.getProductDetails(productId);
       }
-    })
-
+    });
     this.loadCategories();
-  };
+  }
 
-  loadProduct(productId: string) {
-    this.productService.getProductById(productId).subscribe(
+  getProductDetails(id: string) {
+    this.productService.getProductById(id).subscribe(
       (product: Products) => {
         this.product = product;
-        this.loadRelatedProducts(product.category);
+        if (this.product.category.length > 0) {
+          this.getProductsByCategory(this.product.category[0]._id);
+        }
       },
       (error) => {
-        console.error('Une erreur est survenue lors du chargement du produit :', error);
+        console.error('Une erreur est survenue lors de la récupération du produit :', error);
       }
     );
   }
 
-  loadRelatedProducts(categoryId: string) {
-    this.productService.getProductsByCategory(categoryId).subscribe(
-      (relatedProducts: Products[]) => {
-        this.relatedProducts = relatedProducts.filter(relatedProduct => relatedProduct._id !== this.product!._id);
+  getProductsByCategory(id: any) {
+    this.productService.getProductsByCategory(id).subscribe(
+      (productsByCategory: Products[]) => {
+        this.productsByCategory =  productsByCategory.filter(product => product._id !== this.product._id);
       },
       (error) => {
         console.error(
-          'Une erreur est survenue lors du chargement des produits similaires :',
+          'Une erreur est survenue lors du chargement des produits par categorie :',
           error
         );
       }
     );
   }
+  
+  
+  
 
   loadCategories() {
     this.categoryService.getAllCategories().subscribe(
@@ -84,6 +74,7 @@ export class ShopDetailComponent implements OnInit {
       }
     );
   }
+
 
 }
 

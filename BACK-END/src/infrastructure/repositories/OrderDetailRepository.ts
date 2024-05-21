@@ -36,7 +36,8 @@ export class OrderDetailRepository implements IRepository<any> {
 
   async getOrderDetailsForOrder(orderId: string): Promise<any[]> {
     try {
-      const orderDetails = await OrderDetailModel.find({ orderId });
+      const orderDetails = await OrderDetailModel.find({ orderId }).populate('order')
+      .populate('product');
       return orderDetails;
     } catch (error: any) {
       throw new Error("Error getting order details for order: " + error.message);
