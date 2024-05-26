@@ -20,6 +20,8 @@ import { AddProductComponent } from './components/product/components/add-product
 import { ListProductComponent } from './components/product/components/list-product/list-product.component';
 import { UpdateProductComponent } from './components/product/components/update-product/update-product.component';
 import { ChampComponent } from './components/champ/champ.component';
+import { UpdatUserComponent } from './components/users/components/updat-user/updat-user.component';
+import { AddUserComponent } from './components/users/components/add-user/add-user.component';
 
 const adminRoutes: Routes = [
   {
@@ -74,7 +76,9 @@ const adminRoutes: Routes = [
     AddProductComponent,
     ListProductComponent,
     UpdateProductComponent,
-    ChampComponent
+    ChampComponent,
+    AddUserComponent,
+    UpdatUserComponent
   ],
   imports: [
     CommonModule,
