@@ -1,0 +1,153 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Champs</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right align-items-center">
+              <li class="breadcrumb-item active">
+                <button class="btn btn-lg btn-primary" (click)="action('add')">
+                  <i class="fas fa-plus"> </i> Ajouter un champ
+                </button>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Liste des champs</h3>
+                </div>
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Surface</th>
+                        <th>Description</th>
+                        <th>Lieu</th>
+                        <th>Type</th>
+                        <th>Prix</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container  *ngIf="champs.length>0">
+                        <tr *ngFor="let item of champs; let i=index;">
+                            <td>{{item?.surface}}</td>
+                            <td>{{item?.description}}</td>
+                            <td>{{item?.geolocalisation}}</td>
+                            <td>
+                              <span [ngClass]="{'badge':true, 'badge-dark':item?.type==typechamp[0],'badge-primary':item?.type==typechamp[1]}">{{item?.type}}</span>
+                            </td>
+                            <td>{{item?.prix}}</td>
+                            <td style="padding-left: 0px; padding-right: 0px;"> 
+                              <button class="btn btn-sm btn-info mx-1" (click)="action('update',i)" >
+                                <i class="fas fa-pencil-alt"> </i>
+                              </button>
+                              <button class="btn btn-sm btn-danger" (click)="action('delete',i)">
+                                <i class="fas fa-trash"> </i>
+                              </button>
+                            </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</div>
+<!-- add and update -->
+<div class="modal fade" id="add-champ" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content"> 
+      <div class="modal-header">
+        <h4 class="modal-title">{{currentname}} </h4>
+        <button type="button" class="close" (click)="initaddchampForm()" aria-label="Close" >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  [formGroup]="addchampForm">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label >Surface (m²)</label>
+                      <input formControlName="surface"  class="form-control" type="number" min="0">
+                  </div>
+              </div>
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label >Lieu</label>
+                      <input formControlName="geolocalisation"  class="form-control" type="text">
+                  </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Type</label>
+                  <select class="form-control" formControlName="type">
+                    <option *ngFor="let item of typechamp" [value]="item">{{item }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label >Prix</label>
+                      <input formControlName="prix" type="number"  class="form-control" min="0">
+                  </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                    <label >Description</label>
+                    <textarea formControlName="description"   class="form-control" rows="5"></textarea>
+                </div>
+              </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default"  (click)="initaddchampForm()">
+          Fermer
+        </button>
+        <ng-container *ngIf="afficheadd">
+          <button type="submit"  class="btn btn-info"  [disabled]="addchampForm.invalid"  (click)="add()"  >Ajouter</button>
+        </ng-container> 
+        <ng-container *ngIf="afficheupdate">
+          <button  type="button"  class="btn btn-info" [disabled]="addchampForm.invalid"  (click)="update()" >Modifier</button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete Modal -->
+<div class="modal fade" id="delete-champ">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Supprimer un champ</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modalaction('delete2')" >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr de vouloir vraiment supprimer ce champ ?</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" (click)="modalaction('delete2')">
+          Fermer
+        </button>
+        <button type="button" class="btn btn-danger" (click)="delete()">Supprimer</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+

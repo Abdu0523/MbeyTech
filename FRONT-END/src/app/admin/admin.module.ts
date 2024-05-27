@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './components/product/components/add-product/add-product.component';
 import { ListProductComponent } from './components/product/components/list-product/list-product.component';
 import { UpdateProductComponent } from './components/product/components/update-product/update-product.component';
+import { ChampComponent } from './components/champ/champ.component';
 
 const adminRoutes: Routes = [
   {
@@ -46,6 +47,10 @@ const adminRoutes: Routes = [
         path: 'orders',
         component: OrdersComponent,
       },
+      {
+        path: 'champs',
+        component: ChampComponent,
+      },
     ],
   },
 ];
@@ -68,7 +73,8 @@ const adminRoutes: Routes = [
     RolesComponent,
     AddProductComponent,
     ListProductComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    ChampComponent
   ],
   imports: [
     CommonModule,
