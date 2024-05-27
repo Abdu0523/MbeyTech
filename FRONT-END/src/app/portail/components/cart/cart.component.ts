@@ -12,7 +12,6 @@ import { Order } from '../../../shared/interfaces/order';
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
-
 })
 export class CartComponent {
   public products!: Product[];
