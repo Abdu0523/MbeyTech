@@ -5,7 +5,7 @@ const ChampactionSchema = new mongoose.Schema<IChampaction>({
   champ:{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "champs",
+        ref: "Champ",
   },
   date_debut: {
     type: String,
