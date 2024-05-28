@@ -8,8 +8,6 @@ import { catchError, map, Observable, of, tap } from 'rxjs';
 export class ServiceProductService {
   private apiUrl = 'http://localhost:3000/api/products';
 
-  //private products : Product[] = createProducts(20)
-
   constructor(private http: HttpClient) {}
 
   getAllProducts(): Observable<any> {
@@ -30,6 +28,15 @@ export class ServiceProductService {
 
   deleteProduct(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+
+  archiveProduct(id: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/archive/${id}`, {});
+  }
+
+  
+  unarchiveProduct(id: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/unarchive/${id}`, {});
   }
 
   getProductsByCategory(categoryId: string): Observable<any> {
