@@ -57,14 +57,14 @@ export class ProductController {
     try {
       const updatedProduct: IProduct = req.body;
 
-      // Récupérer le produit actuel pour obtenir l'ancienne image
+    
       const currentProduct = await this.productUseCase.getProductById(productId);
       if (!currentProduct) {
         res.status(404).json({ message: "Product not found" });
         return;
       }
 
-      // Supprimer l'ancienne image si une nouvelle image est téléchargée
+    
       if (req.file) {
         const oldImagePath = path.join(__dirname, '../../../uploads', currentProduct.image);
         if (fs.existsSync(oldImagePath)) {
@@ -72,7 +72,7 @@ export class ProductController {
         }
         updatedProduct.image = req.file.path;
       } else {
-        // Si aucune nouvelle image n'est téléchargée, conservez l'ancienne image
+        
         updatedProduct.image = currentProduct.image;
       }
 
@@ -109,8 +109,7 @@ export class ProductController {
         return;
       }
 
-      // Vous pouvez implémenter l'archivage ici en modifiant la propriété 'status' ou 'archived' du produit
-      // par exemple : product.status = 'inactive'; ou product.archived = true;
+    
       await this.productUseCase.updateProduct(productId, product);
 
       res.status(200).json({ message: "Product archived successfully" });
@@ -120,7 +119,7 @@ export class ProductController {
     }
   }
 
-  // Méthode pour désarchiver un produit
+  
   async unarchiveProduct(req: Request, res: Response): Promise<void> {
     const productId = req.params.id;
     try {
@@ -130,8 +129,7 @@ export class ProductController {
         return;
       }
 
-      // Vous pouvez implémenter le désarchivage ici en modifiant la propriété 'status' ou 'archived' du produit
-      // par exemple : product.status = 'active'; ou product.archived = false;
+     
       await this.productUseCase.updateProduct(productId, product);
 
       res.status(200).json({ message: "Product unarchived successfully" });

@@ -81,6 +81,7 @@ export class UpdateProductComponent implements OnInit {
       if (this.product._id) {
         this.productService.updateProduct(this.product._id, formData).subscribe(() => {
           this.productUpdated.emit();
+
           this.productForm.reset();
           $('#updateProductModal').modal('hide');
           window.location.reload();

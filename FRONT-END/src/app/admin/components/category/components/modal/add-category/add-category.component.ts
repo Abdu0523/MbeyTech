@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormMaker } from '../../../../../shared/interfaces/form-maker';
 import { FileService } from '../../../../../../shared/services/file/file.service';
-
+declare var $: any;
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
@@ -47,8 +47,7 @@ export class AddCategoryComponent {
       const image = this.fileService.getFile();
       if (image && nom) {
         this.categoryAdded.emit({ nom, image });
-        this.elementRef.nativeElement.remove();
-        this.closeModal();
+        $('#add-category').modal('hide');
       }
     } else {
       this.categoryForm.markAllAsTouched();
