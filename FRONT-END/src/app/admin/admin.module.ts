@@ -20,6 +20,7 @@ import { AddProductComponent } from './components/product/components/add-product
 import { ListProductComponent } from './components/product/components/list-product/list-product.component';
 import { UpdateProductComponent } from './components/product/components/update-product/update-product.component';
 import { ChampComponent } from './components/champ/champ.component';
+import { ChampactionComponent } from './components/champ/champaction/champaction.component';
 
 const adminRoutes: Routes = [
   {
@@ -51,6 +52,10 @@ const adminRoutes: Routes = [
         path: 'champs',
         component: ChampComponent,
       },
+      {
+        path: 'champcls/:id',
+        component: ChampactionComponent,
+      },
     ],
   },
 ];
@@ -74,7 +79,8 @@ const adminRoutes: Routes = [
     AddProductComponent,
     ListProductComponent,
     UpdateProductComponent,
-    ChampComponent
+    ChampComponent,
+    ChampactionComponent
   ],
   imports: [
     CommonModule,

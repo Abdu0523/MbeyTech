@@ -2,11 +2,21 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <h1>Champs</h1>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-8">
             <ol class="breadcrumb float-sm-right align-items-center">
+              <li class="breadcrumb-item active">
+                <button class="btn btn-lg btn-dark" routerLink="/admin/champcls/Vente">
+                  <i class="fas fa-list"> </i> Vente
+                </button>
+              </li>
+              <li class="breadcrumb-item active">
+                <button class="btn btn-lg btn-info" routerLink="/admin/champcls/Location">
+                  <i class="fas fa-list"> </i> Louer
+                </button>
+              </li>
               <li class="breadcrumb-item active">
                 <button class="btn btn-lg btn-primary" (click)="action('add')">
                   <i class="fas fa-plus"> </i> Ajouter un champ

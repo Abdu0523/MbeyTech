@@ -27,7 +27,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagModule } from 'primeng/tag';
 import { ChampclComponent } from './components/champcl/champcl.component';
-import { DetchampclComponent } from './components/champcl/detchampcl/detchampcl.component';
+
 
 
 const sharedRoutes: Routes = [
@@ -84,8 +84,7 @@ const sharedRoutes: Routes = [
     BestsalerProductComponent,
     FactComponent,
     TastimonialComponent,
-    ChampclComponent,
-    DetchampclComponent,
+    ChampclComponent
   ],
   imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule,FormsModule,ReactiveFormsModule],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
