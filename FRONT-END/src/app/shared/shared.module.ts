@@ -26,6 +26,7 @@ import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagModule } from 'primeng/tag';
+import { VcommandeComponent } from './components/vcommande/vcommande.component';
 
 const sharedRoutes: Routes = [
   {
@@ -52,6 +53,10 @@ const sharedRoutes: Routes = [
         path: 'checkout',
         component: CheckoutComponent,
       },
+      {
+        path: 'vcommande',
+        component: VcommandeComponent,
+      },
     ],
   },
 ];
@@ -77,6 +82,7 @@ const sharedRoutes: Routes = [
     BestsalerProductComponent,
     FactComponent,
     TastimonialComponent,
+    VcommandeComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule,FormsModule],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
