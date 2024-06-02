@@ -1,13 +1,15 @@
+import { Category } from "../../../../../shared/interfaces/category";
+
 export interface Products{
 
   _id: string;
   name: string;
   description: string;
-  status: string;
+  status: boolean;
   image: string;
   price: number;
   quantity: number;
-  category: string;
+  category: Category[];
 }
 
 export class Product implements Products{
@@ -15,10 +17,10 @@ export class Product implements Products{
        public _id: string,
        public name: string,
        public description: string,
-       public status: string,
+       public status: boolean,
        public image: string,
        public price: number,
        public quantity: number,
-       public category:  string
+       public category: Category[]
     ){}
 }

@@ -28,7 +28,7 @@ export class AddProductComponent {
     this.productForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      status: ['', Validators.required],
+      status: ['inactive', Validators.required],
       image: ['', Validators.required],
       price: ['', Validators.required],
       quantity: ['', Validators.required],
@@ -49,7 +49,7 @@ export class AddProductComponent {
     this.productForm.patchValue({ image: file });
     this.productForm.get('image')?.updateValueAndValidity();
 
-    // Afficher l'image sélectionnée
+   
     const reader = new FileReader();
     reader.onload = () => {
       this.imageUrl = reader.result;
@@ -60,6 +60,7 @@ export class AddProductComponent {
   addProduct(): void {
     if (this.productForm.valid) {
       const productData: any = this.productForm.value;
+      productData.status = productData.status === 'active' ? true : false; // Convertir la valeur du statut en boolean
       const formData = new FormData();
       for (let key in productData) {
         formData.append(key, productData[key]);
@@ -72,4 +73,5 @@ export class AddProductComponent {
         });
     }
   }
+  
 }

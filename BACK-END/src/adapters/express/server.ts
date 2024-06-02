@@ -10,6 +10,8 @@ import path from "path";
 import productRoutes from "./routes/ProductRoute";
 import OrderRouter from "./routes/OderRoute";
 import orderDetailRouter from "./routes/OrderDetailRoute";
+import champRoutes from "./routes/ChampRoute";
+import champactionRoutes from "./routes/ChampactionRoute";
 
 const app = express();
 const port = 3000;
@@ -26,6 +28,8 @@ connectDatabase();
 app.use("/api/persons", personRoutes);
 app.use("/api/categories", categorieRouter);
 app.use("/api/products", productRoutes);
+app.use("/api/champs", champRoutes);
+app.use("/api/champactions", champactionRoutes);
 app.use("/api/orders", OrderRouter);
 app.use("/api/order-details", orderDetailRouter);
 app.get("/api/uploads/:imageName", (req, res) => {

@@ -15,11 +15,12 @@ import { AddCategoryComponent } from './components/category/components/modal/add
 import { UpdateCategoryComponent } from './components/category/components/modal/update-category/update-category.component';
 import { DeleteCategoryComponent } from './components/category/components/modal/delete-category/delete-category.component';
 import { RolesComponent } from './components/roles/roles.component';
-import { SharedModule } from "../shared/shared.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './components/product/components/add-product/add-product.component';
 import { ListProductComponent } from './components/product/components/list-product/list-product.component';
 import { UpdateProductComponent } from './components/product/components/update-product/update-product.component';
+import { ChampComponent } from './components/champ/champ.component';
+import { ChampactionComponent } from './components/champ/champaction/champaction.component';
 
 const adminRoutes: Routes = [
   {
@@ -47,6 +48,14 @@ const adminRoutes: Routes = [
         path: 'orders',
         component: OrdersComponent,
       },
+      {
+        path: 'champs',
+        component: ChampComponent,
+      },
+      {
+        path: 'champcls/:id',
+        component: ChampactionComponent,
+      },
     ],
   },
 ];
@@ -69,7 +78,9 @@ const adminRoutes: Routes = [
     RolesComponent,
     AddProductComponent,
     ListProductComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    ChampComponent,
+    ChampactionComponent
   ],
   imports: [
     CommonModule,

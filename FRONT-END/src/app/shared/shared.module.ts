@@ -20,11 +20,15 @@ import { BannerSectionComponent } from './components/home/components/banner-sect
 import { BestsalerProductComponent } from './components/home/components/bestsaler-product/bestsaler-product.component';
 import { FactComponent } from './components/home/components/fact/fact.component';
 import { TastimonialComponent } from './components/home/components/tastimonial/tastimonial.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagModule } from 'primeng/tag';
+import { ChampclComponent } from './components/champcl/champcl.component';
+
+
 
 const sharedRoutes: Routes = [
   {
@@ -42,6 +46,10 @@ const sharedRoutes: Routes = [
       {
         path: 'contact',
         component: ContactComponent,
+      },
+      {
+        path: 'champ',
+        component: ChampclComponent,
       },
       {
         path: 'shop-detail/:id',
@@ -76,8 +84,9 @@ const sharedRoutes: Routes = [
     BestsalerProductComponent,
     FactComponent,
     TastimonialComponent,
+    ChampclComponent
   ],
-  imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule],
+  imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule,FormsModule,ReactiveFormsModule],
   exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
 })
 export class SharedModule {}

@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { ProductUseCase } from "../../../infrastructure/use-cases/ProductUseCase";
 import { IProduct } from "../../../data/interfaces/IProduct";
+import path from "path";
+import fs from 'fs';
 
 export class ProductController {
   private productUseCase: ProductUseCase;
@@ -9,26 +11,12 @@ export class ProductController {
     this.productUseCase = productUseCase;
   }
 
-  /*
   async createProduct(req: Request, res: Response): Promise<void> {
     try {
       const newProduct: IProduct = req.body;
-      const createdProduct = await this.productUseCase.createProduct(
-        newProduct
-      );
-      res.status(201).json(createdProduct);
-    } catch (error: any) {
-      console.log("Error creating product", error.stack);
-      res.status(500).json({ status: "Error", message: error.message });
-    }
-  }
-  */
-  async createProduct(req: Request, res: Response): Promise<void> {
-    try {
-      const newProduct: IProduct = req.body;
-      // Ajoutez une vérification pour vérifier si une image a été téléchargée
+      
       if (req.file) {
-        newProduct.image = req.file.path; // Chemin d'accès à l'image
+        newProduct.image = req.file.path; 
       }
       const createdProduct = await this.productUseCase.createProduct(newProduct);
       res.status(201).json(createdProduct);
@@ -68,14 +56,32 @@ export class ProductController {
     const productId = req.params.id;
     try {
       const updatedProduct: IProduct = req.body;
-      const product = await this.productUseCase.updateProduct(
-        productId,
-        updatedProduct
-      );
+
+    
+      const currentProduct = await this.productUseCase.getProductById(productId);
+      if (!currentProduct) {
+        res.status(404).json({ message: "Product not found" });
+        return;
+      }
+
+    
+      if (req.file) {
+        const oldImagePath = path.join(__dirname, '../../../uploads', currentProduct.image);
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlinkSync(oldImagePath);
+        }
+        updatedProduct.image = req.file.path;
+      } else {
+        
+        updatedProduct.image = currentProduct.image;
+      }
+
+      const product = await this.productUseCase.updateProduct(productId, updatedProduct);
       if (!product) {
         res.status(404).json({ message: "Product not found" });
         return;
       }
+
       res.status(200).json(product);
     } catch (error: any) {
       console.log("Error updating product", error.stack);
@@ -90,6 +96,45 @@ export class ProductController {
       res.status(204).end();
     } catch (error: any) {
       console.log("Error deleting product", error.stack);
+      res.status(500).json({ status: "Error", message: error.message });
+    }
+  }
+
+  async archiveProduct(req: Request, res: Response): Promise<void> {
+    const productId = req.params.id;
+    try {
+      const product = await this.productUseCase.getProductById(productId);
+      if (!product) {
+        res.status(404).json({ message: "Product not found" });
+        return;
+      }
+
+    
+      await this.productUseCase.updateProduct(productId, product);
+
+      res.status(200).json({ message: "Product archived successfully" });
+    } catch (error: any) {
+      console.error("Error archiving product:", error);
+      res.status(500).json({ status: "Error", message: error.message });
+    }
+  }
+
+  
+  async unarchiveProduct(req: Request, res: Response): Promise<void> {
+    const productId = req.params.id;
+    try {
+      const product = await this.productUseCase.getProductById(productId);
+      if (!product) {
+        res.status(404).json({ message: "Product not found" });
+        return;
+      }
+
+     
+      await this.productUseCase.updateProduct(productId, product);
+
+      res.status(200).json({ message: "Product unarchived successfully" });
+    } catch (error: any) {
+      console.error("Error unarchiving product:", error);
       res.status(500).json({ status: "Error", message: error.message });
     }
   }

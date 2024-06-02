@@ -19,9 +19,11 @@
             <input type="text" class="form-control" id="description" formControlName="description">
           </div>
           <div class="form-group">
-            <label for="status">Statut</label>
-            <input type="text" class="form-control" id="status" formControlName="status">
+            <label for="status">Status:</label><br>
+            <label><input type="radio" formControlName="status" value="active"> Actif</label>
+            <label><input type="radio" formControlName="status" value="inactive"> Inactif</label>
           </div>
+          
           <div class="form-group">
             <label for="image">Image</label>
             <input type="file" class="form-control" id="image" formControlName="image" (change)="onFileSelected($event)">
