@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user/user.service';
 import { UsersService } from '../../../admin/components/users/shared/services/users.service';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -28,6 +29,7 @@ export class RegisterComponent {
     if (this.addUserForm.valid) {
       const newUser = this.addUserForm.value;
       this.userService.addUser(newUser).subscribe(
+
         (user) => {
           console.log('Utilisateur ajouté avec succès :', user);
           // Réinitialiser le formulaire ou effectuer d'autres actions nécessaires
