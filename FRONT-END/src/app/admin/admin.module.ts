@@ -27,6 +27,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ItemUserComponent } from './components/users/components/item-user/item-user.component';
+import { ChampactionComponent } from './components/champ/champaction/champaction.component';
 
 const adminRoutes: Routes = [
   {
@@ -58,6 +59,10 @@ const adminRoutes: Routes = [
         path: 'champs',
         component: ChampComponent,
       },
+      {
+        path: 'champcls/:id',
+        component: ChampactionComponent,
+      },
     ],
   },
 ];
@@ -85,7 +90,8 @@ const adminRoutes: Routes = [
     AddUserComponent,
     UpdatUserComponent,
     DetailUserComponent,
-    ItemUserComponent
+    ItemUserComponent,
+    ChampactionComponent
   ],
   imports: [
     CommonModule,

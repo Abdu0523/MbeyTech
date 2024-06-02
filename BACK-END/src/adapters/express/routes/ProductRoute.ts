@@ -38,8 +38,10 @@ const storage = multer.diskStorage({
 productRoutes.post('/create', upload.single('image'), async (req : Request, res : Response) => productController.createProduct(req, res));
 productRoutes.get('/getAll', async (req, res) => productController.getAllProducts(req, res));
 productRoutes.get('/:id', async (req, res) => productController.getProductById(req, res));
-productRoutes.put('/:id', async (req, res) => productController.updateProduct(req, res));
+productRoutes.put('/:id', upload.single('image'), async (req, res) => productController.updateProduct(req, res));
 productRoutes.delete('/:id', async (req, res) => productController.deleteProduct(req, res));
 productRoutes.get('/category/:categoryId', async (req, res) => productController.getProductsByCategory(req, res));
+productRoutes.put('/archive/:id', async (req, res) => productController.archiveProduct(req, res));
+productRoutes.put('/unarchive/:id', async (req, res) => productController.unarchiveProduct(req, res));
 
 export default productRoutes;

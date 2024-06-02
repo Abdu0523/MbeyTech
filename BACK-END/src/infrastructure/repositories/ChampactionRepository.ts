@@ -62,6 +62,7 @@ export class ChampactionRepository {
     async getByName(name: string): Promise<IChampaction | null> {
         return await ChampactionModel.findOne({ name })
     }
+ 
 
 }
 

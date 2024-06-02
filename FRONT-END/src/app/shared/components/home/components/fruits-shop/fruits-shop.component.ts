@@ -132,6 +132,26 @@ this.panierService.addToCart(product)
     );
   }
 
+  toggleProductStatus(product: Product): void {
+    product.status = !product.status; // Inverse le statut du produit
+    // Appelez le service pour mettre à jour le produit dans la base de données
+    this.productService.updateProduct(product._id, product).subscribe(
+      () => {
+        console.log(`Statut du produit "${product.name}" mis à jour.`);
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour du statut du produit :', error);
+        // Rétablissez le statut original du produit en cas d'erreur
+        product.status = !product.status;
+      }
+    );
+  }
+  
+  
+  
+ 
+  
+
   addToCart(product: Products, customerId: string) {
     // const productAlreadyInCart = this.orderDetails.some(detail => detail.product.some(p => p._id === product._id));
     // console.log('productAlreadyInCart',productAlreadyInCart)

@@ -15,7 +15,6 @@ export class ChampclComponent {
   currentindex:any;
   afficheadd:any='ok';
   affichedetail:any;
-  currentname:string='Ajouter un nouveau champ';
   typechamp=['Location','Vente'];
   constructor(private formBuilder: FormBuilder,private crud:CrudchampService){}
 
@@ -56,7 +55,6 @@ export class ChampclComponent {
     this.affichedetail=undefined;
     this.currentindex=undefined;
     if($name=='detail'){
-      this.currentname='Modifier un champ';
       this.currentindex=$val;
       this.affichedetail='ok';
       this.modalaction('okk');

@@ -1,0 +1,174 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <h1>Champs</h1>
+                </div>
+                <div class="col-sm-8">
+                    <ol class="breadcrumb float-sm-right align-items-center">
+                        <li class="breadcrumb-item active">
+                            <button class="btn btn-lg btn-dark" routerLink="/admin/champcls/Vente">
+                                <i class="fas fa-list"> </i> Vente
+                            </button>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <button class="btn btn-lg btn-info" routerLink="/admin/champcls/Location">
+                                <i class="fas fa-list"> </i> Louer
+                            </button>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <button class="btn btn-lg btn-primary" routerLink="/admin/champs">
+                                <i class="fas fa-list"> </i> Liste des champs
+                            </button>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">{{currenttype}}</h3>
+                        </div>
+                        <div class="card-body" *ngIf="!affichedetail">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Telephone</th>
+                                        <th *ngIf="currenttype==typechamp[0]">Période</th>
+                                        <th>Lieu</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngIf="champs.length>0">
+                                        <tr *ngFor="let item of champs; let i=index;">
+                                            <td>{{item?.nom}}</td>
+                                            <td>{{item?.prenom}}</td>
+                                            <td>{{item?.telephone}}</td>
+                                            <td *ngIf="currenttype==typechamp[0]">{{item?.date_debut}} au {{item?.date_fin}}</td>
+                                            <td>{{item?.champ?.geolocalisation}}</td>
+                                            <td>
+                                                <span class="badge-info">{{item?.status}}</span>
+                                            </td>
+                                            <td style="padding-left: 0px; padding-right: 0px;">
+                                                <button class="btn btn-sm btn-success mx-1" (click)="action('update',i,'Valider')">
+                                                    <i class="fas fa-check"> </i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger mx-1" (click)="action('update',i,'Rejeter')">
+                                                    <i class="fas fa-times"> </i>
+                                                </button>
+                                                <button class="btn btn-sm btn-info" (click)="action('detail',i)">
+                                                    <i class="fas fa-eye"> </i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" *ngIf="affichedetail">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Champ</h3>
+                                </div>
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Surface</th>
+                                                <th>Description</th>
+                                                <th>Lieu</th>
+                                                <th>Type</th>
+                                                <th>Prix</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{champs[currentindex]?.champ?.surface}}</td>
+                                                <td>{{champs[currentindex]?.champ?.description}}</td>
+                                                <td>{{champs[currentindex]?.champ?.geolocalisation}}</td>
+                                                <td class="text-info"> 
+                                                    {{champs[currentindex]?.champ?.type}}
+                                                </td>
+                                                <td>{{champs[currentindex]?.champ?.prix}} FCFA</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Demandeur</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form [formGroup]="addchampForm">
+                                       <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Nom</label>
+                                                <input formControlName="nom" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Prenom</label>
+                                                <input formControlName="prenom" class="form-control" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Telephone</label>
+                                                <input formControlName="telephone" class="form-control" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" *ngIf="currenttype==typechamp[0]">
+                                            <div class="row">
+                                               <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Date Debut</label>
+                                                        <input formControlName="date_debut" class="form-control" type="date" >
+                                                    </div>
+                                               </div>
+                                               <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Date fin</label>
+                                                    <input formControlName="date_fin" class="form-control" type="date" >
+                                                </div>
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <button type="button" class="btn btn-info" (click)="action('close')" style="margin-right: 3px;">
+                                        Annuler
+                                    </button>
+                                    <button class="btn  btn-success mx-1" (click)="action('update',currentindex,'Valider')">
+                                        Valider
+                                    </button>
+                                    <button class="btn btn-danger mx-1" (click)="action('update',currentindex,'Rejeter')">
+                                        Rejeter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

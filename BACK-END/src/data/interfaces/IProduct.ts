@@ -4,7 +4,7 @@ export interface IProduct {
     //id: mongoose.Schema.Types.ObjectId;
     name: string;
     description: string;
-    status: string;
+    status: boolean;
     image: string;
     price: number;
     quantity: number;
