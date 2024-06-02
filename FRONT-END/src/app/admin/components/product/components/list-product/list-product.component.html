@@ -30,7 +30,11 @@
                   <td>{{product.price}}</td>
                   <td>{{product.quantity}}</td>
                   <td>
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" [attr.data-target]="'#updateProductModal' + product._id">
+                    <button type="button"
+                     class="btn btn-sm btn-primary"
+                      data-toggle="modal"
+                       [attr.data-target]="'#updateProductModal' + product._id"
+                       >
                       <i class="fas fa-pencil-alt"></i>
                     </button>
                     <button type="button" class="btn btn-sm btn-danger" (click)="confirmDelete(product._id)">
@@ -49,7 +53,7 @@
                   <th>Action</th>
                 </tr>
               </tfoot>
-          
+
             </table>
           </div>
           <!-- /.card-body -->
@@ -62,7 +66,7 @@
   </div>
   <!-- /.container-fluid -->
 </section>
-<!-- Confirmation Modal 
+<!-- Confirmation Modal
 <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

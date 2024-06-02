@@ -22,6 +22,11 @@ import { UpdateProductComponent } from './components/product/components/update-p
 import { ChampComponent } from './components/champ/champ.component';
 import { UpdatUserComponent } from './components/users/components/updat-user/updat-user.component';
 import { AddUserComponent } from './components/users/components/add-user/add-user.component';
+import { DetailUserComponent } from './components/users/components/detail-user/detail-user.component';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { ItemUserComponent } from './components/users/components/item-user/item-user.component';
 
 const adminRoutes: Routes = [
   {
@@ -78,13 +83,18 @@ const adminRoutes: Routes = [
     UpdateProductComponent,
     ChampComponent,
     AddUserComponent,
-    UpdatUserComponent
+    UpdatUserComponent,
+    DetailUserComponent,
+    ItemUserComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(adminRoutes),
     FormsModule,
     ReactiveFormsModule,
+    DialogModule,
+    ButtonModule,
+    InputTextModule
   ],
 })
 export class AdminModule {}
