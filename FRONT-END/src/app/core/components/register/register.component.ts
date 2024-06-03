@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user/user.service';
 import { UsersService } from '../../../admin/components/users/shared/services/users.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -34,6 +35,9 @@ export class RegisterComponent {
           console.log('Utilisateur ajouté avec succès :', user);
           // Réinitialiser le formulaire ou effectuer d'autres actions nécessaires
           this.addUserForm.reset();
+          Swal.fire("Utilisateur ajouté avec succès ");
+          // router
+
         },
         (error) => {
           console.error('Erreur lors de l\'ajout de l\'utilisateur :', error);

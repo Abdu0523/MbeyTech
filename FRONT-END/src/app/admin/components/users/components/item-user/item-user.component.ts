@@ -42,7 +42,7 @@ toggleUserStatus(user: any): void {
 }
 deleteUser(id: string): void {
   Swal.fire({
-    title: "Etes vous sure de vouloir suppricett?",
+    title: "Etes vous sure de vouloir supprimer cette utilisateur?",
     text: "cet action est irreversible",
     icon: "warning",
     showCancelButton: true,
@@ -56,11 +56,11 @@ deleteUser(id: string): void {
           // this.users = this.users.splice(id, 1)
           // this.userService.refreshNeeded.next();
           Swal.fire({
-            title: "Supprime !",
-            text: "Your file has been deleted.",
+            title: "Supprimer!",
+            text: "Votre utilisateur est supprimee.",
             icon: "success"
           });
-
+          window.location.reload();
         });
 
     }
