@@ -1,4 +1,5 @@
-export interface IPersonne {
+export interface Users {
+    _id: string;
     nomComplet: string;
     // nom: string;
     email: string;
@@ -8,6 +9,6 @@ export interface IPersonne {
     statut: boolean;
     password: string;
     userType: string;
-    createdAt: Date;
-    updatedAt: Date;
+    // createdAt: Date;
+    // updatedAt: Date;
   }
