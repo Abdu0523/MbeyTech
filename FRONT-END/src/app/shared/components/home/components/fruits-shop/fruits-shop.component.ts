@@ -163,7 +163,7 @@ this.panierService.addToCart(product)
       (order: Order) => {
         if (!order) {
           this.orderService
-            .createOrder({ person: customerId })
+            .createOrder(customerId)
             .subscribe(
               (newOrder: Order) => {
                 console.log('newOrder : ', newOrder);

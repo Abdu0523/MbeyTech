@@ -37,7 +37,13 @@ export class PanierService {
     return JSON.parse(localStorage.getItem('cart') || '[]') as Product[];
   }
 
-  clearCart(): void {
-    localStorage.removeItem('cart');
+  clearCart(): Observable<any> {
+    return new Observable(subscriber => {
+      localStorage.removeItem('cart');
+      subscriber.next({ message: 'Product removed from cart successfully' });
+      subscriber.complete();
+      this.RequiredRefresh.next();
+    });
+
   }
 }
