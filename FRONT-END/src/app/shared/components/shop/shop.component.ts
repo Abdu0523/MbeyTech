@@ -43,8 +43,7 @@ export class ShopComponent {
     return this.productService.getAllProducts().subscribe({
       next: (productsByCategory: Product[]) => {
         this.productsByCategory = productsByCategory;
-        console.log("fall34", this.productsByCategory[0])
-      },
+       },
       error: (error) => {
         console.error(
           'Une erreur est survenue lors du chargement des produits par categorie :',
