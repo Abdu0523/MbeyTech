@@ -40,7 +40,6 @@ export class AddCategoryComponent {
   ) {}
 
   onSubmit() {
-    // this.closeModal();
     if (this.categoryForm.valid) {
       console.log('info: ', this.categoryForm.value);
       const nom = this.categoryForm.get('name')?.value;
@@ -48,6 +47,7 @@ export class AddCategoryComponent {
       if (image && nom) {
         this.categoryAdded.emit({ nom, image });
         $('#add-category').modal('hide');
+        this.closeModal();
       }
     } else {
       this.categoryForm.markAllAsTouched();
@@ -66,27 +66,5 @@ export class AddCategoryComponent {
 
   closeModal() {
     this.initForm()
-    // Sélection du formulaire
-    // var form = document.getElementById('categoryForm') as HTMLFormElement;
-
-    // if (form) {
-    //   // Ajout de l'écouteur d'événements pour l'événement submit
-    //   form.addEventListener('submit', function (event) {
-    //     // Empêcher le comportement par défaut du formulaire (rechargement de la page)
-    //     event.preventDefault();
-
-    //     if (form) {
-    //       // Simuler un clic sur le bouton de soumission du formulaire pour fermer le modal
-    //       var submitButton = form.querySelector(
-    //         '[type="submit"]'
-    //       ) as HTMLButtonElement;
-
-    //       if (submitButton) {
-    //         submitButton.setAttribute('data-bs-dismiss', 'modal');
-    //         submitButton.click();
-    //       }
-    //     }
-    //   });
-    // }
   }
 }

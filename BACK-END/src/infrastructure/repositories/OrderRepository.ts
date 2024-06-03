@@ -18,7 +18,7 @@ export class OrderRepository implements IRepository<any> {
 
   async getAll(): Promise<IOrder[]> {
     try {
-      const orders = await OrderModel.find();
+      const orders = await OrderModel.find().populate('person');
       return orders;
     } catch (error: any) {
       throw new Error("Error getting all orders: " + error.message);

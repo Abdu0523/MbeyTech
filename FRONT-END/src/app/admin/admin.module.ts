@@ -21,6 +21,7 @@ import { ListProductComponent } from './components/product/components/list-produ
 import { UpdateProductComponent } from './components/product/components/update-product/update-product.component';
 import { ChampComponent } from './components/champ/champ.component';
 import { ChampactionComponent } from './components/champ/champaction/champaction.component';
+import { OrderDetailsComponent } from './components/orders/components/order-details/order-details/order-details.component';
 
 const adminRoutes: Routes = [
   {
@@ -80,7 +81,8 @@ const adminRoutes: Routes = [
     ListProductComponent,
     UpdateProductComponent,
     ChampComponent,
-    ChampactionComponent
+    ChampactionComponent,
+    OrderDetailsComponent
   ],
   imports: [
     CommonModule,
