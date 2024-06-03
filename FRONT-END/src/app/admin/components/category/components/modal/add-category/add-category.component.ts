@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormMaker } from '../../../../../shared/interfaces/form-maker';
 import { FileService } from '../../../../../../shared/services/file/file.service';
-
+declare var $: any;
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
@@ -40,14 +40,13 @@ export class AddCategoryComponent {
   ) {}
 
   onSubmit() {
-    // this.closeModal();
     if (this.categoryForm.valid) {
       console.log('info: ', this.categoryForm.value);
       const nom = this.categoryForm.get('name')?.value;
       const image = this.fileService.getFile();
       if (image && nom) {
         this.categoryAdded.emit({ nom, image });
-        this.elementRef.nativeElement.remove();
+        $('#add-category').modal('hide');
         this.closeModal();
       }
     } else {
@@ -67,27 +66,5 @@ export class AddCategoryComponent {
 
   closeModal() {
     this.initForm()
-    // Sélection du formulaire
-    // var form = document.getElementById('categoryForm') as HTMLFormElement;
-
-    // if (form) {
-    //   // Ajout de l'écouteur d'événements pour l'événement submit
-    //   form.addEventListener('submit', function (event) {
-    //     // Empêcher le comportement par défaut du formulaire (rechargement de la page)
-    //     event.preventDefault();
-
-    //     if (form) {
-    //       // Simuler un clic sur le bouton de soumission du formulaire pour fermer le modal
-    //       var submitButton = form.querySelector(
-    //         '[type="submit"]'
-    //       ) as HTMLButtonElement;
-
-    //       if (submitButton) {
-    //         submitButton.setAttribute('data-bs-dismiss', 'modal');
-    //         submitButton.click();
-    //       }
-    //     }
-    //   });
-    // }
   }
 }
