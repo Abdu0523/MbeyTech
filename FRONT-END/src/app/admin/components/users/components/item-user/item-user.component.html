@@ -8,9 +8,11 @@
         <tr>
           <th style="width: 20%">Nom Complet</th>
           <th style="width: 30%">Email</th>
+          <th style="width: 30%">Adresse</th>
+          <th style="width: 30%">Profil</th>
           <th>Telephone</th>
-          <th style="width: 8%" class="text-center">Status</th>
-          <th style="width: 20%"></th>
+          <th style="width: 8%" class="text-center">Statut</th>
+          <th style="width: 20%">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -24,19 +26,28 @@
         <tr *ngFor="let user of users">
           <td><small> {{user.nomComplet}} </small></td>
           <td><small>  {{user.email}} </small></td>
-          <td class="project_progress"><small>{{user.phone}} </small></td>
-          <td class="project-state"><span class="badge badge-success">{{user.statut== '1'? 'actif' : 'bloqué' }} </span></td>
+          <td><small>  {{user.adresse}} </small></td>
+          <td><small>  {{user.userType}} </small></td>
+          <td><small>{{user.countryCode}}-{{user.phone}}</small></td>
+          <td class="project-state"><span class="badge badge-success">{{user.statut== true? 'actif' : 'bloqué' }} </span></td>
           <td class="project-actions d-flex text-right">
             <button type="button"
               class="btn btn-sm d-flex align-items-center mx-1"
               data-toggle="modal"
-              [attr.data.target]="'#EditModal'+ user._id"
-              >
+             [attr.data-target]="'#EditModal'+ user._id">
               <i class="fas fa-pencil-alt text-info"> </i>
             </button>
             <a class="btn-sm d-flex align-items-center mx-1" (click)="deleteUser(user._id)">
               <i class="fas fa-trash text-danger"></i>
             </a>
+            <button class="btn" (click)="toggleUserStatus(user)">
+              <span *ngIf="user.statut; else inactive">
+                <i class="fa fa-toggle-on text-primary" aria-hidden="true"></i> 
+              </span>
+              <ng-template #inactive>
+                <i class="fa fa-toggle-off text-danger" aria-hidden="true"></i>
+              </ng-template>
+            </button>
             <!-- <a class="btn-sm d-flex align-items-center mx-1" (click)="deleteUser(user._id)">
               <i class="fas fa-trash text-danger"></i>
             </a> -->
@@ -48,11 +59,12 @@
   <!-- /.card-body -->
 </div>
 
-<div *ngFor="let user of users" class="modal fade" [id]="'EditModal' + user._id" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true" #EditModal>
+<!-- <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true" #EditModal> -->
+<div *ngFor="let user of users" class="modal fade" [id]="'EditModal'+user._id" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true" #EditModal>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="EditModalLabel">Modifier {{ user.nomComplet }}</h5>
+        <h5 class="modal-title" id="EditModalLabel">Modifier</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { UsersService } from '../../shared/services/users.service';
-import { User } from '../../../../../shared/interfaces/user';
 
 @Component({
   selector: 'app-add-user',
@@ -24,7 +24,7 @@ export class AddUserComponent {
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
       adresse: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['',  [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
       userType: ['', Validators.required],
     });
   }
@@ -34,7 +34,9 @@ export class AddUserComponent {
     //   this.addUserForm.patchValue(this.user);
     // }
   }
-
+  getUser(user: any) {
+    return this.addUserForm.get(user);
+  }
   onSubmit(): void {
     if (this.addUserForm.valid) {
       // if(this.isEdit){
@@ -51,7 +53,9 @@ export class AddUserComponent {
             this.addUserForm.reset();
             this.userService.refreshNeeded.next();
             this.addedUser.emit();
-            
+            Swal.fire("Utilisateur ajouté avec succès ");
+            window.location.reload();
+
           },
           (error) => {
             console.error('Erreur lors de l\'ajout de l\'utilisateur :', error);

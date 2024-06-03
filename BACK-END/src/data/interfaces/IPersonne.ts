@@ -5,7 +5,7 @@ export interface IPersonne {
     countryCode: string;
     phone: string;
     adresse: string;
-    statut: string;
+    statut: boolean;
     password: string;
     userType: string;
     createdAt: Date;

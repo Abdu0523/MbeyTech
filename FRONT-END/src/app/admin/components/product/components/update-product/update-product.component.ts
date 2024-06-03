@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Category } from '../../../../../shared/interfaces/category';
+import { CategoryService } from '../../../../../shared/services/category/category.service';
 import { Products } from '../../shared/models/products';
 import { ServiceProductService } from '../../shared/services/service-product.service';
-import { CategoryService } from '../../../../../shared/services/category/category.service';
-import { Category } from '../../../../../shared/interfaces/category';
-import { Observable } from 'rxjs';
 
 declare var $: any;
 

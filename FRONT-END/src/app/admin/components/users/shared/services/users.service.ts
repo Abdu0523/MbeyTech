@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, catchError, throwError } from 'rxjs';
-import { User } from '../../../../../shared/interfaces/user';
 import { Users } from '../models/users';
 
 @Injectable({
@@ -34,8 +33,8 @@ export class UsersService {
     );
   }
 
-  updateUser(user: any, id: number): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${user.id}`, user).pipe(
+  updateUser(user: any, id: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, user).pipe(
       catchError(this.handleError)
     );
   }
@@ -45,10 +44,17 @@ export class UsersService {
   //   );
   // }
 
-  deleteUser(id: number): Observable<any> {
+  deleteUser(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
     );
+  }
+  activateUser(id: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/users/${id}/activate`, {});
+  }
+
+  deactivateUser(id: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/users/${id}/deactivate`, {});
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -38,17 +38,17 @@ export class UsersComponent {
     this.loadUsers();
   }
 
-  deleteUser(id: number): void {
-    this.userService.deleteUser(id).subscribe(
-       () =>{
-         this.users = this.users.splice(id, 1)
-         this.refreshElement();
-       }
-        // this.users.filter(item => item.id !== id)
-        ,
-      (error) => this.error = error
-    );
-  }
+  // deleteUser(id: number): void {
+  //   this.userService.deleteUser(id).subscribe(
+  //      () =>{
+  //        this.users = this.users.splice(id, 1)
+  //        this.refreshElement();
+  //      }
+  //       // this.users.filter(item => item.id !== id)
+  //       ,
+  //     (error) => this.error = error
+  //   );
+  // }
   refreshElement(): void {
     this.showElement = false; // Cacher l'élément
     setTimeout(() => {

@@ -9,7 +9,7 @@ export class ListPersonneDTO implements IPersonne {
     public countryCode: string,
     public phone: string,
     public adresse: string,
-    public statut: string,
+    public statut: boolean,
     public password: string,
     public userType: string,
     public createdAt: Date,
@@ -65,11 +65,11 @@ export class ListPersonneDTO implements IPersonne {
     this.adresse = adresse;
   }
 
-  getStatut(): string {
+  getStatut(): boolean {
     return this.statut;
   }
 
-  setStatut(statut: string): void {
+  setStatut(statut: boolean): void {
     this.statut = statut;
   }
 
@@ -111,6 +111,6 @@ export class ListPersonneDTO implements IPersonne {
   }
 
   estActif(): boolean {
-    return this.statut === 'actif';
+    return this.statut === true;
   }
 }

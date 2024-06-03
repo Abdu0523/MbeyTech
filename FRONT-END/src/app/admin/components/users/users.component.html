@@ -1,7 +1,4 @@
-<!-- <app-detail-user [user]="user"></app-detail-user> -->
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -10,8 +7,6 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right align-items-center">
-              <li class="breadcrumb-item"><a href="#">Import</a></li>
-              <li class="breadcrumb-item"><a href="#">Export</a></li>
               <li class="breadcrumb-item active">
                 <button type="button"
                  class="btn btn-primary"
@@ -29,10 +24,5 @@
     <section class="content">
       <app-add-user (addedUser)="userAdded()"></app-add-user>
       <app-item-user [users]="users"></app-item-user>
-      <!-- Default box -->
-
-      <!-- /.card -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->

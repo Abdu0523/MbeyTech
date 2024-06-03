@@ -43,7 +43,12 @@ export class PersonUseCase {
         throw new Error("Error deleting user: " + error.message);
       }
     }
-
+    async activateUser(id: string) {
+      return this.personRepository.updateStatus(id, true);
+    }
+    async deactivateUser(id: string) {
+      return this.personRepository.updateStatus(id, false);
+    }
   async login(login : LoginDTO): Promise<any>{
     if (!login) {
       return new ErrorHandler("Veuillez renseigner les champs", 401)

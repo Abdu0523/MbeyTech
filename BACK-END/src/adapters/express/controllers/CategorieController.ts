@@ -4,7 +4,6 @@ import { ICategorie } from "../../../data/interfaces/ICategorie";
 
 export class CategorieController {
   constructor(private categorieUseCase: CategorieUseCase) {}
-
  
   async addCategorie(req: Request, res: Response): Promise<void> {
     try {

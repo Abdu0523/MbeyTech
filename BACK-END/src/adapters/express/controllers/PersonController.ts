@@ -107,4 +107,41 @@ export class PersonController {
       res.status(500).json({ error: error.message });
     }
   }
+  async activer(req: Request, res: Response): Promise<void> {
+    const userId = req.params.id;
+    try {
+      // const { id } = req.params;
+       const activateUser: IPersonne = req.body._id;
+      const user = await this.personUseCase.activateUser(req.body._id);
+     
+      if (!user) {
+        res.status(404).json({message: 'user n\'existe pas'});
+        return;
+      } else {
+        res.status(200).json(user);
+      }
+    } catch (error: any) {
+      console.log("Error active user", error.stack);
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  async desactiver(req: Request, res: Response): Promise<void> {
+    const userId = req.params.id;
+    try {
+      // const { id } = req.params;
+      // const activateUser: IPersonne = req.params._id;
+      const user = await this.personUseCase.deactivateUser(req.params._id);
+     
+      if (!user) {
+        res.status(404).json({message: 'user n\'existe pas'});
+        return;
+      } else {
+        res.status(200).json(user);
+      }
+    } catch (error: any) {
+      console.log("Error desactive user", error.stack);
+      res.status(500).json({ error: error.message });
+    }
+  }
 }

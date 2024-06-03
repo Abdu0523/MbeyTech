@@ -57,7 +57,10 @@ export class PersonRepository implements IRepository<any> {
     const persons = await PersonModel.findOne({email}).select('+password');
     return persons;
   }
-
+  async updateStatus(id: string, status:boolean) {
+    const persons = await PersonModel.findByIdAndUpdate(id, { statut: status }, { new: true });
+    return persons
+  }
   async getById(id: string): Promise<IPersonne | null> {
     try {
       const user = await PersonModel.findById(id);
@@ -66,5 +69,6 @@ export class PersonRepository implements IRepository<any> {
       throw new Error("Error getting user by ID: " + error.message);
     }
   }
+  
 
 }
