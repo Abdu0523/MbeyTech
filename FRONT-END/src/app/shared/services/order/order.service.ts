@@ -11,10 +11,10 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  createOrder(order: Order): Observable<Order> {
+  createOrder(customId: string): Observable<Order> {
     const formData = new FormData();
-    formData.append('order', order.person);
-    return this.http.post<Order>(this.apiUrl, order).pipe(
+    formData.append('order', customId);
+    return this.http.post<Order>(this.apiUrl, formData).pipe(
       catchError((error) => {
         console.error('Error from createOrder : ', error);
         return of();
@@ -25,7 +25,7 @@ export class OrderService {
   getAllOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiUrl).pipe(
       catchError((error) => {
-        console.error('Error from getOrderForCustomer : ', error);
+        console.error('Error from getAllOrders : ', error);
         return of([]);
       })
     );

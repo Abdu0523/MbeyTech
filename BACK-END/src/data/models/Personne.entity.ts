@@ -29,18 +29,22 @@ import { IPersonne } from "../interfaces/IPersonne";
     },
     countryCode: {
         type: String,
-        required: true,
+        required: false,
     },
     statut: {
-        type: String,
-        required: true,
-        default: "1"
+        type: Boolean,
+        required: false,
+        default: true
     },
     password: {
         type: String,
         required: true,
         max: 16,
         minlength: 6
+    },
+    userType: {
+        type: String,
+        required: true,
     },
     createdAt: {
         type: Date,

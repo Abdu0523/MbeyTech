@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-delete-category',
@@ -10,5 +11,6 @@ export class DeleteCategoryComponent {
 
   onSubmit() {
     this.categoryDeleted.emit();
+    $('#delete-category-modal').modal('hide');
   }
 }
