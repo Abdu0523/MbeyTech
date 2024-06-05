@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = ''; 
+  private loginUrl: string = 'http://localhost:3000/api/persons/login'; 
 
   constructor(private http: HttpClient) { }
 
-  login(phoneNumber: string, password: string): Observable<any> {
-    return this.http.post<any>(this.loginUrl, { phoneNumber, password });
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<any>(this.loginUrl, { email, password });
   }
 }
