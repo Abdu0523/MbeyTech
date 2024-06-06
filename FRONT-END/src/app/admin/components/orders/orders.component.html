@@ -1,4 +1,4 @@
-<app-order-details></app-order-details>
+<app-order-details [order]="order"></app-order-details>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -51,7 +51,7 @@
                     <td>{{item.validated}}</td>
                     <td>
                       <button class="btn btn-sm mx-1 btn-primary"  data-bs-toggle="modal"
-                      data-bs-target="#order-details">
+                      data-bs-target="#order-details" (click)="getOrderId(item)">
                         <i class="fas fa-folder"> </i>
                       </button>
                       <!-- <button class="btn btn-sm mx-1 btn-info">

@@ -9,6 +9,7 @@ import { OrderService } from '../../../shared/services/order/order.service';
 })
 export class OrdersComponent {
   orders: Order[] = [];
+  order!: Order;
 
   constructor(private orderService: OrderService) {
     
@@ -18,11 +19,16 @@ export class OrdersComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getAllOrders();
-    console.log(this.orders);
+    console.log(this.orders)
   }
 
   getAllOrders(){
     this.orderService.getAllOrders()
       .subscribe(orders => this.orders = orders);
+  }
+
+  getOrderId(order: Order){
+    this.order = order;
+    console.log(this.order);
   }
 }
