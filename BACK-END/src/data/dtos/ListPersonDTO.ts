@@ -9,8 +9,9 @@ export class ListPersonneDTO implements IPersonne {
     public countryCode: string,
     public phone: string,
     public adresse: string,
-    public statut: string,
+    public statut: boolean,
     public password: string,
+    public userType: string,
     public createdAt: Date,
     public updatedAt: Date
   ) {}
@@ -64,11 +65,11 @@ export class ListPersonneDTO implements IPersonne {
     this.adresse = adresse;
   }
 
-  getStatut(): string {
+  getStatut(): boolean {
     return this.statut;
   }
 
-  setStatut(statut: string): void {
+  setStatut(statut: boolean): void {
     this.statut = statut;
   }
 
@@ -79,6 +80,14 @@ export class ListPersonneDTO implements IPersonne {
   setPassword(password: string): void {
     this.password = password;
   }
+
+  getUserType(): string {
+      return this.userType;
+    }
+
+    setUserType(userType: string): void {
+      this.userType = userType;
+    }
 
   getCreatedAt(): Date {
     return this.createdAt;
@@ -102,6 +111,6 @@ export class ListPersonneDTO implements IPersonne {
   }
 
   estActif(): boolean {
-    return this.statut === 'actif';
+    return this.statut === true;
   }
 }

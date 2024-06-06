@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,36 +10,40 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup = new FormGroup({
-    phoneNumber: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-  });
+  loginForm: FormGroup;
 
   errorMessage: undefined;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
-  ) {}
-
-  ngOnInit(): void {
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.formBuilder.group({
-      phoneNumber: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
 
+  ngOnInit(): void {
+    
+  }
+
   onSubmit(): void {
+    
     if (this.loginForm.invalid) {
       return;
     }
+    
 
-    const phoneNumber = this.loginForm.value.phoneNumber;
+    const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
 
-    this.authService.login(phoneNumber, password).subscribe(
-      () => {
-        // Rediriger l'utilisateur vers une autre page après la connexion réussie
+    this.authService.login(email, password).subscribe(
+      (response) => {
+        // console.log(response.user.email)
+        this.router.navigate(['/admin/product']);
+
       },
       (error: any) => {
         this.errorMessage = error.message;
