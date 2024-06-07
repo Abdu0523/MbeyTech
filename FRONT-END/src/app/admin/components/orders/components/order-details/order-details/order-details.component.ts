@@ -58,6 +58,7 @@ export class OrderDetailsComponent {
     doc.text(`Email: ${this.order.person[0].email}`, 14, 112);
 
     const columns = [
+      '',
       'Produit',
       'Quantité',
       'Prix unitaire',
@@ -65,17 +66,25 @@ export class OrderDetailsComponent {
       'Sous-total',
     ];
     const rows = this.orderDetails.map((item) => [
+      '',
       item.product[0].name,
       item.quantity,
-      item.product[0].price,
+      item.product[0].price + ' FCFA',
       item.product[0].description,
-      (item.quantity * item.product[0].price).toFixed(2),
+      (item.quantity * item.product[0].price).toFixed(2)  + ' FCFA',
     ]);
 
     autoTable(doc, {
       head: [columns],
       body: rows,
       startY: 130,
+      didDrawCell: (data) => {
+        if (data.column.index === 0 && data.row.index < this.orderDetails.length) {
+          const img = new Image();
+          img.src = 'http://localhost:3000/api/uploads/' + this.orderDetails[data.row.index].product[0].image.split('\\')[2];
+          doc.addImage(img, 'JPEG', data.cell.x + 2, data.cell.y + 2, 10, 10);
+        }
+      }
     });
 
     const finalY = (doc as any).lastAutoTable.finalY;
