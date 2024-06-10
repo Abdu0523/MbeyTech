@@ -84,6 +84,7 @@ export class PersonController {
      
       if (!user) {
         res.status(404).json({message: 'user n\'existe pas'});
+        // console.log('user')
         return;
       } else {
         res.status(200).json(user);
@@ -112,10 +113,11 @@ export class PersonController {
     try {
       // const { id } = req.params;
        const activateUser: IPersonne = req.body._id;
-      const user = await this.personUseCase.activateUser(req.body._id);
+      const user = await this.personUseCase.activateUser(userId);
      
       if (!user) {
-        res.status(404).json({message: 'user n\'existe pas'});
+        //res.status(404).json(userId);
+        res.status(404).json({message: 'user n\'existe pas '});
         return;
       } else {
         res.status(200).json(user);
@@ -131,7 +133,7 @@ export class PersonController {
     try {
       // const { id } = req.params;
       // const activateUser: IPersonne = req.params._id;
-      const user = await this.personUseCase.deactivateUser(req.params._id);
+      const user = await this.personUseCase.deactivateUser(userId);
      
       if (!user) {
         res.status(404).json({message: 'user n\'existe pas'});

@@ -36,7 +36,7 @@ export class OrderRepository implements IRepository<any> {
 
   async getOrderForCustomer(customerId: string): Promise<any> {
     try {
-      const order = await OrderModel.findOne({ customerId });
+      const order = await OrderModel.findOne({ customerId }).populate('person');
       return order;
     } catch (error: any) {
       throw new Error("Error getting order for customer: " + error.message);

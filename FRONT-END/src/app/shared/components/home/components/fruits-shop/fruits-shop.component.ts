@@ -22,7 +22,7 @@ export class FruitsShopComponent  {
   public products: Product[] = [];
   public category!: Category;
   public product!: Product;
-  public customerId: string = "663d3eca576baba30d52d489";
+  public customerId: string = "665e3a129ce64a61637a0f55";
   public productIdToAdd!: string;
   public orderDetails: OrderDetail[] = []
 
