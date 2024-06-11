@@ -17,6 +17,7 @@ const champController = new ChampController(champUseCase);
 
 champRoutes.post('/create', async (req : Request, res : Response) => champController.createChamp(req, res));
 champRoutes.get('/getAll', async (req, res) => champController.getAllChamps(req, res));
+champRoutes.get('/statut/:id', async (req, res) => champController.getChampbystatut(req, res));
 champRoutes.get('/:id', async (req, res) => champController.getChampById(req, res));
 champRoutes.put('/:id', async (req, res) => champController.updateChamp(req, res));
 champRoutes.delete('/:id', async (req, res) => champController.deleteChamp(req, res));

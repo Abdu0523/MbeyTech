@@ -31,7 +31,9 @@ const ChampactionSchema = new mongoose.Schema<IChampaction>({
     type: String,
     required: true
   }  
-});
+},
+{ timestamps: true }
+);
 
 const ChampactionModel = mongoose.model<IChampaction>("Champaction", ChampactionSchema);
 export default ChampactionModel;
