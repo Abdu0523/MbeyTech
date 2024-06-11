@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ChampUseCase } from "../../../infrastructure/use-cases/ChampUseCase";
 import { IChamp } from "../../../data/interfaces/IChamp";
+import { stat } from "fs";
 
 export class ChampController {
   private champUseCase: ChampUseCase;
@@ -73,6 +74,17 @@ export class ChampController {
       res.status(204).end();
     } catch (error: any) {
       console.log("Error deleting champ", error.stack);
+      res.status(500).json({ status: "Error", message: error.message });
+    }
+  }
+
+  async getChampbystatut(req: Request, res: Response): Promise<void> {
+    const  statut  = req.params.id;
+    try {
+      const champs = await this.champUseCase.getChampsbystatut(statut);
+      res.status(200).json(champs);
+    } catch (error: any) {
+      console.log("Error fetching champ", error.stack);
       res.status(500).json({ status: "Error", message: error.message });
     }
   }
