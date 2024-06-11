@@ -12,6 +12,8 @@ import { FileService } from '../../../../../../shared/services/file/file.service
 import { FormMaker } from '../../../../../shared/interfaces/form-maker';
 import { Category } from '../../../../../../shared/interfaces/category';
 
+declare var $ : any;
+
 @Component({
   selector: 'app-update-category',
   templateUrl: './update-category.component.html',
@@ -67,8 +69,10 @@ export class UpdateCategoryComponent {
       if (image && nom) {
         const _id = this.category._id;
         this.categoryUpdated.emit({ _id, nom, image });
-        $('#update-category-modal').hide();
-        // this.resetForm()
+
+        this.resetForm();
+        $('#update-category-modal').modal('hide');
+        
       }
     } else {
       this.categoryForm.markAllAsTouched();

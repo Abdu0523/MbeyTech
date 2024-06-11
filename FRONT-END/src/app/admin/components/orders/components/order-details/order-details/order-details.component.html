@@ -1,0 +1,229 @@
+<div class="modal fade" id="order-details">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <form id="categoryForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Détails de la commande</h4>
+          <button
+            type="button"
+            class="close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <section class="content" *ngIf="order">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-12">
+                    <!-- Main content -->
+                    <div class="invoice p-3 mb-3">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="col-12">
+                          <h4>
+                            <i class="fas fa-globe"></i> Mbeytech.
+                            <small class="float-right">Date: 2/10/2014</small>
+                          </h4>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->
+                      <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                          De
+                          <address>
+                            <strong>Admin, Inc.</strong><br />
+                            San Francisco, CA 94107<br />
+                            Phone: (804) 123-5432<br />
+                            Email: infoalmasaeedstudio.com
+                          </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-3 invoice-col">
+                          Vers
+                          <address *ngIf="order">
+                            <strong>{{ order.person[0].nomComplet }}</strong
+                            ><br />
+                            {{ order.person[0].adresse }}<br />
+                            Téléphone: {{ order.person[0].phone }}<br />
+                            Email: {{ order.person[0].email }}
+                          </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-5 invoice-col">
+                          <b>Facture #007612</b><br />
+                          <br />
+                          <b>ID commande :</b> {{ order._id }}<br />
+                          <b>Paiement effectué :</b> 2/22/2014<br />
+                          <b>Compte :</b> 968-34567
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- Table row -->
+                      <div class="row">
+                        <div class="col-12 table-responsive">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>Produit</th>
+                                <th>Quantité</th>
+                                <th>Prix unitaire</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Sous-total</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of orderDetails">
+                                <td>
+                                  <img
+                                    [src]="
+                                      'http://localhost:3000/api/uploads/' +
+                                      item.product[0].image.split('\\')[2]
+                                    "
+                                    class="img-circle img-size-32 mr-2"
+                                    alt=""
+                                  />
+                                </td>
+                                <td>{{ item.product[0].name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.product[0].price }} FCFA</td>
+                                <td>
+                                  {{ item.product[0].description }}
+                                </td>
+                                <td>{{ item.order[0].status }}</td>
+                                <td>
+                                  {{ item.quantity * item.product[0].price }}
+                                  FCFA
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-6">
+                          <p class="lead">Méthode paiement:</p>
+                          <img
+                            src="assets/admin/dist/img/credit/visa.png"
+                            alt="Visa"
+                          />
+                          <img
+                            src="assets/admin/dist/img/credit/mastercard.png"
+                            alt="Mastercard"
+                          />
+                          <img
+                            src="assets/admin/dist/img/credit/american-express.png"
+                            alt="American Express"
+                          />
+                          <img
+                            src="assets/admin/dist/img/credit/paypal2.png"
+                            alt="Paypal"
+                          />
+
+                          <p
+                            class="text-muted well well-sm shadow-none"
+                            style="margin-top: 10px"
+                          >
+                            Etsy doostang zoodles disqus groupon greplin oooj
+                            voxy zoodles, weebly ning heekya handango imeem
+                            plugg dopplr jibjab, movity jajah plickers sifteo
+                            edmodo ifttt zimbra.
+                          </p>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-6">
+                          <p class="lead">Somme Due 2/22/2014</p>
+
+                          <div class="table-responsive">
+                            <table class="table">
+                              <!-- <tr>
+                                <th style="width: 50%">Subtotal:</th>
+                                <td>$250.30</td>
+                              </tr>
+                              <tr>
+                                <th>Tax (9.3%)</th>
+                                <td>$10.34</td>
+                              </tr>
+                              <tr>
+                                <th>Shipping:</th>
+                                <td>$5.80</td>
+                              </tr> -->
+                              <tr>
+                                <th>Total:</th>
+                                <td>{{getTotal()}} FCFA</td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- this row will not appear when printing -->
+                      <div class="row no-print">
+                        <div class="col-12">
+                          <a
+                            (click)="printInvoice()"
+                            rel="noopener"
+                            target="_blank"
+                            class="btn btn-default"
+                            ><i class="fas fa-print"></i> Imprimer</a
+                          >
+                          <button
+                            type="button"
+                            class="btn btn-success float-right"
+                          >
+                            <i class="far fa-credit-card"></i> Effectur le Paiement
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-primary float-right"
+                            style="margin-right: 5px"
+                            (click)="generatePDF()"
+                          >
+                            <i class="fas fa-download"></i> Generer PDF
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.invoice -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+            Fermer
+          </button>
+          <!-- <button
+            type="submit"
+            class="btn btn-primary"
+            id="add-category-button"
+          >
+            Ajouter
+          </button> -->
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </form>
+  </div>
+  <!-- /.modal-dialog -->
+</div>
