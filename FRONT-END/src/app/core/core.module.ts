@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const coreRoutes: Routes = [
   {
@@ -30,7 +30,8 @@ const coreRoutes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(coreRoutes)
+    RouterModule.forChild(coreRoutes),
+    FormsModule
   ]
 })
 export class CoreModule { }

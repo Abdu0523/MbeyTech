@@ -1,7 +1,7 @@
 import { Category } from "../../../../../shared/interfaces/category";
+import { User } from "../../../../../shared/interfaces/user";
 
 export interface Products{
-
   _id: string;
   name: string;
   description: string;
@@ -10,6 +10,7 @@ export interface Products{
   price: number;
   quantity: number;
   category: Category[];
+  person: User[];
 }
 
 export class Product implements Products{
@@ -21,6 +22,7 @@ export class Product implements Products{
        public image: string,
        public price: number,
        public quantity: number,
-       public category: Category[]
+       public category: Category[],
+       public person: User[]
     ){}
 }

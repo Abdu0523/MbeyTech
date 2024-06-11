@@ -31,12 +31,6 @@ export class CategoryComponent {
     this.getCategories();
   }
 
-  // openModal() {
-  //   console.log(this.updateCategoryComponent.updateCategoryModal);
-  //   this.updateCategoryComponent.showModal();
-  //   // this.modalService.open(this.updateCategoryModal, {centered: true});
-  // }
-
   getCategories(): void {
     this.categoryService
       .getAllCategories()
@@ -48,7 +42,7 @@ export class CategoryComponent {
       .getCategoryById(id)
       .subscribe(
         (category) => (
-          (this.category = category), console.log('categoryById', this.category)
+          (this.category = category)
         )
       );
   }
@@ -58,7 +52,6 @@ export class CategoryComponent {
       .addCategory(newCategory.nom, newCategory.image)
       .subscribe(
         (category: Category) => {
-          console.log('New category added:', category);
           this.getCategories();
           // $('#add-category').hide();
         },
@@ -72,7 +65,6 @@ export class CategoryComponent {
     this.categoryService
       .updateCategory(category._id, category.nom, category.image)
       .subscribe((category: Category) => {
-        console.log('category updated:', category);
         this.getCategories();
       },(error) => {
         console.error('Error update category : ', error);
@@ -82,7 +74,6 @@ export class CategoryComponent {
   onCategoryDeleted() {
     this.categoryService.delete(this.categoryId).subscribe(
       (category: Category) => {
-        console.log('Category dleted : ', category);
         this.getCategories();
       },
       (error) => {
