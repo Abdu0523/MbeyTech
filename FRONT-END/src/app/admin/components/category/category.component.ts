@@ -4,6 +4,7 @@ import { CategoryService } from '../../../shared/services/category/category.serv
 // import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { error } from 'jquery';
 import { UpdateCategoryComponent } from './components/modal/update-category/update-category.component';
+import { User } from '../../../shared/interfaces/user';
 
 @Component({
   selector: 'app-category',
@@ -19,16 +20,17 @@ export class CategoryComponent {
   // @ViewChild('updateCategoryModal') updateCategoryModal!: NgbModalRef;
   // private modalRef!: NgbModalRef;
   public categoryId!: string;
+  public user!: User;
 
   constructor(
-    private categoryService: CategoryService
-  ) // private modalService: NgbModal
-  {}
+    private categoryService: CategoryService // private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getCategories();
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
   getCategories(): void {
@@ -40,11 +42,7 @@ export class CategoryComponent {
   getCategoryById(id: any): void {
     this.categoryService
       .getCategoryById(id)
-      .subscribe(
-        (category) => (
-          (this.category = category)
-        )
-      );
+      .subscribe((category) => (this.category = category));
   }
 
   onCategoryAdded(newCategory: { nom: string; image: File }) {
@@ -64,11 +62,14 @@ export class CategoryComponent {
   onCategoryUdated(category: { _id: string; nom: string; image: File }) {
     this.categoryService
       .updateCategory(category._id, category.nom, category.image)
-      .subscribe((category: Category) => {
-        this.getCategories();
-      },(error) => {
-        console.error('Error update category : ', error);
-      });
+      .subscribe(
+        (category: Category) => {
+          this.getCategories();
+        },
+        (error) => {
+          console.error('Error update category : ', error);
+        }
+      );
   }
 
   onCategoryDeleted() {

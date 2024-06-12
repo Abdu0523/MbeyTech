@@ -44,6 +44,15 @@ export class OrderUseCase {
     return await this.orderRepository.getUnvalidatedOrdersForCustomer(customerId);
   }
 
+  async getOrdersByUser(userId: string): Promise<any> {
+    try {
+      const order = await this.orderRepository.getOrdersByUser(userId);
+      return order;
+    } catch (error: any) {
+      throw new Error("Error getting order by userId: " + error.message);
+    }
+  }
+
   async updateOrder(orderId: string, updatedOrderData: Partial<IOrder>): Promise<IOrder | null> {
     try {
       // Appeler la méthode update du repository pour mettre à jour la commande

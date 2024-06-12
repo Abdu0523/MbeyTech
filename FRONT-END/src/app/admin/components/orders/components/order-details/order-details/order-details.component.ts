@@ -5,6 +5,7 @@ import { OrderDetail } from '../../../../../../shared/interfaces/order-detail';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import autoTable from 'jspdf-autotable';
+import { User } from '../../../../../../shared/interfaces/user';
 
 @Component({
   selector: 'app-order-details',
@@ -14,18 +15,20 @@ import autoTable from 'jspdf-autotable';
 export class OrderDetailsComponent {
   @Input() order!: Order;
   orderDetails: OrderDetail[] = [];
+  user!: User;
+
   constructor(private orderDetailService: OrderDetailService) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getOrderDetailsForOrder(this.order._id);
-    console.log('smbn : ', this.order);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['order'] && changes['order'].currentValue) {
       this.getOrderDetailsForOrder(this.order._id);
+      this.user = JSON.parse(localStorage.getItem('user') || '{}');
     }
   }
 

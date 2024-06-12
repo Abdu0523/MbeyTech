@@ -58,4 +58,8 @@ export class OrderService {
   deleteOrder(orderId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${orderId}`);
   }
+
+  getOrdersByUser(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/users/${userId}`)
+  }
 }

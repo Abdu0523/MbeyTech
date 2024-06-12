@@ -40,7 +40,6 @@ export class SidebarComponent /*implements AfterViewInit*/ {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    console.log(this.user);
   }
 
   logout() {
