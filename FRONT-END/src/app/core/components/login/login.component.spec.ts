@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import "./../../../../../node_modules/bootstrap/dist/js/bootstrap.min.js";
 
 import { LoginComponent } from './login.component';
 

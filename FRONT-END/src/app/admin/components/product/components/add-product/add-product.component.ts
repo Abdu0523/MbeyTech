@@ -19,6 +19,7 @@ export class AddProductComponent {
   public imageUrl: string | ArrayBuffer | null = null;
 
   @Output() productAdded: EventEmitter<void> = new EventEmitter<void>();
+  public user: any;
 
   constructor(
     private productService: ServiceProductService,
@@ -38,6 +39,7 @@ export class AddProductComponent {
 
   ngOnInit(): void {
     this.loadCategories();
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
   loadCategories(): void {
@@ -65,6 +67,7 @@ export class AddProductComponent {
       for (let key in productData) {
         formData.append(key, productData[key]);
       }
+      formData.append('person',this.user._id);
       this.productService.addProduct(formData)
         .subscribe(() => {
           this.productAdded.emit();

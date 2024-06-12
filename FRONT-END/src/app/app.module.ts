@@ -5,8 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { PortailModule } from './portail/portail.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { interceptorInterceptor } from './core/interceptor/interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  // providers: [ { provide: HTTP_INTERCEPTORS, useValue: interceptorInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

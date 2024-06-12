@@ -1,10 +1,11 @@
 import IRepository from "./IRepository";
 import { IOrderDetail } from "../../data/interfaces/IOrderDetail";
 import OrderDetailModel from "../../data/models/OrderDetail.entity";
+import mongoose from "mongoose";
 
 export class OrderDetailRepository implements IRepository<any> {
   getByName(name: string): Promise<any> {
-      throw new Error("Method not implemented.");
+    throw new Error("Method not implemented.");
   }
 
   async add(entity: IOrderDetail): Promise<IOrderDetail> {
@@ -36,11 +37,15 @@ export class OrderDetailRepository implements IRepository<any> {
 
   async getOrderDetailsForOrder(orderId: string): Promise<any[]> {
     try {
-      const orderDetails = await OrderDetailModel.find({ orderId }).populate('order')
-      .populate('product');
+      const orderDetails = await OrderDetailModel.find({order: new mongoose.Types.ObjectId(orderId) })
+        .populate("order")
+        .populate("product");
+        console.log('orderDetails : ',orderDetails);
       return orderDetails;
     } catch (error: any) {
-      throw new Error("Error getting order details for order: " + error.message);
+      throw new Error(
+        "Error getting order details for order: " + error.message
+      );
     }
   }
 

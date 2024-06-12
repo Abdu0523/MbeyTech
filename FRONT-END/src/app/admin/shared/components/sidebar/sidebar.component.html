@@ -22,7 +22,7 @@
         />
       </div>
       <div class="info">
-        <a routerLink="#" class="d-block">Alexander Pierce</a>
+        <a routerLink="#" class="d-block">{{ user.nomComplet }}</a>
       </div>
     </div>
 
@@ -32,14 +32,15 @@
         <input
           class="form-control form-control-sidebar"
           type="search"
-          placeholder="Rechercher"
+          placeholder=""
           aria-label="Search"
+          disabled
         />
-        <div class="input-group-append">
+        <!-- <div class="input-group-append">
           <button class="btn btn-sidebar">
             <i class="fas fa-search fa-fw"></i>
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -63,7 +64,7 @@
             <p>Dashboard</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.userType === 'admin' || user.userType === 'agriculteur'">
           <a
             routerLink="/admin/product"
             routerLinkActive="active"
@@ -73,7 +74,7 @@
             <p>Produits</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.userType === 'admin' || user.userType === 'agriculteur'">
           <a
             routerLink="/admin/category"
             routerLinkActive="active"
@@ -83,7 +84,7 @@
             <p>Catégories</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.userType === 'admin' || user.userType === 'bailleur'">
           <a
             routerLink="/admin/champs"
             routerLinkActive="active"
@@ -93,7 +94,7 @@
             <p>Champs</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.userType === 'admin'">
           <a
             routerLink="/admin/users"
             routerLinkActive="active"
@@ -103,7 +104,7 @@
             <p>Utilisateurs</p>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item" *ngIf="user.userType === 'admin'">
           <a
             routerLink="/admin/roles"
             routerLinkActive="active"
@@ -112,8 +113,8 @@
             <i class="nav-icon fas fa-user"></i>
             <p>Rôles</p>
           </a>
-        </li>
-        <li class="nav-item">
+        </li> -->
+        <li class="nav-item" *ngIf="user.userType === 'admin' || user.userType === 'agriculteur'">
           <a
             routerLink="/admin/orders"
             routerLinkActive="active"
@@ -129,7 +130,7 @@
 
     <!-- Logout Button -->
     <div class="logout-button mx-2">
-      <button class="btn btn-primary btn-block">Déconnexion</button>
+      <button class="btn btn-primary btn-block" (click)="logout()">Déconnexion</button>
     </div>
   </div>
   <!-- /.sidebar -->

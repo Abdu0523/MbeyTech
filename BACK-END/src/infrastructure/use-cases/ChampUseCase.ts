@@ -57,4 +57,12 @@ export  class ChampUseCase {
         const champ = await this.champRepository.getByName(name)
         return !!champ
     }
+    async getChampsbystatut(statut:string): Promise<IChamp[]> {
+        try {
+            const champs = await this.champRepository.findByStatut(statut);
+            return champs;
+        } catch (error) {
+            throw new Error(`Error while getting champs: ${error}`);
+        }
+    }
 }

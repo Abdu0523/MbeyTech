@@ -29,40 +29,60 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { PreloaderComponent } from './shared/components/preloader/preloader.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { authGuard } from '../core/guards/auth.guard';
 
 const adminRoutes: Routes = [
   {
     path: '',
     component: AdminWrapperComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [authGuard],
+        data: { userType: ['admin', 'agriculteur', 'bailleur'] },
+      },
       {
         path: 'category',
         component: CategoryComponent,
+        canActivate: [authGuard],
+        data: { userType: ['admin', 'agriculteur'] },
       },
       {
         path: 'product',
         component: ProductComponent,
+        canActivate: [authGuard],
+        data: { userType: ['admin', 'agriculteur'] },
       },
       {
         path: 'users',
         component: UsersComponent,
+        canActivate: [authGuard],
+        data: { userType: ['admin'] },
       },
       {
         path: 'roles',
         component: RolesComponent,
+        canActivate: [authGuard],
+        data: { userType: ['admin'] },
       },
       {
         path: 'orders',
         component: OrdersComponent,
+        canActivate: [authGuard],
+        data: { userType: ['admin', 'agriculteur'] },
       },
       {
         path: 'champs',
         component: ChampComponent,
+        canActivate: [authGuard],
+        data: { userType: ['admin', 'bailleur'] },
       },
       {
         path: 'champcls/:id',
         component: ChampactionComponent,
+        canActivate: [authGuard],
+        data: { userType: ['admin', 'bailleur'] },
       },
     ],
   },
@@ -93,7 +113,7 @@ const adminRoutes: Routes = [
     DetailUserComponent,
     ItemUserComponent,
     ChampactionComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -102,7 +122,7 @@ const adminRoutes: Routes = [
     ReactiveFormsModule,
     DialogModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
   ],
 })
 export class AdminModule {}

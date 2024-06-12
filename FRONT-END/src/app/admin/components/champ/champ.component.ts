@@ -17,6 +17,7 @@ export class ChampComponent implements OnInit {
   afficheupdate:any;
   currentname:string='Ajouter un nouveau champ';
   typechamp=['Location','Vente'];
+  statut=['Activer','Desactiver'];
   constructor(private formBuilder: FormBuilder,private crud:CrudchampService){}
 
   ngOnInit(): void {
@@ -36,7 +37,8 @@ export class ChampComponent implements OnInit {
       description:[$name?.description,Validators.required],
       geolocalisation:[$name?.geolocalisation,Validators.required],
       prix:[$name?.prix,Validators.required],
-      type:[$name?.type,Validators.required]
+      type:[$name?.type,Validators.required],
+      statut:[$name?.statut,Validators.required]
     });  
     if(!$name){
       this.modalaction();

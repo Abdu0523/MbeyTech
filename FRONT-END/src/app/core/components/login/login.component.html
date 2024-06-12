@@ -1,44 +1,57 @@
+<div class="text-center login">
+  <main class="form-signin w-100 m-auto rounded-3">
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <img class="mb-4 rounded-circle" src="assets/logo.jpeg" alt="" width="80" height="65" />
+      <h1 class="h3 mb-3 fw-normal">Connectez-vous à votre compte</h1>
 
-<!-- Login Start -->
-<div class="container-fluid Login py-5">
-  <div class="container py-5">
-    <div class="p-5 bg-light rounded">
-      <div class="p-5 row g-4">
-        <div class="col-12">
-          <div class="text-center mx-auto" style="max-width: 700px">
-            <h1 class="text-primary">connexion</h1>
-            
-          </div>
+      <div class="form-floating">
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="name@mbeytech.com"
+          [(ngModel)]="email"
+          name="email"
+          required
+          email
+          #emailInput="ngModel"
+          (input)="clearError()"
+        />
+        <label for="email">Adresse Email</label>
+        <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="text-danger">
+          <div *ngIf="emailInput.errors?.['required']" class="text-start">L'adresse email est requise.</div>
         </div>
-       
-        <div class="col-lg-5 mx-auto">
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            
-            <input
-            formControlName="email"
-              type="email"
-              class="w-100 form-control border-0 py-3 mb-4"
-              placeholder="Email"
-              required 
-            />
-            <input
-            formControlName="password"
-              type="password"
-              class="w-100 form-control border-0 py-3 mb-4"
-              placeholder="Mot de passe"
-            />
-          
-            <button
-              class="w-100 btn form-control border-secondary py-3 bg-white text-primary"
-              type="submit"
-            >
-              Envoyer
-            </button>
-          </form>
-        </div>
-        
       </div>
-    </div>
-  </div>
+
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Mot de passe"
+          [(ngModel)]="password"
+          name="password"
+          required
+          #passwordInput="ngModel"
+          (input)="clearError()"
+        />
+        <label for="password">Mot de passe</label>
+        <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger">
+          <div *ngIf="passwordInput.errors?.['required']" class="text-start">Le mot de passe est requis.</div>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <button class="w-100 btn btn-lg btn-success" type="submit" [disabled]="loginForm.invalid">
+        Se connecter
+      </button>
+      <button class="w-100 btn my-2 btn-lg btn-secondary" routerLink="/register">
+        Créer un compte
+      </button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2023–2024</p>
+    </form>
+  </main>
 </div>
-<!-- Login End -->

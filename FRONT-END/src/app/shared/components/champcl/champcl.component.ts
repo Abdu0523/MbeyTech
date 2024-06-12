@@ -16,6 +16,8 @@ export class ChampclComponent {
   afficheadd:any='ok';
   affichedetail:any;
   typechamp=['Location','Vente'];
+  statut=['Activer','Desactiver'];
+
   constructor(private formBuilder: FormBuilder,private crud:CrudchampService){}
 
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class ChampclComponent {
   }
   getlistchamp(){
     this.champs=[];
-    this.crud.get().subscribe((data:any)=>{
+    this.crud.getBystatut(this.statut[0]).subscribe((data:any)=>{
       this.champs=data;
     });
   }
@@ -43,7 +45,7 @@ export class ChampclComponent {
     this.addchampForm.value.champ=this.champs[this.currentindex]._id;
     this.crud.postaction(this.addchampForm.value).subscribe({
       next:(data:any)=>{
-        this.champs.splice(this.currentindex, 1);
+        //this.champs.splice(this.currentindex, 1);
         this.modalaction('clchamp');
       },
       error:(error)=>{

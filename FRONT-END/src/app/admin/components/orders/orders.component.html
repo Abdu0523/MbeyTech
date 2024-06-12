@@ -1,4 +1,4 @@
-<app-order-details></app-order-details>
+<app-order-details [order]="order"></app-order-details>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -45,13 +45,22 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <tr *ngIf="orders.length === 0">
+                    <td colspan="4" class="text-center">
+                      <h4>Vous n'avez pas encore de commandes disponibles.</h4>
+                    </td>
+                  </tr>
                   <tr *ngFor="let item of orders">
-                    <td>{{item.createdAt}}</td>
-                    <td>{{item.person[0].nomComplet}}</td>
-                    <td>{{item.validated}}</td>
+                    <td>{{ item.createdAt }}</td>
+                    <td>{{ item.person[0].nomComplet }}</td>
+                    <td>{{ item.validated }}</td>
                     <td>
-                      <button class="btn btn-sm mx-1 btn-primary"  data-bs-toggle="modal"
-                      data-bs-target="#order-details">
+                      <button
+                        class="btn btn-sm mx-1 btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#order-details"
+                        (click)="getOrderId(item)"
+                      >
                         <i class="fas fa-folder"> </i>
                       </button>
                       <!-- <button class="btn btn-sm mx-1 btn-info">

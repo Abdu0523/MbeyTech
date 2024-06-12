@@ -27,6 +27,10 @@ orderRouter.get("/unvalidated/:id", async (req: Request, res: Response) => {
     await orderController.getUnvalidatedOrdersForCustomer(req, res);
   });
 
+  orderRouter.get("/users/:id", async (req: Request, res: Response) => {
+    await orderController.getOrdersByUser(req, res);
+  });
+
 orderRouter.put("/:id", async (req: Request, res: Response) => {
   await orderController.updateOrder(req, res);
 });

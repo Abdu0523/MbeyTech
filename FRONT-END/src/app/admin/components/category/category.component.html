@@ -73,7 +73,7 @@
                     <span class="description-text"></span>
                   </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4" *ngIf="user.userType === 'admin'">
                   <button
                     class="btn btn-sm btn-outline-danger"
                     (click)="getId(item._id)"

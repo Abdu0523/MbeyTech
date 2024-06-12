@@ -39,7 +39,7 @@ export class OrderDetailController {
   }
 
   async getOrderDetailsForOrder(req: Request, res: Response): Promise<void> {
-    const orderId = req.params.orderId;
+    const orderId = req.params.id;
 
     try {
       const orderDetails = await this.orderDetailUseCase.getOrderDetailsForOrder(orderId);

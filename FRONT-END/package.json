@@ -23,6 +23,8 @@
     "datatables.net": "^2.0.3",
     "datatables.net-bs4": "^2.0.3",
     "jquery": "^3.7.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "primeng": "^17.16.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.6.13",

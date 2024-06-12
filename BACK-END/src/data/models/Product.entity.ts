@@ -34,6 +34,13 @@ const ProductSchema = new mongoose.Schema<IProduct>({
       ref: "Categorie",
     },
   ],
+  person: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Personne",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
