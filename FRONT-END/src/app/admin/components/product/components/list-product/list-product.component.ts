@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Products } from '../../shared/models/products';
 import { ServiceProductService } from '../../shared/services/service-product.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 declare var $ : any;
 
 @Component({
@@ -13,21 +14,35 @@ export class ListProductComponent {
   @Input() products: Products[] = [];
   confirmProductId!: string ;
 
-  constructor(private productService: ServiceProductService) { }
+  constructor(private productService: ServiceProductService, private authService : AuthService) { }
 
   ngOnInit(): void {
-    this.loadProducts();
+    //this.loadProducts();
+    this.loadUserProducts();
   }
 
+  loadUserProducts(): void {
+    const userId = this.authService.getUserId();
+    if (userId) {
+      this.productService.getproductByUser(userId).subscribe(products => {
+        this.products = products;
+      });
+    } else {
+      console.error('Utilisateur non connecté');
+    }
+  }
+
+  /*
   loadProducts(): void {
     this.productService.getAllProducts().subscribe(products => {
       this.products = products;
     });
   }
+  */
 
   deleteProduct(productId: string): void {
     this.productService.deleteProduct(productId).subscribe(() => {
-      this.loadProducts();
+      this.loadUserProducts();
     });
   }
 
