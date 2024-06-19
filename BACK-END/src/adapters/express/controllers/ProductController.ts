@@ -146,4 +146,10 @@ export class ProductController {
     );
     res.json(products);
   }
+
+  async getProductByUser(req: Request, res: Response): Promise<void> {
+    const userId = req.params.userId;
+    const products = await this.productUseCase.getProductByUser(userId);
+    res.json(products);
+  }
 }

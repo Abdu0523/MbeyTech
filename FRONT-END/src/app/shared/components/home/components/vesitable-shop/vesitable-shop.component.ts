@@ -38,16 +38,16 @@ export class VesitableShopComponent implements OnInit {
     ];
   }
 
-  getSeverity(status: string) {
+  getSeverity(status: string): "success" | "secondary" | "info" | "warning" | "danger" | "contrast" | undefined {
     switch (status) {
-      case 'INSTOCK':
+      case 'In Stock':
         return 'success';
-      case 'LOWSTOCK':
+      case 'Low Stock':
         return 'warning';
-      case 'OUTOFSTOCK':
+      case 'Out of Stock':
         return 'danger';
       default:
-        return '';
+        return 'secondary'; // Valeur par défaut
     }
   }
 }

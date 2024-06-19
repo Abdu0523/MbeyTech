@@ -65,6 +65,15 @@ export class ProductRepository {
     }
   }
 
+  async getPrductsByUser(userId: string): Promise<IProduct[]> {
+    try{
+      const products = await ProductModel.find({ person: userId}).populate("person").populate("category");
+      return products.map((product) => product.toJSON());
+    }catch (error) {
+      throw new Error(`Error while finding products by user: ${error}`);
+    }
+  }
+
   async getByName(name: string): Promise<IProduct | null> {
     return await ProductModel.findOne({ name });
   }
