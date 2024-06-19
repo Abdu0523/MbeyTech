@@ -55,7 +55,7 @@ export class ChampactionComponent {
     this.currentindex=undefined;
     if($name=='update'){
       this.currentindex=$val;
-      this.affichedetail='ok';
+      this.affichedetail=undefined;
       this.champs[this.currentindex].status=$statut;
       this.initaddchampForm(this.champs[this.currentindex]);
       this.update();

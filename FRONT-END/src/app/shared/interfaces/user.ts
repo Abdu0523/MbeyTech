@@ -3,7 +3,7 @@ export interface User {
     nomComplet: string;
     email: string;
     password: string;
-    telephone: string;
+    phone: string;
     adresse: string;
     userType: string;
   }

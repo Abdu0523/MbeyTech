@@ -53,4 +53,7 @@ export class CrudchampService {
   getById($id:any) {
     return this.http.get(this.fullUrl+'/' +$id);
   }
+  getBystatut($statut:any) {
+    return this.http.get(this.fullUrl+'/statut/' +$statut);
+  }
 }

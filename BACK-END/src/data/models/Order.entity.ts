@@ -26,5 +26,12 @@ const OrderSchema = new mongoose.Schema<IOrder>({
   },
 });
 
+OrderSchema.virtual('personneInfo', {
+  ref: 'Personne',
+  localField: 'personneId',
+  foreignField: '_id',
+  justOne: true
+});
+
 const OrderModel = mongoose.model<IOrder>("Order", OrderSchema);
 export default OrderModel;

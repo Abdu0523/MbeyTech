@@ -9,6 +9,7 @@ export interface IProduct {
     price: number;
     quantity: number;
     category: mongoose.Schema.Types.ObjectId[];
+    person: mongoose.Schema.Types.ObjectId[];
     createdAt?: Date;
     updatedAt?: Date;
   }

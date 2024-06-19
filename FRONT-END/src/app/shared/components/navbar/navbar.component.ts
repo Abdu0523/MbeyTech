@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { PanierService } from '../../services/panier/panier.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +11,7 @@ import { PanierService } from '../../services/panier/panier.service';
 export class NavbarComponent {
   public nbrPanier: Number = 0;
   constructor(
-    private panierService:  PanierService
+    private panierService:  PanierService,private authService: AuthService, private router: Router
   ) {}
   ngOnInit() {
     this.getNombrePanier()
@@ -20,5 +22,10 @@ export class NavbarComponent {
 
   getNombrePanier(){
     this.nbrPanier = this.panierService.getCart().length
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }

@@ -22,8 +22,14 @@ import { IChamp } from "../interfaces/IChamp";
     type: {
         type: String,
         required: true,
+    },
+    statut: {
+        type: String,
+        required: true,
     }
-  });
+  },
+  { timestamps: true }
+);
 
 const ChampModel = mongoose.model<IChamp>("Champ", ChampSchema);
 export default ChampModel;

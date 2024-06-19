@@ -50,6 +50,14 @@ export  class ChampRepository {
     async getByName(name : string): Promise<IChamp | null> {
         return await ChampModel.findOne({name});
     }
+    async findByStatut(statut:string): Promise<IChamp[]> {
+        try {
+            const champs = await ChampModel.find({statut:statut});
+            return champs.map(champ => champ.toJSON());
+        } catch (error) {
+            throw new Error(`Error while finding champs: ${error}`);
+        }
+    }
    
 }
 

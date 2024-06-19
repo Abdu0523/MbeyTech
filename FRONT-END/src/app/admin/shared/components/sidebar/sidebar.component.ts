@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 import { ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { AuthService } from '../../../../core/services/auth.service';
+import { User } from '../../../../shared/interfaces/user';
 
 @Component({
   selector: 'app-sidebar-admin',
@@ -29,4 +31,19 @@ export class SidebarComponent /*implements AfterViewInit*/ {
   //     this.parentLink.nativeElement.classList.add('active');
   //   }
   // }
+
+  user!: User;
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

@@ -4,4 +4,5 @@ export interface IChamp {
     geolocalisation: string;
     prix: number;
     type:string;
+    statut:string;
   }

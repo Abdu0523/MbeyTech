@@ -39,7 +39,7 @@ export class OrderController {
   }
 
   async getOrderForCustomer(req: Request, res: Response): Promise<void> {
-    const customerId = req.params.customerId;
+    const customerId = req.params.id;
 
     try {
       const order = await this.orderUseCase.getOrderForCustomer(customerId);
@@ -54,11 +54,26 @@ export class OrderController {
   }
 
   async getUnvalidatedOrdersForCustomer(req: Request, res: Response): Promise<void> {
-    const customerId = req.params.customerId;
+    const customerId = req.params.id;
 
     try {
       const orders = await this.orderUseCase.getUnvalidatedOrdersForCustomer(customerId);
       res.status(200).json(orders);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  async getOrdersByUser(req: Request, res: Response): Promise<void> {
+    const userId = req.params.id;
+
+    try {
+      const order = await this.orderUseCase.getOrdersByUser(userId);
+      if (order) {
+        res.status(200).json(order);
+      } else {
+        res.status(404).json({ message: 'Order not found for user.' });
+      }
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }

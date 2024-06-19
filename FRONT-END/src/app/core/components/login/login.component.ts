@@ -1,53 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrl: './login.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-
-  errorMessage: undefined;
+export class LoginComponent {
+  email: string = '';
+  password: string = '';
+  returnUrl: string;
+  errorMessage!: string;
 
   constructor(
-    private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  onSubmit() {
+    this.authService.login(this.email, this.password).subscribe(
+       (response) => {
+        if (response.token) {
+          const user = response.user;
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(user));
+          if (user.userType === 'admin' || 'agriculteur' || 'bailleur') {
+            this.router.navigate(['/admin/dashboard']);
+          } else if (user.userType === 'acheteur') {
+            this.router.navigateByUrl(this.returnUrl);
+          }
+        }
+      },
+       (error) => {
+        if (!error.success) {
+          this.errorMessage = 'Email ou mot de passe incorrect';
+        }
     });
   }
 
-  ngOnInit(): void {
-    
-  }
-
-  onSubmit(): void {
-    
-    if (this.loginForm.invalid) {
-      return;
-    }
-    
-
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
-
-    this.authService.login(email, password).subscribe(
-      (response) => {
-        // console.log(response.user.email)
-        this.router.navigate(['/admin/product']);
-
-      },
-      (error: any) => {
-        this.errorMessage = error.message;
-      }
-    );
+  clearError(){
+    this.errorMessage = '';
   }
 }

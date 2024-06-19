@@ -49,7 +49,7 @@
                     </thead>
                     <tbody>
                       <ng-container  *ngIf="champs.length>0">
-                        <tr *ngFor="let item of champs; let i=index;">
+                        <tr *ngFor="let item of champs; let i=index;" [ngClass]="{'strike':item?.statut==statut[1]}">
                             <td>{{item?.surface}}</td>
                             <td>{{item?.description}}</td>
                             <td>{{item?.geolocalisation}}</td>
@@ -89,10 +89,20 @@
       <div class="modal-body">
         <form  [formGroup]="addchampForm">
               <div class="col-md-12">
-                  <div class="form-group">
-                      <label >Surface (m²)</label>
-                      <input formControlName="surface"  class="form-control" type="number" min="0">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label >Surface (m²)</label>
+                        <input formControlName="surface"  class="form-control" type="number" min="0">
+                    </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label >Prix</label>
+                        <input formControlName="prix" type="number"  class="form-control" min="0">
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="col-md-12">
                   <div class="form-group">
@@ -101,18 +111,24 @@
                   </div>
               </div>
               <div class="col-md-12">
-                <div class="form-group">
-                  <label>Type</label>
-                  <select class="form-control" formControlName="type">
-                    <option *ngFor="let item of typechamp" [value]="item">{{item }}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label >Prix</label>
-                      <input formControlName="prix" type="number"  class="form-control" min="0">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select class="form-control" formControlName="type">
+                        <option *ngFor="let item of typechamp" [value]="item">{{item }}</option>
+                      </select>
+                    </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Statut</label>
+                      <select class="form-control" formControlName="statut">
+                        <option *ngFor="let item of statut" [value]="item">{{item }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
