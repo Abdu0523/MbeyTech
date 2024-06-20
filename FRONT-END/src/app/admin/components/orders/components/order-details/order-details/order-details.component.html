@@ -98,7 +98,7 @@
                                 <td>
                                   {{ item.product[0].description }}
                                 </td>
-                                <td>{{ item.order[0].status }}</td>
+                                <td *ngIf="item.order">{{ item.order[0].status }}</td>
                                 <td>
                                   {{ item.quantity * item.product[0].price }}
                                   FCFA

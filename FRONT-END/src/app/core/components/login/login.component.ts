@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  returnUrl: string;
+  returnUrl: string = '/';
   errorMessage!: string;
 
   constructor(
@@ -19,7 +19,13 @@ export class LoginComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
+  }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    console.log(this.returnUrl);
   }
 
   onSubmit() {
@@ -29,7 +35,7 @@ export class LoginComponent {
           const user = response.user;
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(user));
-          if (user.userType === 'admin' || 'agriculteur' || 'bailleur') {
+          if (user.userType === 'admin' || user.userType === 'agriculteur' || user.userType === 'bailleur') {
             this.router.navigate(['/admin/dashboard']);
           } else if (user.userType === 'acheteur') {
             this.router.navigateByUrl(this.returnUrl);

@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "https://api.wave.com",
+      "secure": true,
+      "changeOrigin": true
+    }
+  }
+  

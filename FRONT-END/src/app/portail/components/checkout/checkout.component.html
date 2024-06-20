@@ -1,0 +1,335 @@
+<app-single-header [pageTitle]="'Checkout'"></app-single-header>
+<!-- Checkout Page Start -->
+<div class="container-fluid py-5">
+  <div class="container py-5">
+    <h1 class="mb-4">Billing details</h1>
+    <form [formGroup]="checkoutForm" (ngSubmit)="validateCommande()">
+      <div class="row g-5">
+        <div class="col-md-12 col-lg-6 col-xl-7">
+          <div class="form-item">
+            <label class="form-label my-3"
+              >Nom complet<sup class="text-danger">*</sup></label
+            >
+            <input
+              type="text"
+              class="form-control text-black"
+              formControlName="nomComplet"
+              placeholder="Entrez votre prénom et nom"
+            />
+            <div
+              *ngIf="
+                formControls['nomComplet'].touched &&
+                formControls['nomComplet'].invalid
+              "
+              class="text-danger"
+            >
+              <div *ngIf="formControls['nomComplet'].errors?.['required']">
+                Le nom complet est requis.
+              </div>
+              <div *ngIf="formControls['nomComplet'].errors?.['minlength']">
+                Le nom complet doit comporter au moins 2 caractères.
+              </div>
+            </div>
+          </div>
+          <div class="form-item">
+            <label class="form-label my-3"
+              >Adresse<sup class="text-danger">*</sup></label
+            >
+            <input
+              type="text"
+              class="form-control text-black"
+              formControlName="adresse"
+              placeholder="Entrez votre adresse"
+            />
+            <div
+              *ngIf="
+                formControls['adresse'].touched &&
+                formControls['adresse'].invalid
+              "
+              class="text-danger"
+            >
+              <div *ngIf="formControls['adresse'].errors?.['required']">
+                L'adresse est requise.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-item">
+              <label class="form-label my-3"
+                >Région<sup class="text-danger">*</sup></label
+              >
+              <select class="form-select" formControlName="region">
+                <option selected>Sélectionner</option>
+                <option value="Dakar">Dakar</option>
+                <option value="Saint-Louis">Saint-Louis</option>
+                <option value="Thiès">Thiès</option>
+              </select>
+              <div
+                *ngIf="
+                  formControls['region'].touched &&
+                  formControls['region'].invalid
+                "
+                class="text-danger"
+              >
+                <div *ngIf="formControls['region'].errors?.['required']">
+                  La région est requise.
+                </div>
+              </div>
+            </div>
+            <div class="col form-item">
+              <label class="form-label my-3"
+                >Ville<sup class="text-danger">*</sup></label
+              >
+              <select class="form-select" formControlName="ville">
+                <option selected>Sélectionner</option>
+                <option value="Guediawaye">Guediawaye</option>
+                <option value="Pikine">Pikine</option>
+                <option value="Tivaoune">Tivaoune</option>
+                <option value="Ngallele">Ngallele</option>
+              </select>
+              <div
+                *ngIf="
+                  formControls['ville'].touched && formControls['ville'].invalid
+                "
+                class="text-danger"
+              >
+                <div *ngIf="formControls['ville'].errors?.['required']">
+                  La ville est requise.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-item">
+            <label class="form-label my-3"
+              >Mobile<sup class="text-danger">*</sup></label
+            >
+            <input
+              type="tel"
+              class="form-control text-black"
+              formControlName="mobile"
+              placeholder="Entrez votre numéro de téléphone"
+            />
+            <div
+              *ngIf="
+                formControls['mobile'].touched && formControls['mobile'].invalid
+              "
+              class="text-danger"
+            >
+              <div *ngIf="formControls['mobile'].errors?.['required']">
+                Le numéro de téléphone est requis.
+              </div>
+              <div *ngIf="formControls['mobile'].errors?.['pattern']">
+                Le numéro de téléphone est invalide.
+              </div>
+            </div>
+          </div>
+          <div class="form-item">
+            <label class="form-label my-3"
+              >Adresse e-mail<sup class="text-danger">*</sup></label
+            >
+            <input
+              type="email"
+              class="form-control text-black"
+              formControlName="email"
+              placeholder="Entrez votre adresse e-mail"
+            />
+            <div
+              *ngIf="
+                formControls['email'].touched && formControls['email'].invalid
+              "
+              class="text-danger"
+            >
+              <div *ngIf="formControls['email'].errors?.['required']">
+                L'adresse e-mail est requise.
+              </div>
+              <div *ngIf="formControls['email'].errors?.['email']">
+                L'adresse e-mail est invalide.
+              </div>
+            </div>
+          </div>
+          <div class="form-item">
+            <label class="form-label my-3"
+              >Note de commande</label
+            >
+            <textarea
+              name="text"
+              class="form-control text-black"
+              formControlName="notes"
+              spellcheck="false"
+              cols="30"
+              rows="11"
+              placeholder="Entrez des notes ci-necessaire"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-5">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-center">
+                <tr>
+                  <th scope="col">Produits</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Quantité</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let orderDetail of orderDetails"
+                  class="text-center"
+                >
+                  <th scope="row">
+                    <div class="d-flex align-items-center mt-2">
+                      <img
+                        [src]="
+                          'http://localhost:3000/api/uploads/' +
+                          orderDetail.product[0].image.split('\\')[2]
+                        "
+                        class="img-fluid rounded-circle"
+                        style="width: 60px; height: 60px"
+                        alt=""
+                      />
+                    </div>
+                  </th>
+                  <td>
+                    <p class="mb-0 mt-4">{{ orderDetail.product[0].name }}</p>
+                  </td>
+                  <td>
+                    <p class="mb-0 mt-4">
+                      {{ orderDetail.product[0].price }} fcfa
+                    </p>
+                  </td>
+                  <td>
+                    <p class="mb-0 mt-4">{{ orderDetail.quantity }}</p>
+                  </td>
+                  <td>
+                    <p class="mb-0 mt-4">
+                      {{ orderDetail.unitPrice * orderDetail.quantity }} fcfa
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td class="py-5">
+                    <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
+                  </td>
+                  <td class="py-5"></td>
+                  <td class="py-5"></td>
+                  <td class="py-5">
+                    <div class="py-3 border-bottom border-top">
+                      <p class="mb-0 text-dark">{{ totalPrice }}</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="row g-4 text-center align-items-center justify-content-center border-bottom py-3"
+          >
+            <div class="col-12">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="accordion" id="accordionPayment">
+                    <div class="accordion-item">
+                      <h2
+                        class="h5 px-4 py-3 accordion-header d-flex justify-content-between align-items-center"
+                      >
+                        <div
+                          class="form-check w-100 collapsed"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseWave"
+                          aria-expanded="false"
+                        >
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="paymentMethod"
+                            id="paymentWave"
+                            formControlName="paymentMethod"
+                            value="Wave"
+                          />
+                          <label class="form-check-label pt-1" for="paymentWave"
+                            >Wave</label
+                          >
+                        </div>
+                      </h2>
+                      <div
+                        id="collapseWave"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#accordionPayment"
+                      >
+                        <div class="accordion-body">
+                          <p>Utilisez l'application Wave pour payer.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item mb-3">
+                      <h2
+                        class="h5 px-4 py-3 accordion-header d-flex justify-content-between align-items-center"
+                      >
+                        <div
+                          class="form-check w-100 collapsed"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseOM"
+                          aria-expanded="false"
+                        >
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="paymentMethod"
+                            id="paymentOM"
+                            formControlName="paymentMethod"
+                            value="OM"
+                          />
+                          <label class="form-check-label pt-1" for="paymentOM"
+                            >Orange Money</label
+                          >
+                        </div>
+                      </h2>
+                      <div
+                        id="collapseOM"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#accordionPayment"
+                      >
+                        <div class="accordion-body">
+                          <p>Utilisez l'application Orange Money pour payer.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      *ngIf="
+                        formControls['paymentMethod'].touched &&
+                        formControls['paymentMethod'].invalid
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="formControls['paymentMethod'].errors?.['required']"
+                      >
+                        Le mode de paiement est requis.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-item">
+                    <button
+                      type="submit"
+                      class="btn btn-primary text-white btn-lg w-100"
+                    >
+                      Valider la commande
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

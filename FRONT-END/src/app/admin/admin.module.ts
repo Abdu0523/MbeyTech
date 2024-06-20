@@ -30,6 +30,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { PreloaderComponent } from './shared/components/preloader/preloader.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { authGuard } from '../core/guards/auth.guard';
+import {DataTablesModule} from 'angular-datatables';
+import { OrderActionsComponent } from './components/orders/components/orders-actions/order-actions/order-actions.component'
 
 const adminRoutes: Routes = [
   {
@@ -114,6 +116,7 @@ const adminRoutes: Routes = [
     ItemUserComponent,
     ChampactionComponent,
     OrderDetailsComponent,
+    OrderActionsComponent,
   ],
   imports: [
     CommonModule,
@@ -123,6 +126,7 @@ const adminRoutes: Routes = [
     DialogModule,
     ButtonModule,
     InputTextModule,
+    DataTablesModule
   ],
 })
 export class AdminModule {}

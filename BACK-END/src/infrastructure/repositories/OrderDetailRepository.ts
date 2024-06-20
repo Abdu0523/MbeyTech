@@ -40,7 +40,6 @@ export class OrderDetailRepository implements IRepository<any> {
       const orderDetails = await OrderDetailModel.find({order: new mongoose.Types.ObjectId(orderId) })
         .populate("order")
         .populate("product");
-        console.log('orderDetails : ',orderDetails);
       return orderDetails;
     } catch (error: any) {
       throw new Error(

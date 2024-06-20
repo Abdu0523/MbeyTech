@@ -11,10 +11,8 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  createOrder(customId: string): Observable<Order> {
-    const formData = new FormData();
-    formData.append('order', customId);
-    return this.http.post<Order>(this.apiUrl, formData).pipe(
+  createOrder(newOrder: Order): Observable<Order> {
+    return this.http.post<Order>(this.apiUrl, newOrder).pipe(
       catchError((error) => {
         console.error('Error from createOrder : ', error);
         return of();

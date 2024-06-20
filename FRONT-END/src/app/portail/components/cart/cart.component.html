@@ -1,103 +1,141 @@
 <app-single-header [pageTitle]="'Panier'"></app-single-header>
 
-
 <!-- Cart Page Start -->
 <div class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Produits</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantite</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let product of products">
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-
-                                <img  [src]="'http://localhost:3000/api/uploads/' + product.image.split('\\')[2]" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
-                            </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4"> {{product.name}} </p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">{{product.price}} CFA</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" (click)="decrementQuantity(product)">
-                                    <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input
-                                type="number"
-                                class="form-control form-control-sm text-center border-0"
-                                [(ngModel)]="product.quantity"
-                                min="1"
-                              >                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border" (click)="incrementQuantity(product)">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4"> {{product.price * product.quantity}}  fcfa</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" (click)="removeFromCart(product._id)" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="mt-5">
-            <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Code Coupon">
-            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Appliquer le coupon </button>
-        </div>
-        <div class="row g-4 justify-content-end">
-            <div class="col-8"></div>
-            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                <div class="bg-light rounded">
-                    <div class="p-4">
-                        <h1 class="display-6 mb-4">Panier <span class="fw-normal">Total</span></h1>
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="mb-0 me-4">Sous-total:</h5>
-                            <p class="mb-0">{{totalPrice}} fcfa</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-0 me-4">Livraison</h5>
-                            <div class="">
-                                <p class="mb-0">Taux forfaitaire: {{livraison}} fcfa</p>
-                            </div>
-                        </div>
-                        <p class="mb-0 text-end">Livraison à Dakar.</p>
-                    </div>
-                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                        <h5 class="mb-0 ps-4 me-4">Total</h5>
-                        <p class="mb-0 pe-4">{{totalPrice + livraison}} fcfa</p>
-                    </div>
-                    <button
-                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                    type="button"
-                    (click)="navigateToCheckout()"
-                  >
-                  Poursuivre le paiement
-                  </button>
+  <div class="container py-5">
+    <ng-container *ngIf="orderDetails.length > 0; else emptyCart">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Produits</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantite</th>
+              <th scope="col">Total</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let orderDetail of orderDetails">
+              <th scope="row">
+                <div class="d-flex align-items-center">
+                  <img
+                    [src]="
+                      'http://localhost:3000/api/uploads/' +
+                      orderDetail.product[0].image.split('\\')[2]
+                    "
+                    class="img-fluid me-5 rounded-circle"
+                    style="width: 80px; height: 80px"
+                    alt=""
+                  />
                 </div>
+              </th>
+              <td>
+                <p class="mb-0 mt-4">{{ orderDetail.product[0].name }}</p>
+              </td>
+              <td>
+                <p class="mb-0 mt-4">{{ orderDetail.product[0].price }} CFA</p>
+              </td>
+              <td>
+                <div class="input-group quantity mt-4" style="width: 100px">
+                  <div class="input-group-btn">
+                    <button
+                      class="btn btn-sm btn-minus rounded-circle bg-light border"
+                      (click)="decrementQuantity(orderDetail)"
+                    >
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm text-center border-0"
+                    [(ngModel)]="orderDetail.quantity"
+                    min="1"
+                  />
+                  <div class="input-group-btn">
+                    <button
+                      class="btn btn-sm btn-plus rounded-circle bg-light border"
+                      (click)="incrementQuantity(orderDetail)"
+                    >
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p class="mb-0 mt-4">
+                  {{
+                    orderDetail.unitPrice *
+                      orderDetail.quantity
+                  }}
+                  fcfa
+                </p>
+              </td>
+              <td>
+                <button
+                  class="btn btn-md rounded-circle bg-light border mt-4"
+                  (click)="removeFromCart(orderDetail.product[0]._id)"
+                >
+                  <i class="fa fa-times text-danger"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="mt-5">
+                <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Code Coupon">
+                <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Appliquer le coupon</button>
+            </div> -->
+      <div class="row g-4 justify-content-end">
+        <div class="col-8"></div>
+        <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+          <div class="bg-light rounded">
+            <div class="p-4">
+              <h1 class="display-6 mb-4">
+                Panier <span class="fw-normal">Total</span>
+              </h1>
+              <div class="d-flex justify-content-between mb-4">
+                <h5 class="mb-0 me-4">Sous-total:</h5>
+                <p class="mb-0">{{ totalPrice }} fcfa</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h5 class="mb-0 me-4">Livraison</h5>
+                <div class="">
+                  <p class="mb-0">Taux forfaitaire: {{ livraison }} fcfa</p>
+                </div>
+              </div>
+              <p class="mb-0 text-end">Livraison à Dakar.</p>
             </div>
+            <div
+              class="py-4 mb-4 border-top border-bottom d-flex justify-content-between"
+            >
+              <h5 class="mb-0 ps-4 me-4">Total</h5>
+              <p class="mb-0 pe-4">{{ totalPrice + livraison }} fcfa</p>
+            </div>
+            <button
+              class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
+              type="button"
+              (click)="navigateToCheckout()"
+            >
+              Poursuivre le paiement
+            </button>
+          </div>
         </div>
-    </div>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyCart>
+      <div class="text-center">
+        <i class="fa fa-shopping-bag fa-4x mb-2"></i>
+        <h2>Votre panier est vide!</h2>
+        <p>Parcourez nos catégories et découvrez nos meilleures offres!</p>
+        <button class="btn btn-lg btn-primary text-white" routerLink="/shop">
+          Commencez vos achats
+        </button>
+      </div>
+    </ng-template>
+  </div>
 </div>
 <!-- Cart Page End -->
