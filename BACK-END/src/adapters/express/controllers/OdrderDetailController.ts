@@ -48,6 +48,17 @@ export class OrderDetailController {
       res.status(500).json({ message: error.message });
     }
   }
+  
+  async getOrderDetailsForOrderAndUser(req: Request, res: Response): Promise<void> {
+    const { orderId, userId } = req.params;
+    console.log(req.params);
+    try {
+      const orderDetails = await this.orderDetailUseCase.getOrderDetailsForOrderAndUser(orderId, userId);
+      res.status(200).json(orderDetails);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 
   async updateOrderDetail(req: Request, res: Response): Promise<void> {
     try {

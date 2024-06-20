@@ -26,6 +26,12 @@ export class OrderDetailService {
     );
   }
 
+  getOrderDetailsForOrderAndUser(orderId?: string, userId?: string): Observable<OrderDetail[]> {
+    return this.http.get<OrderDetail[]>(
+      `${this.apiUrl}/order/${orderId}/${userId}`
+    );
+  }
+
   updateOrderDetail(
     orderDetailId: string,
     orderDetailData: Partial<OrderDetail>
