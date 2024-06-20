@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { PanierService } from '../../services/panier/panier.service';
+import { Component, SimpleChanges } from '@angular/core';
+import { CartService } from '../../services/cart/cart.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -11,17 +11,26 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   public nbrPanier: Number = 0;
   constructor(
-    private panierService:  PanierService,private authService: AuthService, private router: Router
+    private cartService:  CartService,private authService: AuthService, private router: Router
   ) {}
+
   ngOnInit() {
     this.getNombrePanier()
-    this.panierService.RequiredRefresh.subscribe(() => {
+    this.cartService.RequiredRefresh.subscribe(() => {
       this.getNombrePanier();
         });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    if (changes['nbrPanier'] && changes['nbrPanier'].currentValue) {
+      this.getNombrePanier();
+    }
+  }
+
   getNombrePanier(){
-    this.nbrPanier = this.panierService.getCart().length
+    this.nbrPanier = this.cartService.getCart().length
   }
 
   logout() {

@@ -22,19 +22,34 @@ export class OrderDetailsComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.getOrderDetailsForOrder(this.order._id);
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (this.user.userType === 'admin') {
+      this.getOrderDetailsForOrder(this.order._id);
+    } else {
+      this.getOrderDetailsForOrderAndUser(this.order._id, this.user._id);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['order'] && changes['order'].currentValue) {
-      this.getOrderDetailsForOrder(this.order._id);
       this.user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (this.user.userType === 'admin') {
+        this.getOrderDetailsForOrder(this.order._id);
+      } else {
+        this.getOrderDetailsForOrderAndUser(this.order._id, this.user._id);
+      }
     }
   }
 
   getOrderDetailsForOrder(orderId: any) {
     this.orderDetailService
       .getOrderDetailsForOrder(orderId)
+      .subscribe((orderDetails) => (this.orderDetails = orderDetails));
+  }
+
+  getOrderDetailsForOrderAndUser(orderId: any, userId: any) {
+    this.orderDetailService
+      .getOrderDetailsForOrderAndUser(orderId, userId)
       .subscribe((orderDetails) => (this.orderDetails = orderDetails));
   }
 
@@ -53,6 +68,12 @@ export class OrderDetailsComponent {
     doc.text(`Facture #007612`, 14, 32);
     doc.text(`ID commande : ${this.order._id}`, 14, 42);
     doc.text(`Paiement effectué : 2/22/2014`, 14, 52);
+
+    doc.text('De:', 14, 72);
+    doc.text(`Nom: ${this.user.nomComplet}`, 14, 82);
+    doc.text(`Adresse: ${this.user.adresse}`, 14, 92);
+    doc.text(`Téléphone: ${this.user.phone}`, 14, 102);
+    doc.text(`Email: ${this.user.email}`, 14, 112);
 
     doc.text('Vers:', 14, 72);
     doc.text(`Nom: ${this.order.person[0].nomComplet}`, 14, 82);
@@ -74,7 +95,7 @@ export class OrderDetailsComponent {
       item.quantity,
       item.product[0].price + ' FCFA',
       item.product[0].description,
-      (item.quantity * item.product[0].price).toFixed(2)  + ' FCFA',
+      (item.quantity * item.product[0].price).toFixed(2) + ' FCFA',
     ]);
 
     autoTable(doc, {
@@ -82,12 +103,17 @@ export class OrderDetailsComponent {
       body: rows,
       startY: 130,
       didDrawCell: (data) => {
-        if (data.column.index === 0 && data.row.index < this.orderDetails.length) {
+        if (
+          data.column.index === 0 &&
+          data.row.index < this.orderDetails.length
+        ) {
           const img = new Image();
-          img.src = 'http://localhost:3000/api/uploads/' + this.orderDetails[data.row.index].product[0].image.split('\\')[2];
+          img.src =
+            'http://localhost:3000/api/uploads/' +
+            this.orderDetails[data.row.index].product[0].image.split('\\')[2];
           doc.addImage(img, 'JPEG', data.cell.x + 2, data.cell.y + 2, 10, 10);
         }
-      }
+      },
     });
 
     const finalY = (doc as any).lastAutoTable.finalY;

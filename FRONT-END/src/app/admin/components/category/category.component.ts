@@ -15,6 +15,7 @@ export class CategoryComponent {
   public categoryCache!: Category[];
   public categories!: Category[];
   public category!: Category;
+  public bb!: boolean
   @ViewChild(UpdateCategoryComponent)
   updateCategoryComponent!: UpdateCategoryComponent;
   // @ViewChild('updateCategoryModal') updateCategoryModal!: NgbModalRef;

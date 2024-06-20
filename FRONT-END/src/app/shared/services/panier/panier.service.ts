@@ -46,4 +46,14 @@ export class PanierService {
     });
 
   }
+
+  updateQuantity(productId: string, quantity: number): void {
+    let cartItems = JSON.parse(localStorage.getItem('cart') || '[]') as Product[];
+    let product = cartItems.find(item => item._id === productId);
+    if (product) {
+      product.quantity = quantity;
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      this.RequiredRefresh.next();
+    }
+  }
 }

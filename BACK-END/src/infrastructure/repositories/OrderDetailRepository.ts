@@ -2,6 +2,7 @@ import IRepository from "./IRepository";
 import { IOrderDetail } from "../../data/interfaces/IOrderDetail";
 import OrderDetailModel from "../../data/models/OrderDetail.entity";
 import mongoose from "mongoose";
+import ProductModel from "../../data/models/Product.entity";
 
 export class OrderDetailRepository implements IRepository<any> {
   getByName(name: string): Promise<any> {
@@ -40,7 +41,6 @@ export class OrderDetailRepository implements IRepository<any> {
       const orderDetails = await OrderDetailModel.find({order: new mongoose.Types.ObjectId(orderId) })
         .populate("order")
         .populate("product");
-        console.log('orderDetails : ',orderDetails);
       return orderDetails;
     } catch (error: any) {
       throw new Error(
@@ -48,6 +48,33 @@ export class OrderDetailRepository implements IRepository<any> {
       );
     }
   }
+
+  async getOrderDetailsForOrderAndUser(orderId: string, userId: string): Promise<any[]> {
+    try {
+      // Trouver tous les produits appartenant à l'utilisateur connecté
+      const userProducts = await ProductModel.find({
+        person: new mongoose.Types.ObjectId(userId),
+      }).exec();
+  
+      // Extraire les identifiants des produits de l'utilisateur
+      const productIds = userProducts.map((product) => product._id);
+  
+      // Trouver les détails de la commande associés à ces produits et à l'identifiant de la commande donné
+      const orderDetails = await OrderDetailModel.find({
+        order: new mongoose.Types.ObjectId(orderId),
+        product: { $in: productIds },
+      })
+        .populate("order")
+        .populate("product");
+  
+      return orderDetails;
+    } catch (error: any) {
+      throw new Error(
+        "Error getting order details for order: " + error.message
+      );
+    }
+  }
+  
 
   async update(
     id: string,
