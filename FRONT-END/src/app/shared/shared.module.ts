@@ -10,7 +10,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShopDetailComponent } from './components/shop-detail/shop-detail.component';
 import { SingleHeaderComponent } from './components/single-header/single-header.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HeroComponent } from './components/home/components/hero/hero.component';
 import { FeatursSectionComponent } from './components/home/components/featurs-section/featurs-section.component';
 import { FruitsShopComponent } from './components/home/components/fruits-shop/fruits-shop.component';
@@ -58,10 +57,6 @@ const sharedRoutes: Routes = [
         component: ShopDetailComponent,
       },
       {
-        path: 'checkout',
-        component: CheckoutComponent,
-      },
-      {
         path: 'vcommande',
         component: VcommandeComponent,
       },
@@ -80,7 +75,6 @@ const sharedRoutes: Routes = [
     ShopDetailComponent,
     SingleHeaderComponent,
     NotFoundComponent,
-    CheckoutComponent,
     HeroComponent,
     FeatursSectionComponent,
     FruitsShopComponent,
@@ -96,6 +90,6 @@ const sharedRoutes: Routes = [
 
   ],
   imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule,FormsModule,ReactiveFormsModule],
-  exports: [SingleHeaderComponent,FooterComponent,NavbarComponent]
+  exports: [SingleHeaderComponent,FooterComponent,NavbarComponent,]
 })
 export class SharedModule {}

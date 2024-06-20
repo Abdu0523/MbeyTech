@@ -20,9 +20,15 @@ export class OrderDetailService {
     );
   }
 
-  getOrderDetailsForOrder(orderId: string = ''): Observable<OrderDetail[]> {
+  getOrderDetailsForOrder(orderId?: string): Observable<OrderDetail[]> {
     return this.http.get<OrderDetail[]>(
       `${this.apiUrl}/order/${orderId}`
+    );
+  }
+
+  getOrderDetailsForOrderAndUser(orderId?: string, userId?: string): Observable<OrderDetail[]> {
+    return this.http.get<OrderDetail[]>(
+      `${this.apiUrl}/order/${orderId}/${userId}`
     );
   }
 
