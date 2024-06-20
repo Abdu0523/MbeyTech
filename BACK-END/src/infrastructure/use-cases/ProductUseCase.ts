@@ -60,4 +60,8 @@ export  class ProductUseCase {
             const product = await this.productRepository.getByName(name)
             return !!product
       }
+
+      async getProductByUser(userId: string): Promise<IProduct[]> {
+          return this.productRepository.getPrductsByUser(userId);
+      }
 }

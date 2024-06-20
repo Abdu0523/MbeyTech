@@ -49,16 +49,14 @@ export class ServiceProductService {
     );
   }
 
-  /*
-  getProductCountForCategory(categoryId: string): Observable<number> {
-    return this.getProductsByCategory(categoryId).pipe(
-      map(products => products.length),
-      tap((count) => console.log("getProductCountForCategory : ", count)),
+  getproductByUser(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/user/${userId}`).pipe( 
+      tap((products) => console.log("getProductByUser : ", products)),
       catchError((error) => {
-        console.error('Error from getProductCountForCategory :', error);
-        return of(0);
+        console.error('Error from getProductsByCategory :', error);
+        return of([]);
       })
-    );
+    )
   }
-  */
+
 }
