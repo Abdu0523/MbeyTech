@@ -23,7 +23,7 @@ export class AuthService {
       .post<any>(this.loginUrl, { email, password })
       .pipe(
         tap(response => {
-          localStorage.setItem('userId', response.user._id); // Stocker l'ID utilisateur
+          localStorage.setItem('userId', response.user._id); 
           localStorage.setItem('token', response.token);
         }),
         catchError(this.handleError)
