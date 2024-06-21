@@ -1,149 +1,204 @@
 <app-single-header [pageTitle]="'Champ'"></app-single-header>
 <div class="container-fluid contact py-5">
-    <div class="container py-5">
-        <h1 class="mb-4">MbeyTech Champ</h1>
-        <div class="p-5 bg-light rounded" *ngIf="!affichedetail">
-            <div class="row" *ngIf="champs.length>0">
-                <div class="col-md-6 col-lg-6 col-xl-4" *ngFor="let item of champs; let i=index;">
-                    <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                            <a (click)="action('detail',i)">
-                                <img src="{{'assets/client/images/bg-register.jpg'}}"
-                                    class="img-fluid w-100 rounded-top" alt="" />
-                            </a>
-                        </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                            style="top: 10px; left: 10px">
-                            {{item.surface}} m²
-                        </div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>{{item.geolocalisation}} </h4>
-                            <p
-                                [ngClass]="{'badge bg-dark':true, 'bg-dark':item?.type==typechamp[0],'bg-primary':item?.type==typechamp[1]}">
-                                {{item?.type}}
-                            </p>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">{{item.prix}} FCFA </p>
-                                <br>
-                                <br>
-                                <a class="btn border border-info rounded-pill px-3 text-info"
-                                    (click)="action('detail',i)">
-                                    <i class="fa fa-eye me-2 text-info"></i> Voir details
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="container py-5">
+    <h1 class="mb-4">MbeyTech Champ</h1>
+    <div class="p-5 bg-light rounded" *ngIf="!affichedetail">
+      <div class="row" *ngIf="champs.length > 0">
+        <div
+          class="col-md-6 col-lg-6 col-xl-4"
+          *ngFor="let item of champs; let i = index"
+        >
+          <div class="rounded position-relative fruite-item">
+            <div class="fruite-img">
+              <a (click)="action('detail', i)">
+                <img
+                  src="{{ 'assets/client/images/bg-register.jpg' }}"
+                  class="img-fluid w-100 rounded-top"
+                  alt=""
+                />
+              </a>
             </div>
-        </div>
-        <div class="p-5 bg-light rounded" *ngIf="affichedetail">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Detail</h3>
-                        </div>
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Surface</th>
-                                        <th>Description</th>
-                                        <th>Lieu</th>
-                                        <th>Type</th>
-                                        <th>Prix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{champs[currentindex]?.surface}}</td>
-                                        <td>{{champs[currentindex]?.description}}</td>
-                                        <td>{{champs[currentindex]?.geolocalisation}}</td>
-                                        <td class="text-info"> 
-                                            {{champs[currentindex]?.type}}
-                                        </td>
-                                        <td>{{champs[currentindex]?.prix}} FCFA</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Finalisation</h3>
-                        </div>
-                        <div class="card-body">
-                            <form [formGroup]="addchampForm">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Nom</label>
-                                        <input formControlName="nom" class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Prenom</label>
-                                        <input formControlName="prenom" class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Telephone</label>
-                                        <input formControlName="telephone" class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-12" *ngIf="champs[currentindex]?.type==typechamp[0]">
-                                    <div class="row">
-                                       <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Date Debut</label>
-                                                <input formControlName="date_debut" class="form-control" type="date">
-                                            </div>
-                                       </div>
-                                       <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Date fin</label>
-                                            <input formControlName="date_fin" class="form-control" type="date">
-                                        </div>
-                                       </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button type="button" class="btn btn-danger" (click)="initaddchampForm()" style="margin-right: 3px;">
-                                Annuler
-                            </button>
-                            <button type="button" class="btn btn-info" [disabled]="addchampForm.invalid" (click)="add()">
-                                Valider
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div
+              class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+              style="top: 10px; left: 10px"
+            >
+              {{ item.surface }} m²
             </div>
+            <div
+              class="p-4 border border-secondary border-top-0 rounded-bottom"
+            >
+              <h4>{{ item.geolocalisation }}</h4>
+              <p
+                [ngClass]="{
+                  'badge bg-dark': true,
+                  'bg-dark': item?.type == typechamp[0],
+                  'bg-primary': item?.type == typechamp[1]
+                }"
+              >
+                {{ item?.type }}
+              </p>
+              <div class="d-flex justify-content-between flex-lg-wrap">
+                <p class="text-dark fs-5 fw-bold mb-0">{{ item.prix }} FCFA</p>
+                <br />
+                <br />
+                <a
+                  class="btn border border-info rounded-pill px-3 text-info"
+                  (click)="action('detail', i)"
+                >
+                  <i class="fa fa-eye me-2 text-info"></i> Voir details
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+    <div class="p-5 bg-light rounded" *ngIf="affichedetail">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Detail</h3>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Surface</th>
+                    <th>Description</th>
+                    <th>Lieu</th>
+                    <th>Type</th>
+                    <th>Prix</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ champs[currentindex]?.surface }}</td>
+                    <td>{{ champs[currentindex]?.description }}</td>
+                    <td>{{ champs[currentindex]?.geolocalisation }}</td>
+                    <td class="text-info">
+                      {{ champs[currentindex]?.type }}
+                    </td>
+                    <td>{{ champs[currentindex]?.prix }} FCFA</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Finalisation</h3>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="addchampForm">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Nom</label>
+                    <input
+                      formControlName="nom"
+                      class="form-control"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Prenom</label>
+                    <input
+                      formControlName="prenom"
+                      class="form-control"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Telephone</label>
+                    <input
+                      formControlName="telephone"
+                      class="form-control"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="col-md-12"
+                  *ngIf="champs[currentindex]?.type == typechamp[0]"
+                >
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Date Debut</label>
+                        <input
+                          formControlName="date_debut"
+                          class="form-control"
+                          type="date"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Date fin</label>
+                        <input
+                          formControlName="date_fin"
+                          class="form-control"
+                          type="date"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer text-center">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="initaddchampForm()"
+                style="margin-right: 3px"
+              >
+                Annuler
+              </button>
+              <button
+                type="button"
+                class="btn btn-info"
+                [disabled]="addchampForm.invalid"
+                (click)="add()"
+              >
+                Valider
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- confirmation Modal -->
 <div class="modal fade" id="confirmation">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Confirmation</h4>
-                <button type="button" class="close" aria-label="Close"(click)="clchamp()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Votre requête a été bien envoyer</p>
-            </div>
-            <div class="modal-footer text-center">
-                <button type="button" class="btn btn-info"(click)="clchamp()">
-                    Fermer
-                </button>
-            </div>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirmation</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="clchamp()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Votre requête a été bien envoyer</p>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-info" (click)="clchamp()">
+          Fermer
+        </button>
+      </div>
     </div>
+  </div>
 </div>

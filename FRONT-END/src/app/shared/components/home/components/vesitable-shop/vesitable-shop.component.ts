@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceProductService } from '../../../../../admin/components/product/shared/services/service-product.service';
 import { Product } from '../../../../../admin/components/product/shared/models/products';
+import { CrudchampService } from '../../../../../admin/components/champ/servicechamp/crudchamp.service';
 
 @Component({
   selector: 'app-vesitable-shop',
@@ -8,17 +9,16 @@ import { Product } from '../../../../../admin/components/product/shared/models/p
   styleUrl: './vesitable-shop.component.css',
 })
 export class VesitableShopComponent implements OnInit {
-  products: Product[] = [];
+  public champs:any=[];
+  statut=['Activer','Desactiver'];
+  typechamp=['Location','Vente'];
 
   responsiveOptions: any[] | undefined;
 
-  constructor(private productService: ServiceProductService) {}
+  constructor(private crud:CrudchampService) {}
 
   ngOnInit() {
-    this.productService.getAllProducts().subscribe((products) => {
-      this.products = products;
-    });
-
+    this.getlistchamp();
     this.responsiveOptions = [
       {
         breakpoint: '1199px',
@@ -49,5 +49,12 @@ export class VesitableShopComponent implements OnInit {
       default:
         return 'secondary'; // Valeur par défaut
     }
+  }
+
+  getlistchamp(){
+    this.champs=[];
+    this.crud.getBystatut(this.statut[0]).subscribe((data:any)=>{
+      this.champs=data;
+    });
   }
 }

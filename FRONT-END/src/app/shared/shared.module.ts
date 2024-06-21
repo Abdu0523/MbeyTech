@@ -28,8 +28,8 @@ import { TagModule } from 'primeng/tag';
 
 import { VcommandeComponent } from './components/vcommande/vcommande.component';
 import { ChampclComponent } from './components/champcl/champcl.component';
-
-
+import { CartService } from './services/cart/cart.service';
+import { AuthService } from '../core/services/auth.service';
 
 const sharedRoutes: Routes = [
   {
@@ -86,10 +86,18 @@ const sharedRoutes: Routes = [
     TastimonialComponent,
     VcommandeComponent,
 
-    ChampclComponent
-
+    ChampclComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(sharedRoutes), CarouselModule, ButtonModule, TagModule,FormsModule,ReactiveFormsModule],
-  exports: [SingleHeaderComponent,FooterComponent,NavbarComponent,]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(sharedRoutes),
+    CarouselModule,
+    ButtonModule,
+    TagModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  exports: [SingleHeaderComponent, FooterComponent, NavbarComponent],
+
 })
 export class SharedModule {}

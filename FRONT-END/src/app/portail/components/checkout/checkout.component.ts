@@ -59,7 +59,7 @@ export class CheckoutComponent {
   ngOnInit() {
     this.getAllPanier();
     this.calculateTotal();
-    this.cartService.RequiredRefresh.subscribe(() => {
+    this.cartService.cartItems$.subscribe(() => {
       this.getAllPanier();
       this.calculateTotal();
     });
@@ -84,15 +84,7 @@ export class CheckoutComponent {
     console.log('checkout tap');
   }
   clearCart() {
-    this.cartService.clearCart().subscribe({
-      next: () => {
-        this.showAlert();
-        this.router.navigate(['/home']);
-      },
-      error: (error) => {
-        this.alertError();
-      },
-    });
+    this.cartService.clearCart();
   }
   // removeFromCart(productId: string) {
   //   Swal.fire({
@@ -125,9 +117,13 @@ export class CheckoutComponent {
   }
   showAlert() {
     Swal.fire({
-      title: 'Commande ajoute avec succès!',
-      text: 'Vous avez cliqué sur le bouton pour explorer les autres produits',
+      title: 'Commande ajoutér avec succès!',
+      text: 'Vous pouvez maintenant explorer d\'autres produits.',
       icon: 'success',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/home']);
+      }
     });
   }
   alertSuccess() {
@@ -156,6 +152,7 @@ export class CheckoutComponent {
             this.addOrderDetail(orderDetail);
           });
           this.clearCart();
+          this.showAlert();
         },
         (error) => {
           console.error('Une erreur est survenue lors createOrder :', error);

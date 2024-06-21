@@ -1,55 +1,65 @@
 <!-- Vesitable Shop Start-->
 <div class="container-fluid vesitable py-5">
   <div class="container py-5">
-    <h1 class="mb-0">Fresh Organic Vegetables</h1>
+    <h1 class="mb-0">Découvrez nos Bailleurs de qualité supérieure</h1>
+      <p class="lead">Trouvez votre prochain espace idéal avec notre sélection exclusive</p>
     <div class="mt-5 justify-content-center">
       <p-carousel
-        [value]="products"
-        [numVisible]="4"
-        [numScroll]="4"
+        [value]="champs"
+        [numVisible]="3"
+        [numScroll]="3"
         [circular]="false"
         [responsiveOptions]="responsiveOptions"
         autoplayInterval="3000"
       >
-        <ng-template let-product pTemplate="item">
+        <ng-template let-champ pTemplate="item">
           <div
             class="border border-primary rounded position-relative vesitable-item mx-2"
           >
             <div class="vesitable-img">
               <img
-                src="assets/client/client/img/vegetable-item-6.jpg"
-                class="img-fluid w-100 rounded-top"
-                alt=""
-              />
+                  src="{{ 'assets/client/images/bg-register.jpg' }}"
+                  class="img-fluid w-100 rounded-top"
+                  alt=""
+                />
               <p-tag
-                [value]="product.inventoryStatus"
-                [severity]="getSeverity(product.inventoryStatus)"
+                [value]="champ.inventoryStatus"
+                [severity]="getSeverity(champ.inventoryStatus)"
                 class="absolute"
                 [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"
               />
             </div>
             <div
-              class="text-white bg-primary px-3 py-1 rounded position-absolute"
-              style="top: 10px; right: 10px"
+            class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+            style="top: 10px; left: 10px"
+          >
+            {{ champ.surface }} m²
+          </div>
+          <div
+            class="p-4"
+          >
+            <h4>{{ champ.geolocalisation }}</h4>
+            <p
+              [ngClass]="{
+                'badge bg-dark': true,
+                'bg-dark': champ?.type == typechamp[0],
+                'bg-primary': champ?.type == typechamp[1]
+              }"
             >
-              Vegetable
+              {{ champ?.type }}
+            </p>
+            <div class="d-flex justify-content-between flex-lg-wrap">
+              <p class="text-dark fs-5 fw-bold mb-0">{{ champ.prix }} FCFA</p>
+              <br />
+              <br />
+              <a
+                class="btn border border-info rounded-pill px-3 text-info"
+                
+              >
+                <i class="fa fa-eye me-2 text-info"></i> Voir details
+              </a>
             </div>
-            <div class="p-4 rounded-bottom">
-              <h4>Parsely</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                eiusmod te incididunt
-              </p>
-              <div class="d-flex justify-content-between flex-lg-wrap">
-                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                <a
-                  href="#"
-                  class="btn border border-secondary rounded-pill px-3 text-primary"
-                  ><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                  cart</a
-                >
-              </div>
-            </div>
+          </div>
           </div>
         </ng-template>
       </p-carousel>

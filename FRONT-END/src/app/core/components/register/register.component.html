@@ -1,67 +1,103 @@
+<div class="align-items-center auth register-bg bg-black">
+  <main class="form-signin w-100">
+    <div class="card col-lg-6 mx-auto">
+      <div class="card-body px-5 py-5">
+        <div class="d-flex justify-content-center align-items-center">
+          <img src="../../../../assets/logo.jpeg" style="width: 10%" />
+        </div>
+        <h3 class="card-title text-center mb-3">Créer votre compte Mbeytech</h3>
 
-    <!-- <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="row w-100 m-0"> -->
-          <div class="align-items-center auth register-bg bg-black">
-            <main class="form-signin w-100 m-auto">
-            <div class="card col-lg-6 mx-auto">
-              <div class="card-body px-5 py-5 ">
-                <div class="d-flex justify-content-center align-items-center">
-                  <img src="../../../../assets/logo.jpeg" style="width: 10%">
-                </div>
-                <h3 class="card-title text-center mb-3">s'inscrire</h3>
-
-                <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                          <label>Nom complet</label>
-                          <input type="text" formControlName="nomComplet" class="form-control p_input">
-                        </div>
-                        <div class="col-md-6 form-group">
-                          <label>Email</label>
-                          <input type="email" formControlName="email" class="form-control p_input">
-                        </div>
-                    </div>
-                      <div class="form-group">
-                    <label>countryCode</label>
-                    <input type="text" formControlName="countryCode" class="form-control p_input">
-                  </div>
-                      <div class="form-group">
-                    <label>telephone</label>
-                    <input type="text" formControlName="phone" class="form-control p_input">
-
-                  </div>
-                  <div class="form-group">
-                    <label>Adresse</label>
-                    <input type="text" formControlName="adresse" class="form-control p_input">
-                  </div>
-                  <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" formControlName="password" class="form-control p_input">
-                  </div>
-                  <div class="form-group">
-                    <label>Choir votre profil</label>
-                    <select class="form-control" formControlName="userType">
-                      <option>Choisir un profil</option>
-                      <option value="agriculteur">Agriculteur</option>
-                      <option value="acheteur">Acheteur</option>
-                      <option value="bailleur">Bailleur</option>
-                    </select>
-                  </div> 
-
-                  <div class="text-center">
-                    <button type="submit" [disabled]="addUserForm.invalid" class="btn btn-block btn-success enter-btn text-light mt-3">S'inscrire</button>
-                  </div>
-                  <div class="text-center">
-                    <button type="button" class="btn btn-block btn-secondary enter-btn text-light mt-3" routerLink="/login">Se connecter</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            </main>
+        <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
           </div>
-          <!-- content-wrapper ends -->
-        <!-- </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Nom complet</label>
+              <input
+                type="text"
+                formControlName="nomComplet"
+                class="form-control p_input"
+                placeholder="Entrez votre nom complet"
+              />
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control p_input"
+                placeholder="Entrez votre email"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Code pays</label>
+            <input
+              type="text"
+              formControlName="countryCode"
+              class="form-control p_input"
+              placeholder="Entrez votre code pays"
+            />
+          </div>
+          <div class="form-group">
+            <label>Téléphone</label>
+            <input
+              type="text"
+              formControlName="phone"
+              class="form-control p_input"
+              placeholder="Entrez votre téléphone"
+            />
+          </div>
+          <div class="form-group">
+            <label>Adresse</label>
+            <input
+              type="text"
+              formControlName="adresse"
+              class="form-control p_input"
+              placeholder="Entrez votre adresse"
+            />
+          </div>
+          <div class="form-group">
+            <label>Mot de passe</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control p_input"
+              placeholder="Entrez votre mot de passe"
+            />
+          </div>
+          <div class="form-group">
+            <label>Profil</label>
+            <select class="form-select" formControlName="userType">
+              <option selected disabled>Choisir un profil</option>
+              <option value="agriculteur">Agriculteur</option>
+              <option value="acheteur">Acheteur</option>
+              <option value="bailleur">Bailleur</option>
+            </select>
+          </div>
+
+          <div class="text-center mt-3">
+            <button
+              class="w-100 btn btn-lg btn-success"
+              type="submit"
+              [disabled]="addUserForm.invalid"
+            >
+              Créer un compte
+            </button>
+            <button
+              class="w-100 btn my-2 btn-lg btn-secondary"
+              routerLink="/login"
+            >
+              Se connecter
+            </button>
+          </div>
+        </form>
       </div>
-    </div> -->
-    
+    </div>
+  </main>
+</div>
+<!-- content-wrapper ends -->
+<!-- </div>
+                </div>
+              </div> -->

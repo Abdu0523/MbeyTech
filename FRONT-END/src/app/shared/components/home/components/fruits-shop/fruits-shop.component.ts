@@ -33,10 +33,6 @@ export class FruitsShopComponent {
   ngOnInit() {
     this.loadCategories();
     this.loadProducts();
-    this.cartService.RequiredRefresh.subscribe(() => {
-      this.loadCategories();
-      this.loadProducts();
-    });
   }
 
   isProductInCart(productId: string): boolean {
@@ -44,10 +40,7 @@ export class FruitsShopComponent {
   }
   
   removeFromCart(productId: string) {
-    this.cartService.removeFromCart(productId).subscribe({
-      next: () => {},
-      error: (error) => {},
-    });
+    this.cartService.removeFromCart(productId);
   }
   loadCategories() {
     this.categoryService.getAllCategories().subscribe(

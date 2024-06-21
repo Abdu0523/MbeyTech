@@ -38,7 +38,8 @@ export class LoginComponent {
           if (user.userType === 'admin' || user.userType === 'agriculteur' || user.userType === 'bailleur') {
             this.router.navigate(['/admin/dashboard']);
           } else if (user.userType === 'acheteur') {
-            this.router.navigateByUrl(this.returnUrl);
+            // this.router.navigateByUrl(this.returnUrl);
+            this.router.navigate(['/portail/cart']);
           }
         }
       },

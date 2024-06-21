@@ -36,7 +36,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('userType');
+    localStorage.removeItem('user');
   }
 
   private handleError(error: any): Observable<never> {

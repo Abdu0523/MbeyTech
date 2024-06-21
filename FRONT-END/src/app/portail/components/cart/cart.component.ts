@@ -29,7 +29,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.getAllPanier();
     this.calculateTotal();
-    this.cartService.RequiredRefresh.subscribe(() => {
+    this.cartService.cartItems$.subscribe(() => {
       this.getAllPanier();
       this.calculateTotal();
     });
@@ -74,14 +74,7 @@ export class CartComponent implements OnInit {
       confirmButtonText: 'Oui, supprimez-la !'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cartService.removeFromCart(productId).subscribe({
-          next: () => {
-            this.alertSuccess();
-          },
-          error: () => {
-            this.alertError();
-          }
-        });
+        this.cartService.removeFromCart(productId);
       }
     });
   }

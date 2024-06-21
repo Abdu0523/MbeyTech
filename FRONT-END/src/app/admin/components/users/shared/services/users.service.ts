@@ -26,7 +26,7 @@ export class UsersService {
     );
   }
 
-  addUser(body: any): Observable <Users> {
+  addUser(body: any): Observable <any> {
     return this.http.post<Users>(`${this.apiUrl}/create`, body)
     .pipe(
       catchError(this.handleError)
